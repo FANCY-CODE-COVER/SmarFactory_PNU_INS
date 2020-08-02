@@ -16,8 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 import com.pnu.spring.smartfactory.DAO.LoginDAO;
 import com.pnu.spring.smartfactory.DAO.PopitDAO;
 import com.pnu.spring.smartfactory.Mapper.LoginMapper;
@@ -53,16 +55,25 @@ public class HomeController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public void getStringJson(LoginDAO data, HttpServletResponse response)  {
-        String testJson;
-        List<LoginDAO> Loginmapper = loginServicimpl.tryloginService(data.getUser_id(), data.getPassword());
-        testJson = "{\"message\":\"" +"Success_"+Loginmapper.get(0).getUser_id()+ "\"}";
-            
-        try {
-            response.getWriter().print(testJson );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }   
+	public HashMap<String, Object> doLogin(@RequestBody Map<String, Object> param)  {
+		 //loginServicimpl.tryloginService( param.get("user_id"), param.get("password"));
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        
+        map.put("user_id", param.get("user_id"));
+        map.put("password", param.get("password"));
+        return map;
+        
+        
+        
+        
+//        List<LoginDAO> Loginmapper = loginServicimpl.tryloginService(data.getUser_id(), data.getPassword());
+//        testJson = "{\"message\":\"" +"Success_"+Loginmapper.get(0).getUser_id()+ "\"}";
+//            
+//        try {
+//            response.getWriter().print(testJson );
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }   
     }
 	
 }

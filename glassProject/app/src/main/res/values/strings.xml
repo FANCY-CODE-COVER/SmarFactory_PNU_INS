@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">glassProject</string>
+    <string name="empty_string"/>
+    <string name="thin_font">sans-serif-thin</string>
+    <string name="footnote_sample">This is the footnote</string>
+    <string name="timestamp_sample">just now</string>
+    <string name="fragment1">This is the fragment1 layout.</string>
+    <string name="fragment2">You can also add menu with different options for each fragment.</string>
+    <string name="fragment3">You can put the centered image inside of the COLUMNS layout.</string>
+    <string name="fragment4">Do you like this sample?\n\nSource code is available at:\ng.co/glass/samples</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="menu_font">sans-serif-thin</string>
+    <string name="menu_item">Menu item</string>
+</resources>

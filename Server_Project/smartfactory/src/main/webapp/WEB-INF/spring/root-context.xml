@@ -8,8 +8,6 @@
         <property name="fileEncoding" value="UTF-8" />
     </bean>
 
-
-
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${db.driver}" />

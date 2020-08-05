@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
-import com.pnu.spring.smartfactory.DAO.LoginDAO;
+import com.pnu.spring.smartfactory.DAO.*;
 import com.pnu.spring.smartfactory.DAO.PopitDAO;
 import com.pnu.spring.smartfactory.Mapper.LoginMapper;
 import com.pnu.spring.smartfactory.Mapper.PopitMapper;
@@ -36,6 +39,9 @@ public class HomeController {
 	private PopitService popitServiceimpl;
 	@Resource(name="com.pnu.spring.smartfactory.Service.LoginServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
 	private LoginService loginServicimpl;
+	
+	@Autowired
+	Environment env;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -61,6 +67,7 @@ public class HomeController {
         
         map.put("user_id", param.get("user_id"));
         map.put("password", param.get("password"));
+        map.put("ccc",  env.getProperty("kakao.key.rest"));
         return map;
         
         

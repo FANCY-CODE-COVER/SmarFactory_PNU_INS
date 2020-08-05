@@ -33,6 +33,7 @@ import com.pnu.spring.smartfactory.DAO.*;
 import com.pnu.spring.smartfactory.DAO.PopitDAO;
 import com.pnu.spring.smartfactory.Mapper.LoginMapper;
 import com.pnu.spring.smartfactory.Mapper.PopitMapper;
+import com.pnu.spring.smartfactory.Service.DataService;
 import com.pnu.spring.smartfactory.Service.LoginService;
 import com.pnu.spring.smartfactory.Service.PopitService;
 /**
@@ -45,6 +46,8 @@ public class HomeController {
 	private PopitService popitServiceimpl;
 	@Resource(name="com.pnu.spring.smartfactory.Service.LoginServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
 	private LoginService loginServicimpl;
+	@Resource(name="com.pnu.spring.smartfactory.Service.DataServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
+	private DataService dataServicimpl;
 	
 	@Autowired
 	Environment env;
@@ -118,14 +121,28 @@ public class HomeController {
 	
 	@RequestMapping(value = "/getdatas", method = {RequestMethod.POST})
 	@ResponseBody
-	public HashMap<String, Object> getDatas()  {
+	public HashMap<String, Object> getDatas(@RequestBody Map<String, Object> param)  {
         
-		String url="https://kauth.kakao.com/oauth/authorize";
-
-				
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		String category_id = (String) param.get("category_id");
+		List<DataDAO> datas = dataServicimpl.getDatasService(category_id);
 		
-		map.put("aaa",   "");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("size", datas.size());
+		for(int i=0;i < datas.size(); ++i)
+		{
+			
+			HashMap<String, Object> submap = new HashMap<String, Object>();
+			
+			submap.put("code", datas.get(i).getCode());
+			submap.put("code_nm", datas.get(i).getCode_nm());
+			submap.put("category_id", datas.get(i).getCategory_id());
+			submap.put("description", datas.get(i).getDescription());
+			
+			map.put(datas.get(i).getCode(), submap);
+			
+		}
+		
+		
         return map;
     }
 	

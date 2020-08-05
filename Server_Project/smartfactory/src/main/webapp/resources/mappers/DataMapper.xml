@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pnu.spring.smartfactory.Mapper.DataMapper">
+	<select id="getDatas"  resultType="com.pnu.spring.smartfactory.DAO.DataDAO">
+		SELECT CODE, CODE_NM, CATEGORY_ID, DESCRIPTION 
+		FROM MDM_CODE 
+		WHERE CATEGORY_ID=#{category_id};
+	</select>
+</mapper>

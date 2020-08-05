@@ -2,3 +2,7 @@
 Server_Project/smartfactory/src/main/webapp/WEB-INF/config/config.properties
 
 Server_Project/smartfactory/src/main/webapp/WEB-INF/config/
+
+Server_Project/smartfactory/src/main/resources/config/api.properties
+
+Server_Project/smartfactory/target/classes/config/api.properties

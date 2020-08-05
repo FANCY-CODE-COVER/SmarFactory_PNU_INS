@@ -1,6 +1,12 @@
 package com.pnu.spring.smartfactory.Controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -67,20 +73,60 @@ public class HomeController {
         
         map.put("user_id", param.get("user_id"));
         map.put("password", param.get("password"));
-        map.put("ccc",  env.getProperty("kakao.key.rest"));
         return map;
+    }
+	
+	@RequestMapping(value = "/message", method = {RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public HashMap<String, Object> sendMEssage() throws IOException  {
         
+		String url="https://kauth.kakao.com/oauth/authorize";
+		
+		URL obj =new URL(url);
+		
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		
+		try {
+			con.setRequestMethod("GET");
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		con.setRequestProperty("Accept-Charset", "UTF-8");
+		con.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
+		con.addRequestProperty("client_id", env.getProperty("kakao.key.rest"));
+		con.addRequestProperty("redirect_uri", env.getProperty("kakao.redirect.uri"));
+		con.addRequestProperty("response_type", "code");
+		String temp =con.getResponseMessage();
+		BufferedReader in = new BufferedReader (new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		String resultXmlText="";
+		while ((inputLine = in.readLine() ) != null) {
+			resultXmlText += inputLine;
+		}
+		in.close();
+		con.disconnect();
+		
+				
+				
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("aaa",   temp);
+        map.put("ccc",   resultXmlText);
+        return map;
+    }
+	
+	@RequestMapping(value = "/getdatas", method = {RequestMethod.POST})
+	@ResponseBody
+	public HashMap<String, Object> getDatas()  {
         
-        
-        
-//        List<LoginDAO> Loginmapper = loginServicimpl.tryloginService(data.getUser_id(), data.getPassword());
-//        testJson = "{\"message\":\"" +"Success_"+Loginmapper.get(0).getUser_id()+ "\"}";
-//            
-//        try {
-//            response.getWriter().print(testJson );
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }   
+		String url="https://kauth.kakao.com/oauth/authorize";
+
+				
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("aaa",   "");
+        return map;
     }
 	
 }

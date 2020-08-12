@@ -29,6 +29,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
+
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import com.pnu.spring.smartfactory.DAO.*;
 import com.pnu.spring.smartfactory.DAO.PopitDAO;
 import com.pnu.spring.smartfactory.Mapper.LoginMapper;
@@ -79,71 +82,66 @@ public class HomeController {
         return map;
     }
 	
-	@RequestMapping(value = "/message", method = {RequestMethod.POST, RequestMethod.GET })
-	@ResponseBody
-	public HashMap<String, Object> sendMEssage() throws IOException  {
-        
-		String url="https://kauth.kakao.com/oauth/authorize";
-		
-		URL obj =new URL(url);
-		
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		
-		try {
-			con.setRequestMethod("GET");
-		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		con.setRequestProperty("Accept-Charset", "UTF-8");
-		con.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
-		con.addRequestProperty("client_id", env.getProperty("kakao.key.rest"));
-		con.addRequestProperty("redirect_uri", env.getProperty("kakao.redirect.uri"));
-		con.addRequestProperty("response_type", "code");
-		String temp =con.getResponseMessage();
-		BufferedReader in = new BufferedReader (new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		String resultXmlText="";
-		while ((inputLine = in.readLine() ) != null) {
-			resultXmlText += inputLine;
-		}
-		in.close();
-		con.disconnect();
-		
-				
-				
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("aaa",   temp);
-        map.put("ccc",   resultXmlText);
-        return map;
-    }
-	
+//	@RequestMapping(value = "/message", method = {RequestMethod.POST, RequestMethod.GET })
+//	@ResponseBody
+//	public HashMap<String, Object> sendMEssage() throws IOException  {
+//        
+//		String url="https://kauth.kakao.com/oauth/authorize";
+//		
+//		URL obj =new URL(url);
+//		
+//		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//		
+//		try {
+//			con.setRequestMethod("GET");
+//		} catch (ProtocolException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		con.setRequestProperty("Accept-Charset", "UTF-8");
+//		con.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
+//		con.addRequestProperty("client_id", env.getProperty("kakao.key.rest"));
+//		con.addRequestProperty("redirect_uri", env.getProperty("kakao.redirect.uri"));
+//		con.addRequestProperty("response_type", "code");
+//		String temp =con.getResponseMessage();
+//		BufferedReader in = new BufferedReader (new InputStreamReader(con.getInputStream()));
+//		String inputLine;
+//		String resultXmlText="";
+//		while ((inputLine = in.readLine() ) != null) {
+//			resultXmlText += inputLine;
+//		}
+//		in.close();
+//		con.disconnect();
+//		
+//				
+//				
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("aaa",   temp);
+//        map.put("ccc",   resultXmlText);
+//        return map;
+//    }
+//	
 	@RequestMapping(value = "/getdatas", method = {RequestMethod.POST})
 	@ResponseBody
-	public HashMap<String, Object> getDatas(@RequestBody Map<String, Object> param)  {
-        
-		String category_id = (String) param.get("category_id");
-		List<DataDAO> datas = dataServicimpl.getDatasService(category_id);
+	public JSONArray getDatas(@RequestBody Map<String, Object> param)  {
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("size", datas.size());
+		String category_id = (String) param.get("category_id");
+		System.out.println("category_id : "+ category_id);
+		List<DataDAO> datas = dataServicimpl.getDatasService(category_id);
+		JSONArray jsonarrary = new JSONArray();
+
 		for(int i=0;i < datas.size(); ++i)
 		{
+			JSONObject jsonObj =new JSONObject();
+			jsonObj.put("code", datas.get(i).getCode());
+			jsonObj.put("code_nm", datas.get(i).getCode_nm());
+			jsonObj.put("category_id", datas.get(i).getCategory_id());
+			jsonObj.put("description", datas.get(i).getDescription());
 			
-			HashMap<String, Object> submap = new HashMap<String, Object>();
-			
-			submap.put("code", datas.get(i).getCode());
-			submap.put("code_nm", datas.get(i).getCode_nm());
-			submap.put("category_id", datas.get(i).getCategory_id());
-			submap.put("description", datas.get(i).getDescription());
-			
-			map.put(datas.get(i).getCode(), submap);
-			
+			jsonarrary.add(jsonObj);		
 		}
-		
-		
-        return map;
+        return jsonarrary;
     }
 	
 }

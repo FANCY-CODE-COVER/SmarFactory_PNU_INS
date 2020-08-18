@@ -13,13 +13,14 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 
 import net.minidev.json.JSONArray;
@@ -39,109 +42,126 @@ import com.pnu.spring.smartfactory.Mapper.PopitMapper;
 import com.pnu.spring.smartfactory.Service.DataService;
 import com.pnu.spring.smartfactory.Service.LoginService;
 import com.pnu.spring.smartfactory.Service.PopitService;
+
+import constant.ApiValue;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	@Resource(name="com.pnu.spring.smartfactory.Service.PopitServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
+	@Resource(name = "com.pnu.spring.smartfactory.Service.PopitServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
 	private PopitService popitServiceimpl;
-	@Resource(name="com.pnu.spring.smartfactory.Service.LoginServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
+	@Resource(name = "com.pnu.spring.smartfactory.Service.LoginServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
 	private LoginService loginServicimpl;
-	@Resource(name="com.pnu.spring.smartfactory.Service.DataServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
+	@Resource(name = "com.pnu.spring.smartfactory.Service.DataServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
 	private DataService dataServicimpl;
-	
-	@Autowired
-	Environment env;
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-               // XML -> Mapper(DAO) -> Service -> ServiceImpl -> Controller에 해당 함수 실행  
-		
-		List<PopitDAO> popitmapper = popitServiceimpl.selectlistService();
+		// XML -> Mapper(DAO) -> Service -> ServiceImpl -> Controller에 해당 함수 실행
+
+		//List<PopitDAO> popitmapper = popitServiceimpl.selectlistService();
 		// View에서 어떤 이름으로 값을 가져와서 뿌릴 건지 정하는 것입니다.
-                // 여기서는 popitMapper 객체를 popitlist로 JSP(View)에 표시할 것입니다.
-		
-		model.addAttribute("popitlist",popitmapper);
+		// 여기서는 popitMapper 객체를 popitlist로 JSP(View)에 표시할 것입니다.
+
+		//model.addAttribute("popitlist", popitmapper);
 		return "home";
 	}
-	
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> doLogin(@RequestBody Map<String, Object> param)  {
-		 //loginServicimpl.tryloginService( param.get("user_id"), param.get("password"));
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        
-        map.put("user_id", param.get("user_id"));
-        map.put("password", param.get("password"));
-        return map;
-    }
-	
-//	@RequestMapping(value = "/message", method = {RequestMethod.POST, RequestMethod.GET })
-//	@ResponseBody
-//	public HashMap<String, Object> sendMEssage() throws IOException  {
-//        
-//		String url="https://kauth.kakao.com/oauth/authorize";
-//		
-//		URL obj =new URL(url);
-//		
-//		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-//		
-//		try {
-//			con.setRequestMethod("GET");
-//		} catch (ProtocolException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		con.setRequestProperty("Accept-Charset", "UTF-8");
-//		con.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
-//		con.addRequestProperty("client_id", env.getProperty("kakao.key.rest"));
-//		con.addRequestProperty("redirect_uri", env.getProperty("kakao.redirect.uri"));
-//		con.addRequestProperty("response_type", "code");
-//		String temp =con.getResponseMessage();
-//		BufferedReader in = new BufferedReader (new InputStreamReader(con.getInputStream()));
-//		String inputLine;
-//		String resultXmlText="";
-//		while ((inputLine = in.readLine() ) != null) {
-//			resultXmlText += inputLine;
-//		}
-//		in.close();
-//		con.disconnect();
-//		
-//				
-//				
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		
-//		map.put("aaa",   temp);
-//        map.put("ccc",   resultXmlText);
-//        return map;
-//    }
-//	
-	@RequestMapping(value = "/getdatas", method = {RequestMethod.POST})
+	public HashMap<String, Object> doLogin(@RequestBody Map<String, Object> param) {
+		// loginServicimpl.tryloginService( param.get("user_id"),
+		// param.get("password"));
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("user_id", param.get("user_id"));
+		map.put("password", param.get("password"));
+		return map;
+	}
+
+	// 임시로 데이터 요청 해주면 보내주는 메소드
+	@RequestMapping(value = "/getdatas", method = { RequestMethod.POST })
 	@ResponseBody
-	public JSONArray getDatas(@RequestBody Map<String, Object> param)  {
-		
+	public JSONArray getDatas(@RequestBody Map<String, Object> param) {
+
 		String category_id = (String) param.get("category_id");
-		System.out.println("category_id : "+ category_id);
+		System.out.println("category_id : " + category_id);
 		List<DataDAO> datas = dataServicimpl.getDatasService(category_id);
 		JSONArray jsonarrary = new JSONArray();
-
-		for(int i=0;i < datas.size(); ++i)
-		{
-			JSONObject jsonObj =new JSONObject();
+		
+		System.out.println("Size:"+datas.size());
+		for (int i = 0; i < datas.size(); ++i) {
+			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("code", datas.get(i).getCode());
 			jsonObj.put("code_nm", datas.get(i).getCode_nm());
 			jsonObj.put("category_id", datas.get(i).getCategory_id());
 			jsonObj.put("description", datas.get(i).getDescription());
-			
-			jsonarrary.add(jsonObj);		
+			jsonarrary.add(jsonObj);
 		}
-        return jsonarrary;
-    }
-	
+		return jsonarrary;
+	}
+	// 카카오 로그인 할때 처음 들어오는 부분
+	@RequestMapping(value = "/beforelogin", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView memberLoginForm(HttpSession session) {
+		ModelAndView mav = new ModelAndView("a");
+		String kakaoUrl = KakaoController.getAuthorizationUrl(session, ApiValue.kakao_key_rest, ApiValue.kakao_redirect_uri);
+		
+		/* 생성한 인증 URL을 View로 전달 */
+		mav.setViewName("redirect:"+kakaoUrl);
+		
+		// 카카오 로그인
+		mav.addObject("kakao_url", kakaoUrl);
+		return mav;
+	}// end memberLoginForm()
+
+	// 카카오 로그인해서 redirect해서 들어오는 부분
+	@RequestMapping(value = "/kakaologin.do",  method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public ModelAndView kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws Exception {
+		System.out.println("code 잘들어옴");
+		ModelAndView mav = new ModelAndView();
+		// 결과값을 node에 담아줌
+		JsonNode node = KakaoController.getAccessToken(code,ApiValue.kakao_key_rest, ApiValue.kakao_redirect_uri);
+		// accessToken에 사용자의 로그인한 모든 정보가 들어있음
+		JsonNode accessToken = node.get("access_token"); // 사용자의 정보
+		System.out.println("getAccessToken : "+accessToken.toString());
+		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
+		JsonNode rInfo = KakaoController.sendMessagetoMe(accessToken);
+		System.out.println(rInfo.toString());
+		String kemail = null;
+		String kname = null;
+		String kgender = null;
+		String kbirthday = null;
+		String kage = null;
+		String kimage = null; // 유저정보 카카오에서 가져오기 Get properties
+		JsonNode properties = userInfo.path("properties");
+		JsonNode kakao_account = userInfo.path("kakao_account");
+		kemail = kakao_account.path("email").asText();
+		kname = properties.path("nickname").asText();
+		kimage = properties.path("profile_image").asText();
+		kgender = kakao_account.path("gender").asText();
+		kbirthday = kakao_account.path("birthday").asText();
+		kage = kakao_account.path("age_range").asText();
+		session.setAttribute("kemail", kemail);
+		session.setAttribute("kname", kname);
+		session.setAttribute("kimage", kimage);
+		session.setAttribute("kgender", kgender);
+		session.setAttribute("kbirthday", kbirthday);
+		session.setAttribute("kage", kage);
+		System.out.println(kemail);
+		System.out.println(kname);
+		mav.setViewName("redirect:"+"http://www.naver.com");
+		return mav;
+	}// end kakaoLogin()
+
 }

@@ -15,6 +15,7 @@
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
 	</bean>
+	
 
 	<!-- SESSIONFACTORY 설정 -->
 	<bean id="sqlSessionFactory"

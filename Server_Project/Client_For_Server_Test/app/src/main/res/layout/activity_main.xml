@@ -29,10 +29,35 @@
         tools:layout_editor_absoluteY="67dp"
         />
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Message"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="155dp"
+        />
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG out"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="155dp"
+        />
+    <Button
+        android:id="@+id/btn_unlink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unlink"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="155dp"
+        />
+
+    <Button
+        android:id="@+id/btn_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="155dp"
         />

@@ -19,6 +19,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -100,8 +101,95 @@ public class KakaoController {
 	}
 	
 	// 액세스토큰으로 나에게 메시지 보내는 메소드
+		@ResponseBody
+		public static JsonNode getFriends(String accessToken) {
+			
+			final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends?offset=0&limit=5&order=asc";
+			//final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends?offset=5&limit=5&order=asc";
+			final HttpClient client = HttpClientBuilder.create().build();
+			final HttpGet get = new HttpGet(RequestUrl); // add header
+			get.addHeader("Authorization", "Bearer " + accessToken);
+					
+			final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+
+			JsonNode returnNode = null;
+			try {
+				
+				final HttpResponse response = client.execute(get); // JSON 형태 반환값 처리
+				ObjectMapper mapper = new ObjectMapper();
+				returnNode = mapper.readTree(response.getEntity().getContent());
+				returnNode = returnNode.get("elements");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				// clear resources
+			}
+			return returnNode;
+		}
+	
+		// 액세스토큰으로 나에게 메시지 보내는 메소드
+		@ResponseBody
+		public static JsonNode sendMessagetoYou(String accessToken, List<String> uuids) {
+			
+			final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends/message/default/send";
+			final HttpClient client = HttpClientBuilder.create().build();
+			final HttpPost post = new HttpPost(RequestUrl); // add header
+			post.addHeader("Authorization", "Bearer " + accessToken);
+					
+			final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+			String uuids_to_string="[";
+			for(int i=0; i<uuids.size();++i)
+			{
+				if (i == uuids.size()-1  ){
+					uuids_to_string+=uuids.get(i);
+				}
+				else {
+					uuids_to_string+="\""+uuids.get(i)+",";
+				}
+			}
+			uuids_to_string+="]";
+			postParams.add(new BasicNameValuePair("receiver_uuids", uuids_to_string));
+			String subParams = 
+			"{" + 
+			"\"object_type\": \"text\"," + 
+			"\"text\": \"This is English\"," + 
+			"\"link\": {" + 
+			"	\"web_url\": \"https://developers.kakao.com\"," + 
+			"\"mobile_web_url\": \"https://developers.kakao.com\" " + 
+			"	}," + 
+			"	\"button_title\": \"This is Button\"" + 
+			"}";
+			
+			postParams.add(new BasicNameValuePair("template_object", subParams));
+			System.out.println("Send Message to You");
+			
+			JsonNode returnNode = null;
+			try {
+				post.setEntity(new UrlEncodedFormEntity(postParams));
+				final HttpResponse response = client.execute(post); // JSON 형태 반환값 처리
+				System.out.println(response.toString());
+				ObjectMapper mapper = new ObjectMapper();
+				returnNode = mapper.readTree(response.getEntity().getContent());
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				// clear resources
+			}
+			return returnNode;
+		}
+
+		
+	// 액세스토큰으로 나에게 메시지 보내는 메소드
 	@ResponseBody
-	public static JsonNode sendMessagetoMe(JsonNode accessToken) {
+	public static JsonNode sendMessagetoMe(String accessToken) {
 		
 		final String RequestUrl = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
 		final HttpClient client = HttpClientBuilder.create().build();

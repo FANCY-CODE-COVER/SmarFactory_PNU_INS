@@ -1,7 +1,8 @@
 package com.pnu.spring.smartfactory.client_for_server_test;
 
-import com.pnu.spring.smartfactory.client_for_server_test.DAO.Category;
-import com.pnu.spring.smartfactory.client_for_server_test.DAO.DataDAO;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.Category;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.DataDAO;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.Message;
 
 import java.util.List;
 
@@ -13,4 +14,13 @@ import retrofit2.http.POST;
 public interface NetworkService {
     @POST("getdatas")
     Call<List<DataDAO>> getDatas(@Body Category category);
+
+    @GET("beforelogin")
+    Call<Void> doLogin();
+
+    @POST("sendmessage")
+    Call<Void> sendMessage(@Body Message message);
+
+    @POST("getfriend")
+    Call<Void> getFriend(@Body Message message);
 }

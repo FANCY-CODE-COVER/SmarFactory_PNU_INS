@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -126,7 +127,7 @@ public class HomeController {
 	@RequestMapping(value = "/kakaologin.do",  method = { RequestMethod.POST,
 			RequestMethod.GET })
 	@ResponseBody
-	public ModelAndView kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
+	public void kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws Exception {
 		System.out.println("code 잘들어옴");
 		ModelAndView mav = new ModelAndView();
@@ -136,8 +137,8 @@ public class HomeController {
 		JsonNode accessToken = node.get("access_token"); // 사용자의 정보
 		System.out.println("getAccessToken : "+accessToken.toString());
 		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
-		JsonNode rInfo = KakaoController.sendMessagetoMe(accessToken);
-		System.out.println(rInfo.toString());
+		//JsonNode rInfo = KakaoController.sendMessagetoMe(accessToken);
+//		System.out.println(rInfo.toString());
 		String kemail = null;
 		String kname = null;
 		String kgender = null;
@@ -161,7 +162,47 @@ public class HomeController {
 		System.out.println(kemail);
 		System.out.println(kname);
 		mav.setViewName("redirect:"+"http://www.naver.com");
-		return mav;
+//		return mav;
 	}// end kakaoLogin()
-
+	// 임시로 데이터 요청 해주면 보내주는 메소드
+		@RequestMapping(value = "/sendmessage", method = { RequestMethod.POST })
+		@ResponseBody
+		public void sendMessage(@RequestBody Map<String, Object> param) {
+			String accessToken =  (String) param.get("access_token");
+			System.out.println("Send Message to ME");
+			JsonNode rInfo = KakaoController.sendMessagetoMe(accessToken);
+		
+		}
+		
+		@RequestMapping(value = "/getfriend", method = { RequestMethod.POST })
+		@ResponseBody
+		public void getFriened(@RequestBody Map<String, Object> param) {
+			String accessToken =  (String) param.get("access_token");
+			String receiver =  (String) param.get("receiver");
+			System.out.println("getfriend");
+			List<String> uuids = new ArrayList<String>();
+			JsonNode freindList = KakaoController.getFriends(accessToken);
+			for(int i =0; i<freindList.size();++i)
+			{
+				String nickname=freindList.get(i).get("profile_nickname").toString();
+				nickname=nickname.replace("\"", "");
+				
+				if (nickname.equals(receiver))
+				{
+					String uuid=freindList.get(i).get("uuid").toString();
+					uuids.add(uuid);
+				}
+			}
+			if (uuids.size()>=1)
+			{
+				KakaoController.sendMessagetoYou(accessToken, uuids);
+			}
+			else
+			{
+				System.out.println("친구가 존재하지 않음");
+			}
+			
+			//System.out.println(returnNode.get("elements").get(0).get("uuid").toString());
+		
+		}
 }

@@ -1,4 +1,4 @@
-package com.pnu.spring.smartfactory.client_for_server_test.DAO;
+package com.pnu.spring.smartfactory.client_for_server_test.DTO;
 
 public class DataDAO {
     private String code;

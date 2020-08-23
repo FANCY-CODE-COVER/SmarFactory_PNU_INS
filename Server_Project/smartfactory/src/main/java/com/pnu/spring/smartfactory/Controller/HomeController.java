@@ -177,32 +177,79 @@ public class HomeController {
 		@RequestMapping(value = "/getfriend", method = { RequestMethod.POST })
 		@ResponseBody
 		public void getFriened(@RequestBody Map<String, Object> param) {
+			System.out.println("친구 가져오기 + 메시지 시작");
 			String accessToken =  (String) param.get("access_token");
 			String receiver =  (String) param.get("receiver");
+			String btnname =  (String) param.get("btnname");
+			String contents =  (String) param.get("contents");
+			
 			System.out.println("getfriend");
+			System.out.println("btnname "+btnname );
+			System.out.println("contents "+contents);
 			List<String> uuids = new ArrayList<String>();
-			JsonNode freindList = KakaoController.getFriends(accessToken);
-			for(int i =0; i<freindList.size();++i)
-			{
-				String nickname=freindList.get(i).get("profile_nickname").toString();
-				nickname=nickname.replace("\"", "");
-				
-				if (nickname.equals(receiver))
+			int offset=0;
+			int limit=5;
+			JsonNode freindList = null;
+			do {
+				freindList = KakaoController.getFriends(accessToken, Integer.toString(offset), Integer.toString(limit));
+				for(int i =0; i<freindList.size();++i)
 				{
-					String uuid=freindList.get(i).get("uuid").toString();
-					uuids.add(uuid);
+					String nickname=freindList.get(i).get("profile_nickname").toString();
+					nickname=nickname.replace("\"", "");
+					
+					if (nickname.equals(receiver))
+					{
+						String uuid=freindList.get(i).get("uuid").toString();
+						uuids.add(uuid);
+						break;
+					}
 				}
+				if(uuids.size()>=1)
+				{
+					break;
+				}
+				offset+=limit;
 			}
+			while(freindList.size() >= limit);
+
+			
 			if (uuids.size()>=1)
 			{
-				KakaoController.sendMessagetoYou(accessToken, uuids);
+				KakaoController.sendMessagetoYou(accessToken, uuids, contents,btnname);
 			}
 			else
 			{
 				System.out.println("친구가 존재하지 않음");
 			}
-			
-			//System.out.println(returnNode.get("elements").get(0).get("uuid").toString());
+			System.out.println("친구 가져오기 + 메시지 끝");
+		}//end getFriend
 		
-		}
+		@RequestMapping(value = "/tokenavailable", method = { RequestMethod.POST })
+		@ResponseBody
+		public JSONObject isTokenAvailable(@RequestBody Map<String, Object> param) {
+			System.out.println("토큰을 점검 시작.");
+			String accessToken =  (String) param.get("access_token");
+			List<String> uuids = new ArrayList<String>();
+			JsonNode response = KakaoController.isTokenAvailable(accessToken);
+			JSONObject jsonObj=new JSONObject();
+			jsonObj.put("expiresIn", response.get("expires_in") );
+			System.out.println("Expires in : "+response.get("expires_in"));
+			System.out.println("토큰을 점검 끝");
+			return jsonObj;
+		}// end 
+		
+		@RequestMapping(value = "/getnewtoken", method = { RequestMethod.POST })
+		@ResponseBody
+		public JSONObject getNewToken(@RequestBody Map<String, Object> param) {
+			System.out.println("새토큰 발급 시작");
+			String refreshToken =  (String) param.get("refresh_token");
+			JsonNode tokenmanger = KakaoController.getNewToken(ApiValue.kakao_key_rest, refreshToken);
+			JSONObject jsonObj=new JSONObject();
+			jsonObj.put("access_token", tokenmanger.get("access_token") );
+			jsonObj.put("refresh_token", tokenmanger.get("refresh_token") );
+			
+			System.out.println("refresh_token_expires_in : "+tokenmanger.get("refresh_token_expires_in"));
+			System.out.println("새토큰 발급 끝");
+			return jsonObj;
+		}// end 
 }

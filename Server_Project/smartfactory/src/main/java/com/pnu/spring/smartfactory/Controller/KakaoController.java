@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -102,9 +103,9 @@ public class KakaoController {
 	
 	// 액세스토큰으로 나에게 메시지 보내는 메소드
 		@ResponseBody
-		public static JsonNode getFriends(String accessToken) {
+		public static JsonNode getFriends(String accessToken, String offset, String limit) {
 			
-			final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends?offset=0&limit=5&order=asc";
+			final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends?offset="+offset+"&limit="+limit+"&order=asc";
 			//final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends?offset=5&limit=5&order=asc";
 			final HttpClient client = HttpClientBuilder.create().build();
 			final HttpGet get = new HttpGet(RequestUrl); // add header
@@ -132,8 +133,9 @@ public class KakaoController {
 		}
 	
 		// 액세스토큰으로 나에게 메시지 보내는 메소드
+		@SuppressWarnings("deprecation")
 		@ResponseBody
-		public static JsonNode sendMessagetoYou(String accessToken, List<String> uuids) {
+		public static JsonNode sendMessagetoYou(String accessToken, List<String> uuids, String contents, String btnname) {
 			
 			final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends/message/default/send";
 			final HttpClient client = HttpClientBuilder.create().build();
@@ -156,20 +158,22 @@ public class KakaoController {
 			String subParams = 
 			"{" + 
 			"\"object_type\": \"text\"," + 
-			"\"text\": \"This is English\"," + 
+			"\"text\": \""+contents+"\"," + 
 			"\"link\": {" + 
 			"	\"web_url\": \"https://developers.kakao.com\"," + 
 			"\"mobile_web_url\": \"https://developers.kakao.com\" " + 
 			"	}," + 
-			"	\"button_title\": \"This is Button\"" + 
+			"	\"button_title\": \""+btnname+"\"" + 
 			"}";
 			
 			postParams.add(new BasicNameValuePair("template_object", subParams));
 			System.out.println("Send Message to You");
 			
 			JsonNode returnNode = null;
+			UrlEncodedFormEntity form;
 			try {
-				post.setEntity(new UrlEncodedFormEntity(postParams));
+				form = new UrlEncodedFormEntity(postParams, "utf-8");
+				post.setEntity(form);
 				final HttpResponse response = client.execute(post); // JSON 형태 반환값 처리
 				System.out.println(response.toString());
 				ObjectMapper mapper = new ObjectMapper();
@@ -230,4 +234,56 @@ public class KakaoController {
 		return returnNode;
 	}
 
+	
+	@ResponseBody
+	public static JsonNode isTokenAvailable(String accessToken) {
+		final String RequestUrl = "https://kapi.kakao.com/v1/user/access_token_info";
+		final HttpClient client = HttpClientBuilder.create().build();
+		final HttpGet get = new HttpGet(RequestUrl); // add header
+		get.addHeader("Authorization", "Bearer " + accessToken);
+		JsonNode returnNode = null;
+		try {
+			final HttpResponse response = client.execute(get); // JSON 형태 반환값 처리
+			ObjectMapper mapper = new ObjectMapper();
+			returnNode = mapper.readTree(response.getEntity().getContent());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// clear resources
+		}
+		return returnNode;
+	}
+	
+	@ResponseBody
+	public static JsonNode getNewToken(String rest_api_key, String refreshToken) {
+		final String RequestUrl = "https://kauth.kakao.com/oauth/token";
+		final HttpClient client = HttpClientBuilder.create().build();
+		final HttpPost post = new HttpPost(RequestUrl); // add header
+		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		
+		postParams.add(new BasicNameValuePair("grant_type", "refresh_token"));
+		postParams.add(new BasicNameValuePair("client_id", rest_api_key));
+		postParams.add(new BasicNameValuePair("refresh_token", refreshToken));
+		
+		JsonNode returnNode = null;
+		try {
+			post.setEntity(new UrlEncodedFormEntity(postParams));
+			final HttpResponse response = client.execute(post); // JSON 형태 반환값 처리
+			ObjectMapper mapper = new ObjectMapper();
+			returnNode = mapper.readTree(response.getEntity().getContent());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// clear resources
+		}
+		return returnNode;
+	}
 }

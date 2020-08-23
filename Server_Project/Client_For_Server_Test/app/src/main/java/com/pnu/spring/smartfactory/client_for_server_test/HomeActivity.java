@@ -25,6 +25,10 @@ import com.kakao.kakaotalk.v2.KakaoTalkService;
 import com.kakao.network.ErrorResult;
 import com.kakao.util.exception.KakaoException;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.Message;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.TokenManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,7 +64,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             // 1. 여기서 토큰, 보낼사람 이름으로 요청 보낸다.
             // 2. 서버에서 토큰으로 친구 목록 찾는다.
             // 3. 친구 목록에서 원하는 이름 찾아서 보낸다.
-            sendMessage();
+            String access_token = PreferenceManager.getString(this, "access_token");
+            String refresh_token = PreferenceManager.getString(this, "refresh_token");
+            String receiver = editRecevier.getText().toString();
+            String contents="여기에 내용이 들어간다.";
+            String btnname="버튼명";
+
+            boolean isAvail=isTokenAvailable(access_token, refresh_token);
+            Log.i("Token", "토큰 확인");
+
+
+            // 동기식 으로 변경하기
+            if( !isAvail )
+            {// 토큰이 이용불가능 하면
+                // 새로 발급한다.
+//                getNewToken(access_token, refresh_token);
+                Log.i("Token", "토큰 재발급");
+//                access_token = PreferenceManager.getString(this, "access_token");
+//                refresh_token = PreferenceManager.getString(this, "refresh_token");
+            }
+            sendMessage(access_token, refresh_token, receiver, contents, btnname);
+            Log.i("Token", "메시지 보내기");
         }
         else if (id == R.id.btn_local_logout) {
             PreferenceManager.removeKey(HomeActivity.this, "id");
@@ -71,6 +95,73 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private boolean isTokenAvailable(String access_token, String refresh_token){
+        TokenManager tm = new TokenManager(access_token, refresh_token, "");
+        Call<TokenManager> joinContentCall = networkService.isTokenAvailable(tm);
+        final boolean[] result = {false};
+        joinContentCall.enqueue(new Callback<TokenManager>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<TokenManager> call, Response<TokenManager> response) {
+                if (response.isSuccessful()) {
+                    //성공
+                    TokenManager tempTm= response.body();
+                    int expire_time =  Integer.parseInt( tempTm.getExpiresIn() );
+                    if ( expire_time >  3000 ){
+                        result[0] = true;
+                    }
+                    Log.d("Kakao", "보내기 성공");
+                } else {// 실패시 에러코드들
+                    if (response.code() == 500) {
+
+                    } else if (response.code() == 503) {
+
+                    } else if (response.code() == 401) {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TokenManager> call, Throwable t) {
+                //실패
+            }
+        });
+        return result[0];
+    }
+
+    private void getNewToken(String access_token, String refresh_token){
+        TokenManager tm = new TokenManager(access_token, refresh_token, "");
+        Call<TokenManager> joinContentCall = networkService.getNewToken(tm);
+        joinContentCall.enqueue(new Callback<TokenManager>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<TokenManager> call, Response<TokenManager> response) {
+                if (response.isSuccessful()) {
+                    //성공
+                    TokenManager tokenManager= response.body();
+                    //토큰 업데이트
+                    assert tokenManager != null;
+                    PreferenceManager.setString(HomeActivity.this, "access_token", tokenManager.getAccess_token());
+                    PreferenceManager.setString(HomeActivity.this, "refresh_token", tokenManager.getRefresh_token());
+                    Log.d("Kakao", "보내기 성공");
+                } else {// 실패시 에러코드들
+                    if (response.code() == 500) {
+
+                    } else if (response.code() == 503) {
+
+                    } else if (response.code() == 401) {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TokenManager> call, Throwable t) {
+                //실패
+            }
+        });
+    }
 
     private void requestFriend() {
         // 조회 요청
@@ -98,21 +189,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(AppFriendsResponse result) {
                         Log.i("KAKAO_API", "친구 조회 성공");
-
-                        for (AppFriendInfo friend : result.getFriends()) {
-                            Log.d("KAKAO_API", friend.toString());
-                            // uuids.add(friend.getUUID());
-                            // 메시지 전송 시 사용
-
-                        }
+//                        for (AppFriendInfo friend : result.getFriends()) {
+//                            Log.d("KAKAO_API", friend.toString());
+//                            // uuids.add(friend.getUUID());
+//                            // 메시지 전송 시 사용
+//                        }
                     }
                 });
     }//end requestFriends
 
-    public void sendMessage() {//
-        String access_token = PreferenceManager.getString(this, "access_token");
-        Message message = new Message(access_token, access_token, editRecevier.getText().toString());
-        Call<Void> joinContentCall = networkService.getFriend(message);
+    public void sendMessage(String access_token, String refresh_token, String receiver, String contents, String btnname) {//
+        Message msg = new Message(access_token, refresh_token, receiver, contents , btnname);
+        Call<Void> joinContentCall = networkService.getFriend(msg);
         joinContentCall.enqueue(new Callback<Void>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -165,8 +253,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // 카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-
-
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

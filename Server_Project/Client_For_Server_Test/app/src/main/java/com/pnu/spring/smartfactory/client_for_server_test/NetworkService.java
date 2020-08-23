@@ -3,6 +3,7 @@ package com.pnu.spring.smartfactory.client_for_server_test;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.Category;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.DataDAO;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.Message;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.TokenManager;
 
 import java.util.List;
 
@@ -23,4 +24,10 @@ public interface NetworkService {
 
     @POST("getfriend")
     Call<Void> getFriend(@Body Message message);
+
+    @POST("tokenavailable")
+    Call<TokenManager> isTokenAvailable(@Body TokenManager tm);
+
+    @POST("getnewtoken")
+    Call<TokenManager> getNewToken(@Body TokenManager tm);
 }

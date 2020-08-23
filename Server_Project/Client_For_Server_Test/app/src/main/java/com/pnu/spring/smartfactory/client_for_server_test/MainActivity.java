@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             requestDatas();
         }
         else if (id == R.id.btn_message) {
-            sendMessage();
+
         }//end btn message
         else if (id == R.id.btn_token) {
             access_token=Session.getCurrentSession().getAccessToken();
@@ -295,36 +295,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }//end doLogin()
 
 
-    public void sendMessage() {// 메시지 보내기
-        Message message = new Message(access_token,access_token, "이광용");
-        Call<Void> joinContentCall=networkService.sendMessage(message);
-        joinContentCall.enqueue(new Callback<Void>(){
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
-                    //성공
-                    Log.d("Kakao", "보내기 성공");
-                }
-                else{// 실패시 에러코드들
-                    if(response.code()==500)
-                    {
-
-                    }
-                    else if(response.code()==503)
-                    {
-
-                    }
-                    else if(response.code()==401)
-                    {
-
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                //실패
-            }
-        });
-    }//end doLogin()
 }

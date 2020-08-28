@@ -37,10 +37,10 @@ import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import com.pnu.spring.smartfactory.DAO.*;
-import com.pnu.spring.smartfactory.DAO.PopitDAO;
 import com.pnu.spring.smartfactory.Mapper.LoginMapper;
 import com.pnu.spring.smartfactory.Mapper.PopitMapper;
 import com.pnu.spring.smartfactory.Service.DataService;
+import com.pnu.spring.smartfactory.Service.FacilityService;
 import com.pnu.spring.smartfactory.Service.LoginService;
 import com.pnu.spring.smartfactory.Service.PopitService;
 
@@ -58,6 +58,9 @@ public class HomeController {
 	private LoginService loginServicimpl;
 	@Resource(name = "com.pnu.spring.smartfactory.Service.DataServiceImpl") // 해당 서비스가 리소스임을 표시합니다.
 	private DataService dataServicimpl;
+	@Resource(name = "com.pnu.spring.smartfactory.Service.FacilityServiceImpl") 
+	private FacilityService facilityServiceimpl;
+	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -136,31 +139,6 @@ public class HomeController {
 		// accessToken에 사용자의 로그인한 모든 정보가 들어있음
 		JsonNode accessToken = node.get("access_token"); // 사용자의 정보
 		System.out.println("getAccessToken : "+accessToken.toString());
-		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
-		//JsonNode rInfo = KakaoController.sendMessagetoMe(accessToken);
-//		System.out.println(rInfo.toString());
-		String kemail = null;
-		String kname = null;
-		String kgender = null;
-		String kbirthday = null;
-		String kage = null;
-		String kimage = null; // 유저정보 카카오에서 가져오기 Get properties
-		JsonNode properties = userInfo.path("properties");
-		JsonNode kakao_account = userInfo.path("kakao_account");
-		kemail = kakao_account.path("email").asText();
-		kname = properties.path("nickname").asText();
-		kimage = properties.path("profile_image").asText();
-		kgender = kakao_account.path("gender").asText();
-		kbirthday = kakao_account.path("birthday").asText();
-		kage = kakao_account.path("age_range").asText();
-		session.setAttribute("kemail", kemail);
-		session.setAttribute("kname", kname);
-		session.setAttribute("kimage", kimage);
-		session.setAttribute("kgender", kgender);
-		session.setAttribute("kbirthday", kbirthday);
-		session.setAttribute("kage", kage);
-		System.out.println(kemail);
-		System.out.println(kname);
 		mav.setViewName("redirect:"+"http://www.naver.com");
 //		return mav;
 	}// end kakaoLogin()
@@ -251,5 +229,7 @@ public class HomeController {
 			System.out.println("refresh_token_expires_in : "+tokenmanger.get("refresh_token_expires_in"));
 			System.out.println("새토큰 발급 끝");
 			return jsonObj;
-		}// end 
+		}// end
+		
+		
 }

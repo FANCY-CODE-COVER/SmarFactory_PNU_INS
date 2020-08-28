@@ -9,18 +9,13 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.pnu.spring.smartfactory.DAO.DataDAO;
 import com.pnu.spring.smartfactory.DAO.FacilityDAO;
 import com.pnu.spring.smartfactory.DAO.PlaceDAO;
 import com.pnu.spring.smartfactory.Service.FacilityService;
-import com.pnu.spring.smartfactory.Service.PopitService;
-
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
@@ -30,6 +25,7 @@ public class FacilityController {
 	@Resource(name = "com.pnu.spring.smartfactory.Service.FacilityServiceImpl") 
 	private FacilityService facilityServiceimpl;
 	
+	// 설비 동 목록 조회
 	@RequestMapping(value = "/getplacelist", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getPlaceList() {
@@ -48,6 +44,7 @@ public class FacilityController {
 		return jsonarrary;
 	}
 	
+	// 동별 설비 목록 조회
 	@RequestMapping(value = "/getfacilitylistperplace", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getFacilityListPerPlace(@RequestBody Map<String, Object> param) {
@@ -73,6 +70,7 @@ public class FacilityController {
 		return jsonarrary;
 	}
 	
+	//설비 상세 조회
 	@RequestMapping(value = "/getfacilitydetail", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getFacilityDetail(@RequestBody Map<String, Object> param) {

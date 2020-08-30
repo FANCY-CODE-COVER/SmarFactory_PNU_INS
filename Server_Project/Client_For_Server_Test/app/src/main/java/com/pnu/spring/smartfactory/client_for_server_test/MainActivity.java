@@ -26,12 +26,13 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.util.exception.KakaoException;
-import com.pnu.spring.smartfactory.client_for_server_test.DTO.Category;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.DataDAO;
-import com.pnu.spring.smartfactory.client_for_server_test.DTO.Message;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.FacilityDAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -146,7 +147,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         else if (id == R.id.btn_test1) {
-
+            //test for getfacilitydetail
+            getFacilityDetail();
+            Log.i("SINSIN", "Test 1 클릭됨");
         }
         else if (id == R.id.btn_test2) {
 
@@ -224,9 +227,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }//end requestFriends
 
-    public void requestDatas() {// 신신사 서버에서 데이터 받아오기
-        Category join = new Category("A01"); // A01 인 자료 요청
-        Call<List<DataDAO>> joinContentCall=networkService.getDatas(join);
+    public void requestDatas() {// 신신사 서버에서 데이터 받아오기 예제
+        Map<String, Object> param = new HashMap<>();
+        param.put("category_id","A01");
+        Call<List<DataDAO>> joinContentCall=networkService.getDatas(param);
         joinContentCall.enqueue(new Callback<List<DataDAO>>(){
             @SuppressLint("SetTextI18n")
             @Override
@@ -263,36 +267,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }//end requestDatas
 
-    public void doLogin() {// 로그인하기
-        Call<Void> joinContentCall=networkService.doLogin();
-        joinContentCall.enqueue(new Callback<Void>(){
+    public void getFacilityDetail() {
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("facility_cd","SS-0-01-B");
+        Log.i("SINSIN", param.get("facility_cd").toString());
+        Call<List<FacilityDAO>> joinContentCall=networkService.getFacilityDetail(param);
+
+        joinContentCall.enqueue(new Callback<List<FacilityDAO>>(){
             @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<List<FacilityDAO>> call, Response<List<FacilityDAO>> response) {
                 if(response.isSuccessful()){
-                    //성공
+                    Log.i("SINSIN", "성공");
+                    List<FacilityDAO> dataDAO=response.body();
+                    assert dataDAO != null;
+                    StringBuilder result= new StringBuilder();
+                    for(int i = 0; i<dataDAO.size(); ++i) {
+                        result.append(dataDAO.get(i).getFacility_no()).append("\n\r");
+                    }
+                    textView.setText(result.toString());
                 }
                 else{// 실패시 에러코드들
                     if(response.code()==500)
                     {
-
+                        Log.i("SINSIN", "500실패");
                     }
                     else if(response.code()==503)
                     {
-
+                        Log.i("SINSIN", "503 실패");
                     }
                     else if(response.code()==401)
                     {
-
+                        Log.i("SINSIN", "401 실패");
                     }
+                    Log.i("SINSIN", response.code()+"실패");
+                    Log.i("SINSIN", response.body()+"실패");
                 }
             }
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<List<FacilityDAO>> call, Throwable t) {
                 //실패
             }
         });
-    }//end doLogin()
-
-
+    }//end requestDatas
 }

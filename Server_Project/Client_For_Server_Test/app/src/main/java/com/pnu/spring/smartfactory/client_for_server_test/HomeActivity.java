@@ -19,16 +19,14 @@ import com.kakao.auth.Session;
 import com.kakao.friends.AppFriendContext;
 import com.kakao.friends.AppFriendOrder;
 import com.kakao.friends.response.AppFriendsResponse;
-import com.kakao.friends.response.model.AppFriendInfo;
 import com.kakao.kakaotalk.callback.TalkResponseCallback;
 import com.kakao.kakaotalk.v2.KakaoTalkService;
 import com.kakao.network.ErrorResult;
 import com.kakao.util.exception.KakaoException;
-import com.pnu.spring.smartfactory.client_for_server_test.DTO.Message;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.TokenManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -96,8 +94,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean isTokenAvailable(String access_token, String refresh_token){
-        TokenManager tm = new TokenManager(access_token, refresh_token, "");
-        Call<TokenManager> joinContentCall = networkService.isTokenAvailable(tm);
+        Map<String, Object> param = new HashMap<>();
+        param.put("access_token", access_token);
+        param.put("refresh_token", refresh_token);
+        param.put("expiresIn", "");
+        Call<TokenManager> joinContentCall = networkService.isTokenAvailable(param);
         final boolean[] result = {false};
         joinContentCall.enqueue(new Callback<TokenManager>() {
             @SuppressLint("SetTextI18n")
@@ -131,8 +132,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getNewToken(String access_token, String refresh_token){
-        TokenManager tm = new TokenManager(access_token, refresh_token, "");
-        Call<TokenManager> joinContentCall = networkService.getNewToken(tm);
+        Map<String, Object> param = new HashMap<>();
+        param.put("access_token", access_token);
+        param.put("refresh_token", refresh_token);
+        param.put("expiresIn", "");
+        Call<TokenManager> joinContentCall = networkService.getNewToken(param);
         joinContentCall.enqueue(new Callback<TokenManager>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -163,7 +167,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void requestFriend() {
+    private void requestFriend() {// 안드로이드 SDK 친구 요청
         // 조회 요청
         AppFriendContext context =
                 new AppFriendContext(AppFriendOrder.NICKNAME, 0, 100, "asc");
@@ -199,8 +203,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }//end requestFriends
 
     public void sendMessage(String access_token, String refresh_token, String receiver, String contents, String btnname) {//
-        Message msg = new Message(access_token, refresh_token, receiver, contents , btnname);
-        Call<Void> joinContentCall = networkService.getFriend(msg);
+        Map<String, Object> param = new HashMap<>();
+        param.put("refresh_token", refresh_token);
+        param.put("access_token", access_token);
+        param.put("receiver", receiver);
+        param.put("btnname", btnname);
+        param.put("contents", contents);
+        Call<Void> joinContentCall = networkService.getFriend(param);
         joinContentCall.enqueue(new Callback<Void>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -225,7 +234,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-    // 세션 콜백 구현
+    // 세션 콜백 구현 : 로그인관련
     private ISessionCallback sessionCallback = new ISessionCallback() {
         @Override
         public void onSessionOpened() {

@@ -48,7 +48,7 @@ public class MyApplication extends Application {
     public void buildNetworkService(){
         synchronized (MyApplication.class){
             if(networkService==null){
-                baseUrl="http://";
+                baseUrl="http://192.168.43.160:8082/smartfactory/";
                 Gson gson = new GsonBuilder()
                         .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                         .create();

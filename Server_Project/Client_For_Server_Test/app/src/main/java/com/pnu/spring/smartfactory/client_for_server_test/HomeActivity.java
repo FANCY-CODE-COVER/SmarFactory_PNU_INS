@@ -209,7 +209,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         param.put("receiver", receiver);
         param.put("btnname", btnname);
         param.put("contents", contents);
-        Call<Void> joinContentCall = networkService.getFriend(param);
+        Call<Void> joinContentCall = networkService.sendMessageToFriend(param);
         joinContentCall.enqueue(new Callback<Void>() {
             @SuppressLint("SetTextI18n")
             @Override

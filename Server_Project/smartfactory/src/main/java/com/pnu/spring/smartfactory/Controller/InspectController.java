@@ -83,13 +83,12 @@ public class InspectController {
 		System.out.println("Size:"+datas.size());
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("req_no", datas.get(i).getReq_no());
+			jsonObj.put("insp_rst_no", datas.get(i).getInsp_rst_no());
 			jsonObj.put("facility_nm", datas.get(i).getFacility_nm());
 			jsonObj.put("inspect_nm", datas.get(i).getInspect_nm());
 			jsonObj.put("result", datas.get(i).getResult());
 			jsonObj.put("user_nm", datas.get(i).getUser_nm());
 			jsonObj.put("facility_no", datas.get(i).getFacility_no());
-			jsonObj.put("insp_rst_no", datas.get(i).getInsp_rst_no());
 			jsonObj.put("emplyee_nm", datas.get(i).getEmplyee_nm());
 			jsonarrary.add(jsonObj);
 		}
@@ -109,13 +108,12 @@ public class InspectController {
 		System.out.println("Size:"+datas.size());
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("req_no", datas.get(i).getReq_no());
+			jsonObj.put("insp_rst_no", datas.get(i).getInsp_rst_no());
 			jsonObj.put("facility_nm", datas.get(i).getFacility_nm());
 			jsonObj.put("inspect_nm", datas.get(i).getInspect_nm());
 			jsonObj.put("result", datas.get(i).getResult());
 			jsonObj.put("user_nm", datas.get(i).getUser_nm());
 			jsonObj.put("facility_no", datas.get(i).getFacility_no());
-			jsonObj.put("insp_rst_no", datas.get(i).getInsp_rst_no());
 			jsonObj.put("emplyee_nm", datas.get(i).getEmplyee_nm());
 			jsonarrary.add(jsonObj);
 		}

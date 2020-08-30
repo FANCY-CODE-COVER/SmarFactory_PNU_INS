@@ -13,7 +13,7 @@
 	
 	<select id="getFRequestList"  resultType="com.pnu.spring.smartfactory.DAO.FRequestDAO">
 	SELECT 
-		DBO.UFGEN_REPAIR_REQ_NO('RQ', 3) REQ_NO,	-- 요청번호
+		CRR.REQ_NO,	-- 요청번호
 		USR.USER_NM,						-- 요청자
 		CRR.FACILITY_NO,					-- 설비번호
 		CRR.INSP_RST_NO,					-- 점검결과번호
@@ -23,12 +23,12 @@
 		LEFT OUTER JOIN SYS_USER AS USR WITH(NOLOCK) ON (CRR.REQ_USER_ID = USR.USER_ID)
 		LEFT OUTER JOIN MDM_EMPLOYEE AS EP1 WITH(NOLOCK) ON (CRR.REQ_USER_ID = EP1.EMPLOYEE_ID)
 		LEFT OUTER JOIN MDM_CODE AS CD1 WITH(NOLOCK) ON (CD1.CATEGORY_ID = 'IPP' AND CRR.STATUS = CD1.SUB_CD1)
-	ORDER BY DBO.UFGEN_REPAIR_REQ_NO('RQ', 3)
+	ORDER BY CRR.REQ_NO
 	</select>
 	
 	<select id="getFRequestDetail"  resultType="com.pnu.spring.smartfactory.DAO.FRequestDAO">
 	SELECT 
-		DBO.UFGEN_REPAIR_REQ_NO('RQ', 3) REQ_NO,	-- 요청번호
+		CRR.REQ_NO,	-- 요청번호
 		USR.USER_NM,						-- 요청자
 		CRR.FACILITY_NO,					-- 설비번호
 		CRR.INSP_RST_NO,					-- 점검결과번호
@@ -41,6 +41,6 @@
 	<if test='facility_cd !=null'>
 		WHERE CRR.FACILITY_NO=#{facility_cd}
  	</if>
-	ORDER BY DBO.UFGEN_REPAIR_REQ_NO('RQ', 3)
+	ORDER BY CRR.REQ_NO
 	</select>
 </mapper>

@@ -1,32 +1,23 @@
 package com.pnu.spring.smartfactory.DAO;
 
 public class InspectDAO {
-		String req_no, facility_nm, inspect_nm,	result, user_nm
-		, facility_no, insp_rst_no, emplyee_nm;
+		String insp_rst_no, facility_nm, inspect_nm,	result, user_nm
+		, facility_no, emplyee_nm;
 		public InspectDAO()
 		{
 			
 		}
 		
-		public InspectDAO(String req_no, String facility_nm, String inspect_nm, String result, String user_nm,
-				String facility_no, String insp_rst_no, String emplyee_nm) {
+		public InspectDAO(String insp_rst_no, String facility_nm, String inspect_nm, String result, String user_nm,
+				String facility_no, String emplyee_nm) {
 			super();
-			this.req_no = req_no;
+			this.insp_rst_no = insp_rst_no;
 			this.facility_nm = facility_nm;
 			this.inspect_nm = inspect_nm;
 			this.result = result;
 			this.user_nm = user_nm;
 			this.facility_no = facility_no;
-			this.insp_rst_no = insp_rst_no;
 			this.emplyee_nm = emplyee_nm;
-		}
-
-		public String getReq_no() {
-			return req_no;
-		}
-
-		public void setReq_no(String req_no) {
-			this.req_no = req_no;
 		}
 
 		public String getFacility_nm() {

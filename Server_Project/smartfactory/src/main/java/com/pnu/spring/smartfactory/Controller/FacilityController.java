@@ -49,33 +49,22 @@ public class FacilityController {
 	@ResponseBody
 	public JSONArray getFacilityListPerPlace(@RequestBody Map<String, Object> param) {
 		String place_cd = (String) param.get("place_cd");
-		List<FacilityDAO> datas = facilityServiceimpl.getFacilityListPerPlaceService(place_cd);
-		JSONArray jsonarrary = new JSONArray();
-		System.out.println("Size:"+datas.size());
-		for (int i = 0; i < datas.size(); ++i) {
-			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("rowno", datas.get(i).getRowno());
-			jsonObj.put("facility_no", datas.get(i).getFacility_no());
-			jsonObj.put("facility_nm", datas.get(i).getFacility_nm());
-			jsonObj.put("place_cd", datas.get(i).getPlace_cd());
-			jsonObj.put("place", datas.get(i).getPlace());
-			jsonObj.put("pline_nm", datas.get(i).getPline_nm());
-			jsonObj.put("departmet_nm", datas.get(i).getDepartmet_nm());
-			jsonObj.put("employee_nm", datas.get(i).getEmployee_nm());
-			jsonObj.put("state", datas.get(i).getState());
-			jsonObj.put("facility_type", datas.get(i).getFacility_type());
-			jsonObj.put("reg_nm", datas.get(i).getReg_nm());
-			jsonarrary.add(jsonObj);
-		}
-		return jsonarrary;
+		List<FacilityDAO> datas = facilityServiceimpl.getFacilityListPerPlaceService(param);
+		return convListtoJSONArray(datas);
 	}
+
+	
 	
 	//설비 상세 조회
 	@RequestMapping(value = "/getfacilitydetail", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getFacilityDetail(@RequestBody Map<String, Object> param) {
 		String facility_cd = (String) param.get("facility_cd");
-		List<FacilityDAO> datas = facilityServiceimpl.getFacilityDetailService(facility_cd);
+		List<FacilityDAO> datas = facilityServiceimpl.getFacilityDetailService(param);
+		return convListtoJSONArray(datas);
+	}
+	
+	private JSONArray convListtoJSONArray(List<FacilityDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
 		System.out.println("Size:"+datas.size());
 		for (int i = 0; i < datas.size(); ++i) {

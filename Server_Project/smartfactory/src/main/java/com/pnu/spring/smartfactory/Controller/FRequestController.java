@@ -38,7 +38,7 @@ public class FRequestController {
 //		String req_dt = (String) param.get("req_dt");
 		JSONObject jsonObj = new JSONObject();
 		try {
-			frequestServiceImpl.insFRequestSerivce(req_no, req_dt);
+			frequestServiceImpl.insFRequestSerivce(param);
 			jsonObj.put("message", "success");
 		}
 		catch(Exception e) {
@@ -57,7 +57,7 @@ public class FRequestController {
 		String req_no = (String) param.get("req_no");
 		JSONObject jsonObj = new JSONObject();
 		try {
-			frequestServiceImpl.delFRequestSerivce(req_no);
+			frequestServiceImpl.delFRequestSerivce(param);
 			jsonObj.put("message", "success");
 		}
 		catch(Exception e) {
@@ -72,20 +72,7 @@ public class FRequestController {
 	@ResponseBody
 	public JSONArray getFRequestList() {
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestListSerivce();
-		JSONArray jsonarrary = new JSONArray();
-		
-		System.out.println("Size:"+datas.size());
-		for (int i = 0; i < datas.size(); ++i) {
-			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("req_no", datas.get(i).getReq_no());
-			jsonObj.put("user_nm", datas.get(i).getUser_nm());
-			jsonObj.put("facility_no", datas.get(i).getFacility_no());
-			jsonObj.put("insp_rst_no", datas.get(i).getInsp_rst_no());
-			jsonObj.put("status", datas.get(i).getStatus());
-			jsonObj.put("employee_nm", datas.get(i).getEmployee_nm());
-			jsonarrary.add(jsonObj);
-		}
-		return jsonarrary;
+		return convListtoJSONArray(datas);
 	}
 	
 	// 설비의 요청 상세 조회 (점검 or 수리)
@@ -93,7 +80,11 @@ public class FRequestController {
 	@ResponseBody
 	public JSONArray getFRequestDetail(@RequestBody Map<String, Object> param) {
 		String facility_no = (String) param.get("facility_no");
-		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailSerivce(facility_no);
+		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailSerivce(param);
+		return convListtoJSONArray(datas);
+	}
+	
+	private JSONArray convListtoJSONArray(List<FRequestDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
 		
 		System.out.println("Size:"+datas.size());
@@ -109,6 +100,5 @@ public class FRequestController {
 		}
 		return jsonarrary;
 	}
-	
 	
 }

@@ -1,13 +1,14 @@
 package com.pnu.spring.smartfactory.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pnu.spring.smartfactory.DAO.FRequestDAO;
 import com.pnu.spring.smartfactory.DAO.ResponseDAO;
 
 public interface FRequestService {
-	public void insFRequestSerivce(String req_no,String req_dt );
-	public void delFRequestSerivce(String req_no);
+	public void insFRequestSerivce(Map<String, Object> param);
+	public void delFRequestSerivce(Map<String, Object> param);
 	public List<FRequestDAO> getFRequestListSerivce();
-	public List<FRequestDAO> getFRequestDetailSerivce(String facility_no);
+	public List<FRequestDAO> getFRequestDetailSerivce(Map<String, Object> param);
 }

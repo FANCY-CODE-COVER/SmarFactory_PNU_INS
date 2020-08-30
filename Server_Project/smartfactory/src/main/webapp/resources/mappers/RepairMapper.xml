@@ -3,16 +3,17 @@
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pnu.spring.smartfactory.Mapper.RepairMapper">
-	<insert id="insRepair" >
+	<insert id="insRepair" parameterType="hashmap">
 		INSERT INTO CMM_REPAIR ([REPAIR_NO], [REG_DT]) VALUES (DBO.UFGEN_REPAIR_NO('RP',3), GETDATE());
 	</insert>
 	
-	<delete  id="delRepair">
+	<delete  id="delRepair" parameterType="hashmap">
 		DELETE FROM CMM_REPAIR WHERE REPAIR_NO=#{repair_no}
 		
 	</delete>
 	
-	<select id="getRepairList"  resultType="com.pnu.spring.smartfactory.DAO.RepairDAO">
+	<select id="getRepairList"  resultType="com.pnu.spring.smartfactory.DAO.RepairDAO" 
+	parameterType="hashmap">
 	SELECT 
 		CRP.REPAIR_NO,		-- 수리번호
 		CRP.FACILITY_NO, 	-- 설비번호
@@ -44,9 +45,7 @@
 		LEFT OUTER JOIN MDM_CODE AS CD1 WITH(NOLOCK) ON (CD1.CATEGORY_ID = 'IPP' AND CRP.STATUS = CD1.SUB_CD1)
 		LEFT OUTER JOIN MDM_CODE AS CD2 WITH(NOLOCK) ON (CRP.CAUSE_CD = CD2.CODE)			-- 설비수리사유: CD2.CATEGORY_ID = 'ARC'
 		LEFT OUTER JOIN MDM_CODE AS CD3 WITH(NOLOCK) ON (CRP.REPAIR_TYPE_CD = CD3.CODE)
-	<if test='facility_no != "" and facility_no != null'>
 	WHERE CRP.FACILITY_NO= #{facility_no}
-	</if>
 	ORDER BY CRP.REPAIR_NO
 	</select>
 </mapper>

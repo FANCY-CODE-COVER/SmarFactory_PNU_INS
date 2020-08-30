@@ -1,6 +1,7 @@
 package com.pnu.spring.smartfactory.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,16 +14,16 @@ import com.pnu.spring.smartfactory.Mapper.FacilityMapper;
 public class FRequestServiceImpl implements FRequestService{
 	@Autowired  
 	private FRequestMapper frequestMapper;
-	public void insFRequestSerivce(String req_no,String req_dt ) {
-		frequestMapper.insFRequest(req_no,req_dt );
+	public void insFRequestSerivce(Map<String, Object> param) {
+		frequestMapper.insFRequest(param);
 	}
-	public void delFRequestSerivce(String req_no) {
-		frequestMapper.delFRequest(req_no);
+	public void delFRequestSerivce(Map<String, Object> param) {
+		frequestMapper.delFRequest(param);
 	}
 	public List<FRequestDAO> getFRequestListSerivce(){
 		return frequestMapper.getFRequestList();
 	}
-	public List<FRequestDAO> getFRequestDetailSerivce(String facility_no){
-		return frequestMapper.getFRequestDetail(facility_no);
+	public List<FRequestDAO> getFRequestDetailSerivce(Map<String, Object> param){
+		return frequestMapper.getFRequestDetail(param);
 	}
 }

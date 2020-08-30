@@ -42,7 +42,7 @@ public class RepairController {
 //		String reg_dt = (String) param.get("reg_dt");
 		JSONObject jsonObj = new JSONObject();
 		try {
-			repairserviceimpl.insRepairService(repair_no, reg_dt);
+			repairserviceimpl.insRepairService(param);
 			jsonObj.put("message", "success");
 		}
 		catch(Exception e) {
@@ -61,7 +61,7 @@ public class RepairController {
 		String repair_no = (String) param.get("repair_no");
 		JSONObject jsonObj = new JSONObject();
 		try {
-			repairserviceimpl.delRepairService(repair_no);
+			repairserviceimpl.delRepairService(param);
 			jsonObj.put("message", "success");
 		}
 		catch(Exception e) {
@@ -88,7 +88,6 @@ public class RepairController {
 	public JSONArray getRepairDetail(@RequestBody Map<String, Object> param) {
 //		String facility_no = (String) param.get("facility_no");
 		List<RepairDAO> datas = repairserviceimpl.getRepairDetailService(param);
-		
 		return convListToJsonArrary(datas);
 	}
 	

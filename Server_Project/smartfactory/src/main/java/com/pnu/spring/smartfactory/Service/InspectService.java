@@ -1,12 +1,13 @@
 package com.pnu.spring.smartfactory.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pnu.spring.smartfactory.DAO.InspectDAO;
 
 public interface InspectService {
-	public void insInspectService(String insp_rst_no,String insp_date );
-	public void delInspectService(String insp_rst_no);
+	public void insInspectService(Map<String, Object> param);
+	public void delInspectService(Map<String, Object> param);
 	public List<InspectDAO> getInspectListService();
-	public List<InspectDAO> getInspectDetailService(String facility_no);
+	public List<InspectDAO> getInspectDetailService(Map<String, Object> param);
 }

@@ -3,7 +3,8 @@
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pnu.spring.smartfactory.Mapper.FacilityMapper">
-	<select id="getPlaceList"  resultType="com.pnu.spring.smartfactory.DAO.PlaceDAO">
+	<select id="getPlaceList"  resultType="com.pnu.spring.smartfactory.DAO.PlaceDAO"
+	parameterType="hashmap">
 		SELECT ROW_NUMBER() OVER (ORDER BY CASE WHEN MFA.PLACE_CD IS NULL THEN 1 ELSE 0 END) AS ROWNO, 
 		  ISNULL(MFA.PLACE_CD, -1) AS PLACE_CD, 
 		  ISNULL(CD3.CODE_NM, '기타')  AS PLACE 
@@ -13,7 +14,8 @@
 		ORDER BY CASE WHEN MFA.PLACE_CD IS NULL THEN 1 ELSE 0 END
 	</select>
 	
-	<select id="getFacilityListPerPlace"  resultType="com.pnu.spring.smartfactory.DAO.FacilityDAO">
+	<select id="getFacilityListPerPlace"  resultType="com.pnu.spring.smartfactory.DAO.FacilityDAO"
+	 parameterType="hashmap">
 	SELECT
 		ROW_NUMBER() OVER (ORDER BY MFA.IX_SORT, MFA.FACILITY_NO) AS ROWNO,
 		MFA.FACILITY_NO,
@@ -27,13 +29,13 @@
 		'' AS FACILITY_TYPE, -- 설비종류
 		'' AS REG_NM -- 사용자
 	FROM MDM_FACILITY AS MFA
-	LEFT OUTER JOIN MDM_CODE AS CD3 WITH(NOLOCK) ON (MFA.PLACE_CD = CD3.CODE)
-	-- 장소
+	LEFT OUTER JOIN MDM_CODE AS CD3 WITH(NOLOCK) ON (MFA.PLACE_CD = CD3.CODE)  -- 장소
 	WHERE MFA.PLACE_CD =#{place_cd} -- A동
 	ORDER BY MFA.IX_SORT, MFA.FACILITY_NO
 	</select>
 	
-	<select id="getFacilityDetail"  resultType="com.pnu.spring.smartfactory.DAO.FacilityDAO">
+	<select id="getFacilityDetail"  resultType="com.pnu.spring.smartfactory.DAO.FacilityDAO"
+	 parameterType="hashmap">
 	SELECT ROW_NUMBER() OVER (ORDER BY MFA.IX_SORT, MFA.FACILITY_NO) AS ROWNO,
 	  MFA.FACILITY_NO,
 	  MFA.FACILITY_NM,

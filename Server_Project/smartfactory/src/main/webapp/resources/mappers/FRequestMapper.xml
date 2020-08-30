@@ -11,7 +11,8 @@
 		DELETE FROM CMM_REPAIR_REQ WHERE REQ_NO=#{req_no}
 	</delete>
 	
-	<select id="getFRequestList"  resultType="com.pnu.spring.smartfactory.DAO.FRequestDAO">
+	<select id="getFRequestList"  resultType="com.pnu.spring.smartfactory.DAO.FRequestDAO"
+	parameterType="hashmap">
 	SELECT 
 		CRR.REQ_NO,	-- 요청번호
 		USR.USER_NM,						-- 요청자
@@ -26,7 +27,8 @@
 	ORDER BY CRR.REQ_NO
 	</select>
 	
-	<select id="getFRequestDetail"  resultType="com.pnu.spring.smartfactory.DAO.FRequestDAO">
+	<select id="getFRequestDetail"  resultType="com.pnu.spring.smartfactory.DAO.FRequestDAO"
+	parameterType="hashmap">
 	SELECT 
 		CRR.REQ_NO,	-- 요청번호
 		USR.USER_NM,						-- 요청자
@@ -38,9 +40,7 @@
 		LEFT OUTER JOIN SYS_USER AS USR WITH(NOLOCK) ON (CRR.REQ_USER_ID = USR.USER_ID)
 		LEFT OUTER JOIN MDM_EMPLOYEE AS EP1 WITH(NOLOCK) ON (CRR.REQ_USER_ID = EP1.EMPLOYEE_ID)
 		LEFT OUTER JOIN MDM_CODE AS CD1 WITH(NOLOCK) ON (CD1.CATEGORY_ID = 'IPP' AND CRR.STATUS = CD1.SUB_CD1)
-	<if test='facility_cd !=null'>
-		WHERE CRR.FACILITY_NO=#{facility_cd}
- 	</if>
+	WHERE CRR.FACILITY_NO=#{facility_cd}
 	ORDER BY CRR.REQ_NO
 	</select>
 </mapper>

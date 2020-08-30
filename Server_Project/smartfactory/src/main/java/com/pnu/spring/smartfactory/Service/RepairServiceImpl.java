@@ -11,11 +11,11 @@ import com.pnu.spring.smartfactory.Mapper.RepairMapper;
 public class RepairServiceImpl implements RepairService{
 	@Autowired  
 	private RepairMapper repairMapper;
-	public void insRepairService(String repair_no,String reg_dt ) {
-		repairMapper.insRepair(repair_no, reg_dt);
+	public void insRepairService(Map<String, Object> param) {
+		repairMapper.insRepair(param);
 	}
-	public void delRepairService(String repair_no) {
-		repairMapper.delRepair(repair_no);
+	public void delRepairService(Map<String, Object> param) {
+		repairMapper.delRepair(param);
 	}
 	public List<RepairDAO> getRepairListService(){
 		return repairMapper.getRepairList();

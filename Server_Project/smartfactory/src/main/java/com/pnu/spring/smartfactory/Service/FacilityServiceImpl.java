@@ -1,6 +1,7 @@
 package com.pnu.spring.smartfactory.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,10 @@ public class FacilityServiceImpl implements FacilityService{
 	public List<PlaceDAO> getPlaceListService() {
 		return facilityMapper.getPlaceList();
 	}
-	public List<FacilityDAO> getFacilityListPerPlaceService(String place_cd){
-		return facilityMapper.getFacilityListPerPlace(place_cd);
+	public List<FacilityDAO> getFacilityListPerPlaceService( Map<String, Object> param){
+		return facilityMapper.getFacilityListPerPlace(param);
 	}
-	public List<FacilityDAO> getFacilityDetailService(String facility_cd){
-		return facilityMapper.getFacilityDetail(facility_cd);
+	public List<FacilityDAO> getFacilityDetailService(Map<String, Object> param){
+		return facilityMapper.getFacilityDetail(param);
 	}
 }

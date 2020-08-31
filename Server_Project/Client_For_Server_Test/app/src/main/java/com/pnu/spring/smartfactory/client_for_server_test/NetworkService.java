@@ -4,10 +4,12 @@ import com.pnu.spring.smartfactory.client_for_server_test.DTO.DataDAO;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.FRequestDAO;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.FacilityDAO;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.InspectDAO;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.Message;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.PlaceDAO;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.RepairDAO;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.TokenManager;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +22,8 @@ public interface NetworkService {
     @POST("getdatas")
     Call<List<DataDAO>> getDatas(@Body Map<String, Object> param);
 
-    @GET("beforelogin")
-    Call<Void> doLogin();
+    @POST("login")
+    Call<Message> doLogin(@Body Map<String, Object> param);
 
     @POST("sendmessagetome")
     Call<Void> sendMessageToMe(@Body Map<String, Object> param);

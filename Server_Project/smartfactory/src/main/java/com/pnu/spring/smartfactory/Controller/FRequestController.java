@@ -32,8 +32,6 @@ public class FRequestController {
 	@RequestMapping(value = "/insfrequest", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insFRequest(@RequestBody Map<String, Object> param) {
-		String req_no = "";
-		String req_dt = "";
 //		String req_no = (String) param.get("req_no");
 //		String req_dt = (String) param.get("req_dt");
 		JSONObject jsonObj = new JSONObject();
@@ -86,7 +84,6 @@ public class FRequestController {
 	
 	private JSONArray convListtoJSONArray(List<FRequestDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
-		
 		System.out.println("Size:"+datas.size());
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();

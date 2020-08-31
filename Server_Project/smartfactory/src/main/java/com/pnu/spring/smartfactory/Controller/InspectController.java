@@ -32,7 +32,7 @@ public class InspectController {
 	@Resource(name = "com.pnu.spring.smartfactory.Service.InspectServiceImpl") 
 	private InspectService inspectserviceimpl;
 	
-	// 설비 요청 등록 (점검 or 수리)
+	// 설비 점검 등록 
 	@RequestMapping(value = "/insinspect", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insInspect(@RequestBody Map<String, Object> param) {
@@ -53,7 +53,7 @@ public class InspectController {
 		return jsonObj;
 	}
 	
-	// 설비 요청 삭제 (점검 or 수리)
+	// 설비 점검 삭제
 	@RequestMapping(value = "/delinspect", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject delInspect(@RequestBody Map<String, Object> param) {
@@ -71,7 +71,7 @@ public class InspectController {
 		return jsonObj;
 	}
 	
-	// 설비 요청 목록 조회 (점검 or 수리)
+	// 설비 점검 목록 조회
 	@RequestMapping(value = "/getinspectlist", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getInspectList() {
@@ -81,7 +81,7 @@ public class InspectController {
 
 	
 	
-	// 설비의 요청 상세 조회 (점검 or 수리)
+	// 설비의 점검 상세 조회 
 	@RequestMapping(value = "/getinspectdetail", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getInspectDetail(@RequestBody Map<String, Object> param) {

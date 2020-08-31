@@ -53,8 +53,6 @@ public class FacilityController {
 		return convListtoJSONArray(datas);
 	}
 
-	
-	
 	//설비 상세 조회
 	@RequestMapping(value = "/getfacilitydetail", method = RequestMethod.POST)
 	@ResponseBody

@@ -5,6 +5,15 @@ public class TokenManager {
     private String access_token;
     private String expiresIn;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
     public TokenManager() {
     }
 

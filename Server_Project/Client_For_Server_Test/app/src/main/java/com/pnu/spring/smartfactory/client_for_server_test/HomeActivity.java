@@ -8,11 +8,13 @@ import retrofit2.Response;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -23,8 +25,10 @@ import com.kakao.kakaotalk.callback.TalkResponseCallback;
 import com.kakao.kakaotalk.v2.KakaoTalkService;
 import com.kakao.network.ErrorResult;
 import com.kakao.util.exception.KakaoException;
+import com.pnu.spring.smartfactory.client_for_server_test.DTO.Message;
 import com.pnu.spring.smartfactory.client_for_server_test.DTO.TokenManager;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,25 +68,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             // 3. 친구 목록에서 원하는 이름 찾아서 보낸다.
             String access_token = PreferenceManager.getString(this, "access_token");
             String refresh_token = PreferenceManager.getString(this, "refresh_token");
-            String receiver = editRecevier.getText().toString();
-            String contents="여기에 내용이 들어간다.";
-            String btnname="버튼명";
 
-            boolean isAvail=isTokenAvailable(access_token, refresh_token);
+            isTokenAvailable(access_token, refresh_token);
             Log.i("Token", "토큰 확인");
-
-
-            // 동기식 으로 변경하기
-            if( !isAvail )
-            {// 토큰이 이용불가능 하면
-                // 새로 발급한다.
-//                getNewToken(access_token, refresh_token);
-                Log.i("Token", "토큰 재발급");
-//                access_token = PreferenceManager.getString(this, "access_token");
-//                refresh_token = PreferenceManager.getString(this, "refresh_token");
-            }
-            sendMessage(access_token, refresh_token, receiver, contents, btnname);
-            Log.i("Token", "메시지 보내기");
         }
         else if (id == R.id.btn_local_logout) {
             PreferenceManager.removeKey(HomeActivity.this, "id");
@@ -93,79 +81,99 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private boolean isTokenAvailable(String access_token, String refresh_token){
+    private void isTokenAvailable(String access_token, String refresh_token){
         Map<String, Object> param = new HashMap<>();
         param.put("access_token", access_token);
         param.put("refresh_token", refresh_token);
         param.put("expiresIn", "");
         Call<TokenManager> joinContentCall = networkService.isTokenAvailable(param);
-        final boolean[] result = {false};
-        joinContentCall.enqueue(new Callback<TokenManager>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(Call<TokenManager> call, Response<TokenManager> response) {
-                if (response.isSuccessful()) {
-                    //성공
-                    TokenManager tempTm= response.body();
-                    int expire_time =  Integer.parseInt( tempTm.getExpiresIn() );
-                    if ( expire_time >  3000 ){
-                        result[0] = true;
-                    }
-                    Log.d("Kakao", "보내기 성공");
-                } else {// 실패시 에러코드들
-                    if (response.code() == 500) {
-
-                    } else if (response.code() == 503) {
-
-                    } else if (response.code() == 401) {
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TokenManager> call, Throwable t) {
-                //실패
-            }
-        });
-        return result[0];
+        new TokenAvailableNetworkCall().execute(joinContentCall);
     }
 
-    private void getNewToken(String access_token, String refresh_token){
-        Map<String, Object> param = new HashMap<>();
-        param.put("access_token", access_token);
-        param.put("refresh_token", refresh_token);
-        param.put("expiresIn", "");
-        Call<TokenManager> joinContentCall = networkService.getNewToken(param);
-        joinContentCall.enqueue(new Callback<TokenManager>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(Call<TokenManager> call, Response<TokenManager> response) {
-                if (response.isSuccessful()) {
-                    //성공
-                    TokenManager tokenManager= response.body();
-                    //토큰 업데이트
-                    assert tokenManager != null;
-                    PreferenceManager.setString(HomeActivity.this, "access_token", tokenManager.getAccess_token());
-                    PreferenceManager.setString(HomeActivity.this, "refresh_token", tokenManager.getRefresh_token());
-                    Log.d("Kakao", "보내기 성공");
-                } else {// 실패시 에러코드들
-                    if (response.code() == 500) {
+    private class TokenAvailableNetworkCall extends AsyncTask<Call, Void, TokenManager> {
+        @Override
+        protected TokenManager doInBackground(Call[] params) {
+            try {
+                Call<TokenManager> call = params[0];
+                Response<TokenManager> response = call.execute();
+                Log.i("SINSIN", "토큰 검사");
+                return response.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
 
-                    } else if (response.code() == 503) {
-
-                    } else if (response.code() == 401) {
-
-                    }
+        @Override
+        protected void onPostExecute(TokenManager tempTm) {
+            boolean result=false;
+            if (tempTm.getExpiresIn()!=null) {
+                int expire_time = Integer.parseInt(tempTm.getExpiresIn());
+                if (expire_time > 3000) {
+                    result = true;
                 }
             }
-
-            @Override
-            public void onFailure(Call<TokenManager> call, Throwable t) {
-                //실패
-            }
-        });
+            String access_token = PreferenceManager.getString(HomeActivity.this, "access_token");
+            String refresh_token = PreferenceManager.getString(HomeActivity.this, "refresh_token");
+            //토큰 재발급 쪽으로 프로세스를 넘긴다.
+            getNewToken(result, access_token, refresh_token);
+        }//end onPostExecute
     }
+
+    private void getNewToken(boolean result, String access_token, String refresh_token){
+        if(!result){
+            // 토큰이 이용불가능 하면
+            // 새로 발급한다.
+            Map<String, Object> param = new HashMap<>();
+            param.put("access_token", access_token);
+            param.put("refresh_token", refresh_token);
+            param.put("expiresIn", "");
+            Call<TokenManager> joinContentCall = networkService.getNewToken(param);
+            new GetNewTokenNetworkCall().execute(joinContentCall);
+        }
+        else{
+            // 토큰이 이용 가능하면 전송
+            access_token = PreferenceManager.getString(HomeActivity.this, "access_token");
+            refresh_token = PreferenceManager.getString(HomeActivity.this, "refresh_token");
+            String receiver = editRecevier.getText().toString();
+            String contents="여기에 내용이 들어간다.";
+            String btnname="버튼명";
+            sendMessage(access_token, refresh_token, receiver, contents, btnname);
+            Log.i("Token", "메시지 보내기");
+        }
+    }
+
+    private class GetNewTokenNetworkCall extends AsyncTask<Call, Void, TokenManager> {
+
+        @Override
+        protected TokenManager doInBackground(Call[] params) {
+            try {
+                Call<TokenManager> call = params[0];
+                Response<TokenManager> response = call.execute();
+                return response.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(TokenManager tokenManager) {
+            //토큰 업데이트
+            assert tokenManager != null;
+            PreferenceManager.setString(HomeActivity.this, "access_token", tokenManager.getAccess_token());
+            PreferenceManager.setString(HomeActivity.this, "refresh_token", tokenManager.getRefresh_token());
+
+            String access_token = PreferenceManager.getString(HomeActivity.this, "access_token");
+            String refresh_token = PreferenceManager.getString(HomeActivity.this, "refresh_token");
+            String receiver = editRecevier.getText().toString();
+            String contents="여기에 내용이 들어간다.";
+            String btnname="버튼명";
+            sendMessage(access_token, refresh_token, receiver, contents, btnname);
+            Log.i("Token", "메시지 보내기");
+        }//end onPostExecute
+    }
+
 
     private void requestFriend() {// 안드로이드 SDK 친구 요청
         // 조회 요청
@@ -193,11 +201,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(AppFriendsResponse result) {
                         Log.i("KAKAO_API", "친구 조회 성공");
-//                        for (AppFriendInfo friend : result.getFriends()) {
-//                            Log.d("KAKAO_API", friend.toString());
-//                            // uuids.add(friend.getUUID());
-//                            // 메시지 전송 시 사용
-//                        }
                     }
                 });
     }//end requestFriends
@@ -234,6 +237,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     // 세션 콜백 구현 : 로그인관련
     private ISessionCallback sessionCallback = new ISessionCallback() {
         @Override

@@ -27,12 +27,11 @@ public class RepairController {
 //	-- delRepair
 //	-- getRepairList
 //	-- getRepairDetail
-	
 	private static final Logger logger = LoggerFactory.getLogger(RepairController.class);
 	@Resource(name = "com.pnu.spring.smartfactory.Service.RepairServiceImpl") 
 	private RepairService repairserviceimpl;
 	
-	// 설비 요청 등록 (점검 or 수리)
+	// 설비 수리 등록 
 	@RequestMapping(value = "/insrepair", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insRepair(@RequestBody Map<String, Object> param) {
@@ -49,11 +48,10 @@ public class RepairController {
 			System.out.println("Error : "+e.toString());
 			jsonObj.put("message", "fail");
 		}
-		
 		return jsonObj;
 	}
 	
-	// 설비 요청 삭제 (점검 or 수리)
+	// 설비 수리 삭제 
 	@RequestMapping(value = "/delrepair", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject delRepair(@RequestBody Map<String, Object> param) {
@@ -71,18 +69,15 @@ public class RepairController {
 		return jsonObj;
 	}
 	
-	// 설비 요청 목록 조회 (점검 or 수리)
+	// 설비 수리 목록 조회
 	@RequestMapping(value = "/getrepairlist", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getRepairList() {
 		List<RepairDAO> datas = repairserviceimpl.getRepairListService();
-		
 		return convListToJsonArrary(datas);
 	}
-
 	
-	
-	// 설비의 요청 상세 조회 (점검 or 수리)
+	// 설비의 수리 상세 조회
 	@RequestMapping(value = "/getrepairdetail", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getRepairDetail(@RequestBody Map<String, Object> param) {

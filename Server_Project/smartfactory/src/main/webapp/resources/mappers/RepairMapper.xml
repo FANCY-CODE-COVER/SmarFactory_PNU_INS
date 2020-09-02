@@ -4,7 +4,8 @@
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pnu.spring.smartfactory.Mapper.RepairMapper">
 	<insert id="insRepair" parameterType="hashmap">
-		INSERT INTO CMM_REPAIR ([REPAIR_NO], [REG_DT]) VALUES (DBO.UFGEN_REPAIR_NO('RP',3), GETDATE());
+		INSERT INTO CMM_REPAIR ([REPAIR_NO], [REG_DT], [FACILITY_NO], [REQ_NO], [START_DT], [END_DT], [STATUS], [CAUSE_CD], [REPAIR_TYPE_CD], [REPAIR_AMT],[CAUSE], [REPAIR_DETAILS], [REMARK],[REG_ID] ) 
+			VALUES (DBO.UFGEN_REPAIR_NO('RP',3), GETDATE(), #{facility_no}, #{req_no}, #{start_dt}, #{end_dt}, #{status}, #{case_cd}, #{repair_type_cd}, #{repair_amt},#{cause}, #{repair_details},#{remark}, #{reg_id});
 	</insert>
 	
 	<delete  id="delRepair" parameterType="hashmap">

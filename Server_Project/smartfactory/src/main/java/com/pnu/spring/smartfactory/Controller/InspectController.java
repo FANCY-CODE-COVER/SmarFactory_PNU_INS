@@ -40,6 +40,9 @@ public class InspectController {
 		String insp_date = "";
 //		String insp_rst_no = (String) param.get("insp_rst_no");
 //		String insp_date = (String) param.get("insp_date");
+		// #{facility_no}, #{req_no}, #{start_dt}, #{end_dt}, #{status}, 
+		// #{case_cd}, #{repair_type_cd}, #{repair_amt},#{cause}, #{repair_details},
+		// #{remark}, #{reg_id}
 		JSONObject jsonObj = new JSONObject();
 		try {
 			inspectserviceimpl.insInspectService(param);

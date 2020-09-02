@@ -39,6 +39,8 @@ public class RepairController {
 		String reg_dt = "";
 //		String repair_no = (String) param.get("repair_no");
 //		String reg_dt = (String) param.get("reg_dt");
+		//  #{facility_no}, #{req_no}, #{start_dt}, #{end_dt}, #{status}, 
+		// #{case_cd}, #{repair_type_cd}, #{repair_amt},#{cause}, #{repair_details},#{remark}, #{reg_id}
 		JSONObject jsonObj = new JSONObject();
 		try {
 			repairserviceimpl.insRepairService(param);

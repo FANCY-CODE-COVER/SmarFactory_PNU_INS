@@ -55,7 +55,7 @@ public class KakaoController {
 	@RequestMapping(value = "/sendmessagetofriend", method = { RequestMethod.POST })
 	@ResponseBody
 	public void sendMessageToFriend(@RequestBody Map<String, Object> param) {
-		System.out.println("친구 가져오기 + 메시지 시작");
+		System.out.println("친구 가져오기, 메시지 전송 시작");
 		String accessToken =  (String) param.get("access_token");
 		String receiver =  (String) param.get("receiver");
 		String btnname =  (String) param.get("btnname");
@@ -67,6 +67,8 @@ public class KakaoController {
 		List<String> uuids = new ArrayList<String>();
 		int offset=0;
 		int limit=5;
+		String a="";
+		
 		JsonNode freindList = null;
 		do {
 			freindList = getFriends(accessToken, Integer.toString(offset), Integer.toString(limit));
@@ -99,7 +101,7 @@ public class KakaoController {
 		{
 			System.out.println("친구가 존재하지 않음");
 		}
-		System.out.println("친구 가져오기 + 메시지 끝");
+		System.out.println("친구 가져오기, 메시지 전송 끝");
 	}//end getFriend
 	
 	@RequestMapping(value = "/tokenavailable", method = { RequestMethod.POST })
@@ -124,7 +126,7 @@ public class KakaoController {
 		JSONObject jsonObj=new JSONObject();
 		jsonObj.put("access_token", tokenmanger.get("access_token") );
 		jsonObj.put("refresh_token", tokenmanger.get("refresh_token") );
-		
+		System.out.println(" access_token: "+tokenmanger.get("access_token"));
 		System.out.println("refresh_token_expires_in : "+tokenmanger.get("refresh_token_expires_in"));
 		System.out.println("새토큰 발급 끝");
 		return jsonObj;

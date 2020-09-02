@@ -3,11 +3,12 @@
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pnu.spring.smartfactory.Mapper.FRequestMapper">
-	<insert id="insFRequest" >
-		INSERT INTO CMM_REPAIR_REQ ([REQ_NO], [REQ_DT]) VALUES (DBO.UFGEN_REPAIR_REQ_NO('RQ',3), GETDATE());
+	<insert id="insFRequest" parameterType="hashmap">
+		INSERT INTO CMM_REPAIR_REQ ([REQ_NO], [REQ_USER_ID], [FACILITY_NO],  [STATUS], [REQ_DETAILS], [REMARK], [REG_ID], [REQ_DT]) 
+		VALUES (DBO.UFGEN_REPAIR_REQ_NO('RQ',3), #{req_user_id}, #{facility_no}, #{status},  #{req_details}, #{remark}, #{reg_id}, GETDATE());
 	</insert>
 	
-	<delete  id="delFRequest">
+	<delete  id="delFRequest" parameterType="hashmap">
 		DELETE FROM CMM_REPAIR_REQ WHERE REQ_NO=#{req_no}
 	</delete>
 	

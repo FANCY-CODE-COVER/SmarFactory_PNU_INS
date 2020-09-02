@@ -4,7 +4,8 @@
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pnu.spring.smartfactory.Mapper.InspectMapper">
 	<insert id="insInspect" parameterType="hashmap">
-		INSERT INTO CMM_INSPECT_RST ([INSP_RST_NO], [INSP_DATE]) VALUES (DBO.UFGEN_INSP_RST_NO('IR',3), GETDATE());
+				INSERT INTO CMM_INSPECT_RST ([INSP_RST_NO],  [INSP_DATE],  [FACILITY_NO], [START_DT], [END_DT], [RESULT_CD] , [RESULT_DETAILS], [REMARK], [REG_ID])
+			VALUES (DBO.UFGEN_INSP_RST_NO('IR',3), GETDATE(), #{facility_no}, #{start_dt}, #{end_dt}, #{result_cd}, #{result_details}, #{remark}, #{reg_id} )
 	</insert>
 	
 	<delete  id="delInspect" parameterType="hashmap">

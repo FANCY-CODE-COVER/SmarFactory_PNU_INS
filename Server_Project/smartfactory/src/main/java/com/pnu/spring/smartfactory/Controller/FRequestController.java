@@ -34,6 +34,7 @@ public class FRequestController {
 	public JSONObject insFRequest(@RequestBody Map<String, Object> param) {
 //		String req_no = (String) param.get("req_no");
 //		String req_dt = (String) param.get("req_dt");
+		// #{req_user_id}, #{facility_no}, #{status},  #{req_details}, #{remark}, #{reg_id}
 		JSONObject jsonObj = new JSONObject();
 		try {
 			frequestServiceImpl.insFRequestSerivce(param);

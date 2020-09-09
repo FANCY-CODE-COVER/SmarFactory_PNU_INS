@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MES</string>
+    <string name="title_home">Home</string>
+    <string name="title_edit">Edit</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_setting">Setting</string>
+</resources>

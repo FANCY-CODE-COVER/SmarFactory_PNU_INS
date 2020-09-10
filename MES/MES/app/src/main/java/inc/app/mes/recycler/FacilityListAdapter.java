@@ -13,29 +13,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import inc.app.mes.MainActivity;
+import inc.app.mes.DTO.FacilityDAO;
+import inc.app.mes.DTO.PlaceDAO;
 import inc.app.mes.R;
-import inc.app.mes.ui.notifications.NotificationsFragment;
+import inc.app.mes.ui.FacilityFragment;
+import inc.app.mes.ui.home.FacilityDetailActivity;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapter.ViewHolder> {
 
-    private ArrayList<String> mListData = new ArrayList<>();
-    private ArrayList<String> mListState = new ArrayList<>();
-
-    public RecyclerViewAdapter(ArrayList<String> listData, ArrayList<String> context) {
-        mListData = listData;
-        mListState = context;
+    private ArrayList<FacilityDAO> items = new ArrayList<>();
+    public FacilityListAdapter(Context context, ArrayList<FacilityDAO> items) {
+        this.items = items;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView title;
         TextView state;
         Context context;
-
         ViewHolder(View itemView) {
             super(itemView);
-
             title = itemView.findViewById(R.id.title);
             state = itemView.findViewById(R.id.state);
 
@@ -43,17 +39,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    Toast.makeText(v.getContext(), pos+"클릭됨", Toast.LENGTH_SHORT).show();
-                    NotificationsFragment NF = new NotificationsFragment();
+                    context=v.getContext();
+                    Toast.makeText(context, pos+"clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), FacilityDetailActivity.class);
+                    intent.putExtra("facility_cd", items.get(pos).getFacility_no());
 
-//                    Intent intent = new Intent(v.getContext(), MainActivity.class);
-////                    intent.putExtra("context",context);
+                    context.startActivity(intent);
+
 //                    intent.putExtra("pos",pos);
-//                    if(pos != RecyclerView.NO_POSITION) {
-//                        v.getContext().startActivity(intent);
-//                    }
 
                 }
+
             });
 
         }
@@ -88,25 +84,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(mListData.get(position));
-        holder.state.setText(mListState.get(position));
-//        String item = mListData.get(position);
-
-//        holder.title.setText(mListData.get(position));
-//        holder.state.setText(mListState.get(position));
-        //holder.onBind(listData.get(position));
+        holder.title.setText(items.get(position).getFacility_nm());
+        holder.state.setText(items.get(position).getFacility_no());
     }
 
     @Override
     public int getItemCount() {
-        return mListData.size();
+        return items.size();
     }
 
-    public void addItem(ItemRecyclerView ItemRecyclerView)
+    public void addItem(FacilityDAO facilityDAO)
     {
-        mListData.add(ItemRecyclerView.getTitle());
-        mListState.add(ItemRecyclerView.getDate());
+        items.add(facilityDAO);
 //        mListData.add(String.valueOf(ItemRecyclerView));
     }
+    public void setClear(){
+        items.clear();
+    }
+
 
 }

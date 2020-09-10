@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import inc.app.mes.R;
-import inc.app.mes.recycler.ItemRecyclerView;
-import inc.app.mes.recycler.RecyclerViewAdapter;
+import inc.app.mes.recycler.FacilityListAdapter;
 
 public class NotificationsFragment extends Fragment {
 
     private RecyclerView notificationRecycler;
-    private RecyclerViewAdapter notificationAdapter;
+    private FacilityListAdapter notificationAdapter;
     public ArrayList<String> title = new ArrayList<String>();
     public ArrayList<String> state = new ArrayList<String>();
     public static ArrayList<String> context = new ArrayList<String>();
@@ -33,45 +32,45 @@ public class NotificationsFragment extends Fragment {
         notificationRecycler = (RecyclerView)root.findViewById(R.id.NotificationRecycler);
 //        notificationRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        notificationAdapter = new RecyclerViewAdapter(title, state);
-
-        notificationRecycler.setLayoutManager(linearLayoutManager);
-
-        ItemRecyclerView data1 = new ItemRecyclerView("title1", "date");
-        notificationAdapter.addItem(data1);
-
-        ItemRecyclerView data2 = new ItemRecyclerView("title2", "date");
-        notificationAdapter.addItem(data2);
-
-        ItemRecyclerView data3 = new ItemRecyclerView("title3", "date");
-        notificationAdapter.addItem(data3);
-
-        ItemRecyclerView data4 = new ItemRecyclerView("title4", "date");
-        notificationAdapter.addItem(data4);
-
-        ItemRecyclerView data5 = new ItemRecyclerView("title5", "date");
-        notificationAdapter.addItem(data5);
-
-        ItemRecyclerView data6 = new ItemRecyclerView("title6", "date");
-        notificationAdapter.addItem(data6);
-
-        ItemRecyclerView data7 = new ItemRecyclerView("title7", "date");
-        notificationAdapter.addItem(data7);
-
-        ItemRecyclerView data8 = new ItemRecyclerView("title8", "date");
-        notificationAdapter.addItem(data8);
-
-        ItemRecyclerView data9 = new ItemRecyclerView("title9", "date");
-        notificationAdapter.addItem(data9);
-
-        ItemRecyclerView data10 = new ItemRecyclerView("title10", "date");
-        notificationAdapter.addItem(data10);
-
-        ItemRecyclerView data11 = new ItemRecyclerView("title11", "date");
-        notificationAdapter.addItem(data11);
-
-        ItemRecyclerView data12 = new ItemRecyclerView("title12", "date");
-        notificationAdapter.addItem(data12);
+//        notificationAdapter = new RecyclerViewAdapter(title, state);
+//
+//        notificationRecycler.setLayoutManager(linearLayoutManager);
+//
+//        ItemRecyclerView data1 = new ItemRecyclerView("title1", "date");
+//        notificationAdapter.addItem(data1);
+//
+//        ItemRecyclerView data2 = new ItemRecyclerView("title2", "date");
+//        notificationAdapter.addItem(data2);
+//
+//        ItemRecyclerView data3 = new ItemRecyclerView("title3", "date");
+//        notificationAdapter.addItem(data3);
+//
+//        ItemRecyclerView data4 = new ItemRecyclerView("title4", "date");
+//        notificationAdapter.addItem(data4);
+//
+//        ItemRecyclerView data5 = new ItemRecyclerView("title5", "date");
+//        notificationAdapter.addItem(data5);
+//
+//        ItemRecyclerView data6 = new ItemRecyclerView("title6", "date");
+//        notificationAdapter.addItem(data6);
+//
+//        ItemRecyclerView data7 = new ItemRecyclerView("title7", "date");
+//        notificationAdapter.addItem(data7);
+//
+//        ItemRecyclerView data8 = new ItemRecyclerView("title8", "date");
+//        notificationAdapter.addItem(data8);
+//
+//        ItemRecyclerView data9 = new ItemRecyclerView("title9", "date");
+//        notificationAdapter.addItem(data9);
+//
+//        ItemRecyclerView data10 = new ItemRecyclerView("title10", "date");
+//        notificationAdapter.addItem(data10);
+//
+//        ItemRecyclerView data11 = new ItemRecyclerView("title11", "date");
+//        notificationAdapter.addItem(data11);
+//
+//        ItemRecyclerView data12 = new ItemRecyclerView("title12", "date");
+//        notificationAdapter.addItem(data12);
 
         notificationRecycler.setAdapter(notificationAdapter);
 

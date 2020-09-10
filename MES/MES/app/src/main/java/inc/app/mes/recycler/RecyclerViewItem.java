@@ -1,11 +1,11 @@
 package inc.app.mes.recycler;
 
-public class ItemRecyclerView {
+public class RecyclerViewItem {
 
     private String title;
     private String state;
 
-    public ItemRecyclerView(String title, String state) {
+    public RecyclerViewItem(String title, String state) {
         this.title = title;
         this.state = state;
     }

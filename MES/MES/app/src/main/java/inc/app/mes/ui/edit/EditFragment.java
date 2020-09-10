@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import inc.app.mes.R;
-import inc.app.mes.recycler.ItemRecyclerView;
-import inc.app.mes.recycler.RecyclerViewAdapter;
+import inc.app.mes.recycler.FacilityListAdapter;
 
 public class EditFragment extends Fragment {
 
     private RecyclerView editRecycler;
-    private RecyclerViewAdapter editAdapter;
+    private FacilityListAdapter editAdapter;
     public ArrayList<String> title = new ArrayList<String>();
     public ArrayList<String> state = new ArrayList<String>();
 //    public static ArrayList<String> context = new ArrayList<String>();
@@ -31,20 +30,20 @@ public class EditFragment extends Fragment {
 
         editRecycler = (RecyclerView)root.findViewById(R.id.EditRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        editAdapter = new RecyclerViewAdapter(title, state);
-
-        editRecycler.setLayoutManager(linearLayoutManager);
-
-        ItemRecyclerView data1 = new ItemRecyclerView("title1", "date");
-        editAdapter.addItem(data1);
-
-        ItemRecyclerView data2 = new ItemRecyclerView("title2", "date");
-        editAdapter.addItem(data2);
-
-        ItemRecyclerView data3 = new ItemRecyclerView("title3", "date");
-        editAdapter.addItem(data3);
-
-        editRecycler.setAdapter(editAdapter);
+//              editAdapter = new RecyclerViewAdapter(title, state);
+//
+//        editRecycler.setLayoutManager(linearLayoutManager);
+//
+//        ItemRecyclerView data1 = new ItemRecyclerView("title1", "date");
+//        editAdapter.addItem(data1);
+//
+//        ItemRecyclerView data2 = new ItemRecyclerView("title2", "date");
+//        editAdapter.addItem(data2);
+//
+//        ItemRecyclerView data3 = new ItemRecyclerView("title3", "date");
+//        editAdapter.addItem(data3);
+//
+//        editRecycler.setAdapter(editAdapter);
 
         return root;
     }

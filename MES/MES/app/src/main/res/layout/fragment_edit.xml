@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".ui.edit.EditFragment">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/PlaceRecycler"
+        android:id="@+id/MenuRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"

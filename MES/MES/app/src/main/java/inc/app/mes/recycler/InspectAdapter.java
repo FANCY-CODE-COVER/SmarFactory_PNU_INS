@@ -8,22 +8,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import inc.app.mes.DTO.FacilityDAO;
-import inc.app.mes.DTO.PlaceDAO;
+import inc.app.mes.DTO.InspectDAO;
 import inc.app.mes.R;
-import inc.app.mes.ui.FacilityFragment;
 import inc.app.mes.ui.home.FacilityDetailActivity;
 
-public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapter.ViewHolder> {
+public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.ViewHolder> {
 
-    private ArrayList<FacilityDAO> items = new ArrayList<>();
-    public FacilityListAdapter(Context context, ArrayList<FacilityDAO> items) {
-        this.items = items;
+    private ArrayList<InspectDAO> items;
+    private Context context;
+    public InspectAdapter(Context context) {
+        this.context=context;
+        this.items = new ArrayList<InspectDAO>();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -40,7 +40,7 @@ public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapte
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     context=v.getContext();
-//                    Toast.makeText(context, pos+"clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, pos+"clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(v.getContext(), FacilityDetailActivity.class);
                     intent.putExtra("facility_cd", items.get(pos).getFacility_no());
 
@@ -54,24 +54,6 @@ public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapte
 
         }
     }
-//        void onBind(ItemRecyclerVertical data) {
-//            date.setText(data.getTitle());
-//            if (data.getTitle().length() > 15) {
-//                String first = data.getTitle().substring(0, 15);
-//                String second = data.getTitle().substring(15, data.getTitle().length());
-//                data.setTitle(first + "\n" + second);
-//            }
-//            if (data.getDate() != "") {
-//                data.setTitle(data.getTitle() + "\n" + data.getDate());
-//            }
-//            title.setText(data.getTitle());
-//            date.setText(data.getDate());
-//       }
-
-//
-//    public RecyclerViewAdapter(ArrayList<ItemRecyclerView> listData) {
-//        this.mListData = listData;
-//    }
 
     @NonNull
     @Override
@@ -84,8 +66,8 @@ public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(items.get(position).getFacility_nm());
-        holder.state.setText(items.get(position).getFacility_no());
+        holder.title.setText(items.get(position).getInsp_rst_no());
+        holder.state.setText(items.get(position).getInspect_nm());
     }
 
     @Override
@@ -93,9 +75,9 @@ public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapte
         return items.size();
     }
 
-    public void addItem(FacilityDAO facilityDAO)
+    public void addItem(InspectDAO inspectDAO)
     {
-        items.add(facilityDAO);
+        items.add(inspectDAO);
 //        mListData.add(String.valueOf(ItemRecyclerView));
     }
     public void setClear(){

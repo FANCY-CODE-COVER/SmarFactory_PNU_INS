@@ -44,7 +44,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String facility_no = intent.getExtras().getString("facility_cd");
-        Log.i("FUCK", facility_no);
         getFacilityListPerPlace(facility_no);
 
     }
@@ -75,6 +74,9 @@ public class FacilityDetailActivity extends AppCompatActivity {
                         stateText.setText(facility.getState());
                         plineNmText.setText(facility.getPline_nm());
                         regNmText.setText(facility.getReg_nm());
+                    }
+                    else{
+                        titleText.setText("설비 찾을 수 없음");
                     }
 
                 }

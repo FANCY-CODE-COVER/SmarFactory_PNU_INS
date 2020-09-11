@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import inc.app.mes.ui.home.FacilityDetailActivity;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -32,7 +33,11 @@ public class qrScan extends AppCompatActivity {
                 //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 //Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                serialNumber.setText(result.getContents());
+//                serialNumber.setText(result.getContents());
+                finish();
+                Intent intent = new Intent(qrScan.this, FacilityDetailActivity.class);
+                intent.putExtra("facility_cd", result.getContents());
+                this.startActivity(intent);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

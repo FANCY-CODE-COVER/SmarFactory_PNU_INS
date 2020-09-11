@@ -6,14 +6,16 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="FUCK" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="KAKAO" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72e21213-12b6-43fb-89b1-60acc8135296" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/NetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/NetworkService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/HomeController.java" afterDir="false" />
@@ -41,9 +43,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -67,10 +69,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="RF8M208DEJA" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-09T07:32:06.829Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-11T00:39:28.696Z" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Android" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -78,6 +81,9 @@
   <component name="RecentsManager">
     <key name="android.template.-302318317">
       <recent name="inc.app.mes.ui.home" />
+    </key>
+    <key name="android.template.-578673095">
+      <recent name="inc.app.mes.ui.edit" />
     </key>
     <key name="android.template.-346551922">
       <recent name="inc.app.mes" />
@@ -181,35 +187,40 @@
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="513" y="198" key="#Auto_Import/0.0.1842.1080@0.0.1842.1080" timestamp="1599753142728" />
+    <state x="322" y="202" key="#Inspections" timestamp="1599799817867">
+      <screen x="0" y="0" width="1842" height="1080" />
+    </state>
+    <state x="322" y="202" key="#Inspections/0.0.1842.1080@0.0.1842.1080" timestamp="1599799817867" />
     <state x="466" y="279" key="#PSD" timestamp="1599649988074">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="453" y="289" key="#PSD/0.0.1792.1120@0.0.1792.1120" timestamp="1599042217517" />
     <state x="466" y="279" key="#PSD/0.0.1842.1080@0.0.1842.1080" timestamp="1599649988074" />
     <state x="485" y="279" key="#PSD/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1598756654336" />
-    <state x="1130" y="227" key="#com.intellij.ide.util.MemberChooser" timestamp="1599748178662">
+    <state x="1130" y="227" key="#com.intellij.ide.util.MemberChooser" timestamp="1599789868027">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
-    <state x="1130" y="227" key="#com.intellij.ide.util.MemberChooser/0.0.1842.1080@0.0.1842.1080" timestamp="1599748178662" />
+    <state x="1130" y="227" key="#com.intellij.ide.util.MemberChooser/0.0.1842.1080@0.0.1842.1080" timestamp="1599789868027" />
     <state x="576" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1599652134168">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="576" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599652134168" />
     <state x="600" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1599499909839" />
-    <state x="679" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599494703573">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="651" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599791771727">
+      <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="634" y="314" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1599481777399" />
+    <state x="651" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771727" />
     <state x="679" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1599494703573" />
     <state x="215" y="294" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1599500308841">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="215" y="294" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1599500308841" />
-    <state x="525" y="302" key="AndroidCreateResourceFileDialog" timestamp="1599661378052">
+    <state x="525" y="302" key="AndroidCreateResourceFileDialog" timestamp="1599785169161">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="511" y="313" key="AndroidCreateResourceFileDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1599478988553" />
-    <state x="525" y="302" key="AndroidCreateResourceFileDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599661378052" />
+    <state x="525" y="302" key="AndroidCreateResourceFileDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599785169161" />
     <state x="548" y="302" key="AndroidCreateResourceFileDialog/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1598758946184" />
     <state x="515" y="164" key="CommitChangelistDialog2" timestamp="1598861434984">
       <screen x="0" y="0" width="1792" height="1120" />
@@ -220,26 +231,26 @@
     </state>
     <state x="510" y="187" key="FileChooserDialogImpl/0.0.1458.864@0.0.1458.864" timestamp="1599639838532" />
     <state x="644" y="234" key="FileChooserDialogImpl/0.0.1842.1080@0.0.1842.1080" timestamp="1599753602310" />
-    <state width="1451" height="307" key="GridCell.Tab.0.bottom" timestamp="1599747486091">
+    <state width="875" height="161" key="GridCell.Tab.0.bottom" timestamp="1599791771884">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="706" height="219" key="GridCell.Tab.0.bottom/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
-    <state width="1451" height="307" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1599747486091" />
-    <state width="1451" height="307" key="GridCell.Tab.0.center" timestamp="1599747486091">
+    <state width="875" height="161" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
+    <state width="875" height="161" key="GridCell.Tab.0.center" timestamp="1599791771884">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="706" height="219" key="GridCell.Tab.0.center/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
-    <state width="1451" height="307" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1599747486091" />
-    <state width="1451" height="307" key="GridCell.Tab.0.left" timestamp="1599747486091">
+    <state width="875" height="161" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
+    <state width="875" height="161" key="GridCell.Tab.0.left" timestamp="1599791771883">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="706" height="219" key="GridCell.Tab.0.left/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
-    <state width="1451" height="307" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1599747486091" />
-    <state width="1451" height="307" key="GridCell.Tab.0.right" timestamp="1599747486091">
+    <state width="875" height="161" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771883" />
+    <state width="875" height="161" key="GridCell.Tab.0.right" timestamp="1599791771884">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="706" height="219" key="GridCell.Tab.0.right/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
-    <state width="1451" height="307" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1599747486091" />
+    <state width="875" height="161" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
     <state x="496" y="300" key="Vcs.Push.Dialog.v2" timestamp="1598861517625">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -249,6 +260,10 @@
     </state>
     <state x="481" y="240" key="com.intellij.ide.util.TipDialog/0.0.1458.864@0.0.1458.864" timestamp="1599636831353" />
     <state x="608" y="300" key="com.intellij.ide.util.TipDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599649187346" />
+    <state x="460" y="311" key="extract.method.dialog" timestamp="1599799585913">
+      <screen x="0" y="0" width="1842" height="1080" />
+    </state>
+    <state x="460" y="311" key="extract.method.dialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599799585913" />
     <state x="154" y="140" width="613" height="807" key="find.popup" timestamp="1599649566014">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>

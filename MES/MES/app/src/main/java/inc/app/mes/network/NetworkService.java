@@ -27,6 +27,10 @@ public interface NetworkService {
     @POST("sendmessagetofriend")
     Call<Void> sendMessageToFriend(@Body Map<String, Object> param);
 
+    @POST("sendmessagebyvoice")
+    Call<Void> sendMessageByVoice(@Body Map<String, Object> param);
+
+
     @POST("tokenavailable")
     Call<TokenManager> isTokenAvailable(@Body Map<String, Object> param);
 
@@ -60,25 +64,25 @@ public interface NetworkService {
     @POST("insInspect")
     Call<String> insInspect(@Body Map<String, Object> param);
 
-    @POST("delInspect")
+    @POST("delinspect")
     Call<String> delInspect(@Body Map<String, Object> param);
 
-    @POST("getInspectList")
+    @POST("getinspectlist")
     Call<List<InspectDAO>> getInspectList(@Body Map<String, Object> param);
 
-    @POST("getInspectDetail")
+    @POST("getinspectdetail")
     Call<List<InspectDAO>> getInspectDetail(@Body Map<String, Object> param);
 
     //-----------설비 수리 관련
-    @POST("insRepair")
+    @POST("insrepair")
     Call<String> insRepair(@Body Map<String, Object> param);
 
-    @POST("delRepair")
+    @POST("delrepair")
     Call<String> delRepair(@Body Map<String, Object> param);
 
-    @POST("getRepairList")
+    @POST("getrepairlist")
     Call<List<RepairDAO>> getRepairList(@Body Map<String, Object> param);
 
-    @POST("getRepairDetail")
+    @POST("getrepairdetail")
     Call<List<RepairDAO>> getRepairDetail(@Body Map<String, Object> param);
 }

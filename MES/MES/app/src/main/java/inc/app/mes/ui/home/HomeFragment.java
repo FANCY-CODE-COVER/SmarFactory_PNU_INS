@@ -30,7 +30,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment{
-
     private RecyclerView facilityListRecycler;
     private RecyclerView placeRecycler;
     private FacilityListAdapter facilityListAdapter;

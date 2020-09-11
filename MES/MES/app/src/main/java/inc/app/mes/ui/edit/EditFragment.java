@@ -1,6 +1,8 @@
 package inc.app.mes.ui.edit;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,42 +13,200 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import inc.app.mes.DTO.FRequestDAO;
+import inc.app.mes.DTO.FacilityDAO;
+import inc.app.mes.DTO.InspectDAO;
+import inc.app.mes.DTO.RepairDAO;
 import inc.app.mes.R;
-import inc.app.mes.recycler.FacilityListAdapter;
+import inc.app.mes.custum_application.MyApplication;
+import inc.app.mes.network.NetworkService;
+import inc.app.mes.recycler.MenuAdapter;
+import inc.app.mes.recycler.InspectAdapter;
+import inc.app.mes.recycler.RepairAdapter;
+import inc.app.mes.recycler.RequestAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditFragment extends Fragment {
 
+    private RecyclerView menuRecycler;
     private RecyclerView editRecycler;
-    private FacilityListAdapter editAdapter;
+
+    private MenuAdapter menuAdapter;
+    private RequestAdapter requestAdapter;
+    private InspectAdapter inspectAdapter;
+    private RepairAdapter repairAdapter;
     public ArrayList<String> title = new ArrayList<String>();
     public ArrayList<String> state = new ArrayList<String>();
-//    public static ArrayList<String> context = new ArrayList<String>();
-//    public int itemSize;
-
+    private NetworkService networkService;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_edit, container, false);
+        networkService = MyApplication.getInstance().getNetworkService();
+        menuRecycler = (RecyclerView)root.findViewById(R.id.MenuRecycler);
+        menuAdapter =new MenuAdapter(this.getContext());
+        menuAdapter.setOnItemClickListener(
+                new MenuAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int pos) {
+                        String menu = menuAdapter.getItems().get(pos);
+                        if(menu.equals("요청")){
+                            getFRequestList();
+                        }
+                        else if (menu.equals("점검")){
+                            getInspectList();
+                        }
+                        else if(menu.equals("수리")){
+                            getRepairList();
+                        }
+
+                    }
+                }
+        );
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        menuRecycler.setLayoutManager(linearLayoutManager);
+        menuAdapter.addItem("요청");
+        menuAdapter.addItem("점검");
+        menuAdapter.addItem("수리");
+        menuRecycler.setAdapter(menuAdapter);
+
 
         editRecycler = (RecyclerView)root.findViewById(R.id.EditRecycler);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//              editAdapter = new RecyclerViewAdapter(title, state);
-//
-//        editRecycler.setLayoutManager(linearLayoutManager);
-//
-//        ItemRecyclerView data1 = new ItemRecyclerView("title1", "date");
-//        editAdapter.addItem(data1);
-//
-//        ItemRecyclerView data2 = new ItemRecyclerView("title2", "date");
-//        editAdapter.addItem(data2);
-//
-//        ItemRecyclerView data3 = new ItemRecyclerView("title3", "date");
-//        editAdapter.addItem(data3);
-//
-//        editRecycler.setAdapter(editAdapter);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+        editRecycler.setLayoutManager(linearLayoutManager2);
+        requestAdapter=new RequestAdapter(this.getContext());
+        inspectAdapter=new InspectAdapter(this.getContext());
+        repairAdapter=new RepairAdapter(this.getContext());
+        getFRequestList();
+
 
         return root;
     }
+    public void getFRequestList() {
+        Map<String, Object> param = new HashMap<String, Object>();
+        Call<List<FRequestDAO>> joinContentCall=networkService.getFRequestList(param);
 
+        joinContentCall.enqueue(new Callback<List<FRequestDAO>>(){
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<List<FRequestDAO>> call, Response<List<FRequestDAO>> response) {
+                if(response.isSuccessful()){
+                    List<FRequestDAO> dataDAO=response.body();
+                    assert dataDAO != null;
+                    requestAdapter.setClear();
+                    for(int i = 0; i<dataDAO.size(); ++i) {
+                        requestAdapter.addItem(dataDAO.get(i));
+                    }
+                    editRecycler.setAdapter(requestAdapter);
+                }
+                else{// 실패시 에러코드들
+                    if(response.code()==500)
+                    {
+                        Log.i("SINSIN", "500실패");
+                    }
+                    else if(response.code()==503)
+                    {
+                        Log.i("SINSIN", "503 실패");
+                    }
+                    else if(response.code()==401)
+                    {
+                        Log.i("SINSIN", "401 실패");
+                    }
+                    Log.i("SINSIN", response.code()+"실패");
+                    Log.i("SINSIN", response.body()+"실패");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<FRequestDAO>> call, Throwable t) {
+                //실패
+            }
+        });
+    }
+    public void getInspectList() {
+        Map<String, Object> param = new HashMap<String, Object>();
+        Call<List<InspectDAO>> joinContentCall=networkService.getInspectList(param);
+
+        joinContentCall.enqueue(new Callback<List<InspectDAO>>(){
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<List<InspectDAO>> call, Response<List<InspectDAO>> response) {
+                if(response.isSuccessful()){
+                    List<InspectDAO> dataDAO=response.body();
+                    assert dataDAO != null;
+                    inspectAdapter.setClear();
+                    for(int i = 0; i<dataDAO.size(); ++i) {
+                        inspectAdapter.addItem(dataDAO.get(i));
+                    }
+                    editRecycler.setAdapter(inspectAdapter);
+                }
+                else{// 실패시 에러코드들
+                    if(response.code()==500)
+                    {
+                        Log.i("SINSIN", "500실패");
+                    }
+                    else if(response.code()==503)
+                    {
+                        Log.i("SINSIN", "503 실패");
+                    }
+                    else if(response.code()==401)
+                    {
+                        Log.i("SINSIN", "401 실패");
+                    }
+                    Log.i("SINSIN", response.code()+"실패");
+                    Log.i("SINSIN", response.body()+"실패");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<InspectDAO>> call, Throwable t) {
+                //실패
+            }
+        });
+    }
+    public void getRepairList() {
+        Map<String, Object> param = new HashMap<String, Object>();
+        Call<List<RepairDAO>> joinContentCall=networkService.getRepairList(param);
+
+        joinContentCall.enqueue(new Callback<List<RepairDAO>>(){
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<List<RepairDAO>> call, Response<List<RepairDAO>> response) {
+                if(response.isSuccessful()){
+                    List<RepairDAO> dataDAO=response.body();
+                    assert dataDAO != null;
+                    repairAdapter.setClear();
+                    for(int i = 0; i<dataDAO.size(); ++i) {
+                        repairAdapter.addItem(dataDAO.get(i));
+                    }
+                    editRecycler.setAdapter(repairAdapter);
+                }
+                else{// 실패시 에러코드들
+                    if(response.code()==500)
+                    {
+                        Log.i("SINSIN", "500실패");
+                    }
+                    else if(response.code()==503)
+                    {
+                        Log.i("SINSIN", "503 실패");
+                    }
+                    else if(response.code()==401)
+                    {
+                        Log.i("SINSIN", "401 실패");
+                    }
+                    Log.i("SINSIN", response.code()+"실패");
+                    Log.i("SINSIN", response.body()+"실패");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<RepairDAO>> call, Throwable t) {
+                //실패
+            }
+        });
+    }
 
 }

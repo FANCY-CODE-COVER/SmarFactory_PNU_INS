@@ -10,4 +10,5 @@ public interface InspectService {
 	public void delInspectService(Map<String, Object> param);
 	public List<InspectDAO> getInspectListService();
 	public List<InspectDAO> getInspectDetailService(Map<String, Object> param);
+	public List<InspectDAO> getInspectDetailByInspRstNoService(Map<String, Object> param);
 }

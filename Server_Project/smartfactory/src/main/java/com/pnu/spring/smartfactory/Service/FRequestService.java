@@ -11,4 +11,5 @@ public interface FRequestService {
 	public void delFRequestSerivce(Map<String, Object> param);
 	public List<FRequestDAO> getFRequestListSerivce();
 	public List<FRequestDAO> getFRequestDetailSerivce(Map<String, Object> param);
+	public List<FRequestDAO> getFRequestDetailByReqNoService(Map<String, Object> param);
 }

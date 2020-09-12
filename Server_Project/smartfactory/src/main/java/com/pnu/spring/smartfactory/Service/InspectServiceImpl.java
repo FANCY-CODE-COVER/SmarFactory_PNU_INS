@@ -23,5 +23,7 @@ public class InspectServiceImpl implements InspectService{
 	public List<InspectDAO> getInspectDetailService(Map<String, Object> param){
 		return inspectMapper.getInspectDetail(param);
 	}
-
+	public List<InspectDAO> getInspectDetailByInspRstNoService(Map<String, Object> param){
+		return inspectMapper.getInspectDetailByInspRstNo(param);
+	}
 }

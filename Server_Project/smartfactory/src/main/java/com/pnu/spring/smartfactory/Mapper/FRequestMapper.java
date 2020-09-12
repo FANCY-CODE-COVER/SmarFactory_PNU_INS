@@ -10,4 +10,5 @@ public interface FRequestMapper {
 	public void delFRequest(Map<String, Object> param);
 	public List<FRequestDAO> getFRequestList();
 	public List<FRequestDAO> getFRequestDetail(Map<String, Object> param);
+	public List<FRequestDAO> getFRequestDetailByReqNo(Map<String, Object> param);
 }

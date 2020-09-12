@@ -2,19 +2,22 @@ package com.pnu.spring.smartfactory.DAO;
 
 public class FRequestDAO {
 	String req_no, user_nm, facility_no, insp_rst_no, status, employee_nm;
-
+	String req_details, remark;
+	
 	public FRequestDAO() {
 
 	}
 
 	public FRequestDAO(String req_no, String user_nm, String facility_no, String insp_rst_no, String status,
-			String employee_nm) {
+			String employee_nm, String req_details, String remark) {
 		this.req_no = req_no;
 		this.user_nm = user_nm;
 		this.facility_no = facility_no;
 		this.insp_rst_no = insp_rst_no;
 		this.status = status;
 		this.employee_nm = employee_nm;
+		this.req_details=req_details;
+		this.remark=remark;
 	}
 
 	public String getReq_no() {
@@ -63,5 +66,21 @@ public class FRequestDAO {
 
 	public void setEmployee_nm(String employee_nm) {
 		this.employee_nm = employee_nm;
+	}
+	public String getReq_details() {
+		return req_details;
+	}
+
+	public void setReq_details(String req_details) {
+		this.req_details = req_details;
+	}
+
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }

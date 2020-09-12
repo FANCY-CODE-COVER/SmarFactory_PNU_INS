@@ -38,11 +38,11 @@ public class FRequestController {
 		JSONObject jsonObj = new JSONObject();
 		try {
 			frequestServiceImpl.insFRequestSerivce(param);
-			jsonObj.put("message", "success");
+			jsonObj.put("result", "success");
 		}
 		catch(Exception e) {
 			System.out.println("Error : "+e.toString());
-			jsonObj.put("message", "fail");
+			jsonObj.put("result", "fail");
 		}
 		
 		return jsonObj;
@@ -57,11 +57,11 @@ public class FRequestController {
 		JSONObject jsonObj = new JSONObject();
 		try {
 			frequestServiceImpl.delFRequestSerivce(param);
-			jsonObj.put("message", "success");
+			jsonObj.put("result", "success");
 		}
 		catch(Exception e) {
 			System.out.println("Error : "+e.toString());
-			jsonObj.put("message", "fail");
+			jsonObj.put("result", "fail");
 		}
 		return jsonObj;
 	}
@@ -83,6 +83,16 @@ public class FRequestController {
 		return convListtoJSONArray(datas);
 	}
 	
+	// 설비의 요청 상세 조회 요청번호 기분 (점검 or 수리)
+	@RequestMapping(value = "/getfrequestdetailbyreqno", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONArray getFRequestDetailByReqNo(@RequestBody Map<String, Object> param) {
+		String req_no = (String) param.get("req_no");
+		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailByReqNoService(param);
+		return convListtoJSONArray(datas);
+	}
+	
+	
 	private JSONArray convListtoJSONArray(List<FRequestDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
 		System.out.println("Size:"+datas.size());
@@ -94,6 +104,8 @@ public class FRequestController {
 			jsonObj.put("insp_rst_no", datas.get(i).getInsp_rst_no());
 			jsonObj.put("status", datas.get(i).getStatus());
 			jsonObj.put("employee_nm", datas.get(i).getEmployee_nm());
+			jsonObj.put("req_details", datas.get(i).getReq_details());
+			jsonObj.put("remark", datas.get(i).getRemark());
 			jsonarrary.add(jsonObj);
 		}
 		return jsonarrary;

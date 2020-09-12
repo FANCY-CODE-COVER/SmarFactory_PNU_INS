@@ -11,4 +11,5 @@ public interface RepairMapper {
 	public void delRepair(Map<String, Object> param);
 	public List<RepairDAO> getRepairList();
 	public List<RepairDAO> getRepairDetail(Map<String, Object> param);
+	public List<RepairDAO> getRepairDetailByRepairNo(Map<String, Object> param);
 }

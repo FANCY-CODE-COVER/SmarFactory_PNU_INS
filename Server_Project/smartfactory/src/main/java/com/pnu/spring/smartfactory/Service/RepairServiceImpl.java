@@ -23,4 +23,8 @@ public class RepairServiceImpl implements RepairService{
 	public List<RepairDAO> getRepairDetailService(Map<String, Object> param){
 		return repairMapper.getRepairDetail(param);
 	}
+	
+	public List<RepairDAO> getRepairDetailByRepairNoService(Map<String, Object> param){
+		return repairMapper.getRepairDetailByRepairNo(param);
+	}
 }

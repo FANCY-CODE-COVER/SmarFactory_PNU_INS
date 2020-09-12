@@ -11,4 +11,5 @@ public interface InspectMapper {
 	public void delInspect(Map<String, Object> param);
 	public List<InspectDAO> getInspectList();
 	public List<InspectDAO> getInspectDetail(Map<String, Object> param);
+	public List<InspectDAO> getInspectDetailByInspRstNo(Map<String, Object> param);
 }

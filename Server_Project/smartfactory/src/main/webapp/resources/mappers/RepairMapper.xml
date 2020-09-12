@@ -49,4 +49,23 @@
 	WHERE CRP.FACILITY_NO= #{facility_no}
 	ORDER BY CRP.REPAIR_NO
 	</select>
+	
+	<select id="getRepairDetailByRepairNo"  resultType="com.pnu.spring.smartfactory.DAO.RepairDAO"
+	 parameterType="hashmap">
+	SELECT 
+		CRP.REPAIR_NO,		-- 수리번호
+		CRP.FACILITY_NO,					-- 설비번호
+		CRP.REQ_NO,							-- 요청번호
+		CRP.START_DT,						-- 시작일시
+		CRP.END_DT,							-- 종료일시
+		CD1.CODE_NM AS STATUS,				-- 상태
+		CD2.CODE_NM AS CAUSE,				-- 설비수리사유
+		CD3.CODE_NM AS REPAIR_TYPE			-- 설비수리항목
+	FROM CMM_REPAIR AS CRP					-- 설비수리
+		LEFT OUTER JOIN MDM_CODE AS CD1 WITH(NOLOCK) ON (CD1.CATEGORY_ID = 'IPP' AND CRP.STATUS = CD1.SUB_CD1)
+		LEFT OUTER JOIN MDM_CODE AS CD2 WITH(NOLOCK) ON (CRP.CAUSE_CD = CD2.CODE)			-- 설비수리사유: CD2.CATEGORY_ID = 'ARC'
+		LEFT OUTER JOIN MDM_CODE AS CD3 WITH(NOLOCK) ON (CRP.REPAIR_TYPE_CD = CD3.CODE)
+	WHERE CRP.REPAIR_NO= #{repair_no}
+	ORDER BY CRP.REPAIR_NO
+	</select>
 </mapper>

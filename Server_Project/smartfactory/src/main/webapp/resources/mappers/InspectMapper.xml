@@ -21,7 +21,11 @@
 		CD1.CODE_NM AS RESULT,				-- 점검결과
 		USR.USER_NM,						-- 요청자
 		CIR.FACILITY_NO,					-- 설비번호
-		EP1.EMPLOYEE_NM						-- 접수자
+		EP1.EMPLOYEE_NM,					-- 접수자
+		CIR.RESULT_DETAILS,					-- 결과 상세
+		CIR.REMARK,							-- 비고
+		CIR.START_DT,						--시작일
+		CIR.END_DT							--종료일
 	FROM CMM_INSPECT_RST AS CIR				-- 설비점검결과
 		LEFT OUTER JOIN SYS_USER AS USR WITH(NOLOCK) ON (CIR.REG_ID= USR.USER_ID)
 		LEFT OUTER JOIN MDM_FACILITY AS MFC WITH(NOLOCK) ON (CIR.FACILITY_NO = MFC.FACILITY_NO)			-- 설비정보
@@ -40,7 +44,11 @@
 		CD1.CODE_NM AS RESULT,				-- 점검결과
 		USR.USER_NM,						-- 요청자
 		CIR.FACILITY_NO,					-- 설비번호
-		EP1.EMPLOYEE_NM						-- 접수자
+		EP1.EMPLOYEE_NM,					-- 접수자
+		CIR.RESULT_DETAILS,					-- 결과 상세
+		CIR.REMARK,							-- 비고
+		CIR.START_DT,						--시작일
+		CIR.END_DT							--종료일
 	FROM CMM_INSPECT_RST AS CIR				-- 설비점검결과
 		LEFT OUTER JOIN SYS_USER AS USR WITH(NOLOCK) ON (CIR.REG_ID= USR.USER_ID)
 		LEFT OUTER JOIN MDM_FACILITY AS MFC WITH(NOLOCK) ON (CIR.FACILITY_NO = MFC.FACILITY_NO)			-- 설비정보
@@ -50,6 +58,30 @@
 	<!-- if test='facility_no !=null'>-->	
 	WHERE MFC.FACILITY_NO = #{facility_no}
 	<!--</if>-->
+	ORDER BY CIR.INSP_RST_NO
+	</select>
+	
+	<select id="getInspectDetailByInspRstNo"  resultType="com.pnu.spring.smartfactory.DAO.InspectDAO"
+	parameterType="hashmap">
+	SELECT 
+		CIR.INSP_RST_NO,					-- 점검결과번호
+		MFC.FACILITY_NM,					-- 설비명
+		CIR.FACILITY_NO,					-- 설비번호
+		MFI.INSPECT_NM,						-- 점검명
+		CD1.CODE_NM AS RESULT,				-- 점검결과
+		USR.USER_NM,						-- 요청자
+		EP1.EMPLOYEE_NM,					-- 접수자
+		CIR.RESULT_DETAILS,					-- 결과 상세
+		CIR.REMARK,							-- 비고
+		CIR.START_DT,						--시작일시
+		CIR.END_DT							--종료일시
+	FROM CMM_INSPECT_RST AS CIR				-- 설비점검결과
+		LEFT OUTER JOIN SYS_USER AS USR WITH(NOLOCK) ON (CIR.REG_ID= USR.USER_ID)
+		LEFT OUTER JOIN MDM_FACILITY AS MFC WITH(NOLOCK) ON (CIR.FACILITY_NO = MFC.FACILITY_NO)			-- 설비정보
+		LEFT OUTER JOIN MDM_FACILITY_INSP AS MFI WITH(NOLOCK) ON (CIR.INSPECT_ID = MFI.INSPECT_ID)		-- 설비점검기준정보
+		LEFT OUTER JOIN MDM_EMPLOYEE AS EP1 WITH(NOLOCK) ON (CIR.REG_ID = EP1.EMPLOYEE_ID)
+		LEFT OUTER JOIN MDM_CODE AS CD1 WITH(NOLOCK) ON (CIR.RESULT_CD = CD1.CODE)	
+	WHERE CIR.INSP_RST_NO = #{insp_rst_no}
 	ORDER BY CIR.INSP_RST_NO
 	</select>
 </mapper>

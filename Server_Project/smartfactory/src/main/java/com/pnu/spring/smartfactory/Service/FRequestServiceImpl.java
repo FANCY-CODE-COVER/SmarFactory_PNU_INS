@@ -26,4 +26,8 @@ public class FRequestServiceImpl implements FRequestService{
 	public List<FRequestDAO> getFRequestDetailSerivce(Map<String, Object> param){
 		return frequestMapper.getFRequestDetail(param);
 	}
+	
+	public List<FRequestDAO> getFRequestDetailByReqNoService(Map<String, Object> param){
+		return frequestMapper.getFRequestDetailByReqNo(param);
+	}
 }

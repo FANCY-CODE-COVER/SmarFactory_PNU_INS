@@ -93,6 +93,15 @@ public class InspectController {
 		return convListtoJSONArray(datas);
 	}
 	
+	// 설비의 점검 상세 조회 
+	@RequestMapping(value = "/getinspectdetailbyinsprstno", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONArray getInspectDetailByInspRstNo(@RequestBody Map<String, Object> param) {
+		String insp_rst_no = (String) param.get("insp_rst_no");
+		List<InspectDAO> datas = inspectserviceimpl.getInspectDetailByInspRstNoService(param);
+		return convListtoJSONArray(datas);
+	}
+
 	private JSONArray convListtoJSONArray(List<InspectDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
 		System.out.println("Size:"+datas.size());
@@ -105,6 +114,10 @@ public class InspectController {
 			jsonObj.put("user_nm", datas.get(i).getUser_nm());
 			jsonObj.put("facility_no", datas.get(i).getFacility_no());
 			jsonObj.put("emplyee_nm", datas.get(i).getEmplyee_nm());
+			jsonObj.put("req_details", datas.get(i).getReq_details());
+			jsonObj.put("remark", datas.get(i).getRemark());
+			jsonObj.put("start_dt", datas.get(i).getStart_dt());
+			jsonObj.put("end_dt", datas.get(i).getEnd_dt());
 			jsonarrary.add(jsonObj);
 		}
 		return jsonarrary;

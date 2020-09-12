@@ -1,50 +1,28 @@
 package com.pnu.spring.smartfactory.Controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
-
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import com.pnu.spring.smartfactory.DAO.*;
-import com.pnu.spring.smartfactory.Mapper.LoginMapper;
-import com.pnu.spring.smartfactory.Mapper.PopitMapper;
 import com.pnu.spring.smartfactory.Service.DataService;
-import com.pnu.spring.smartfactory.Service.FacilityService;
 import com.pnu.spring.smartfactory.Service.LoginService;
 import com.pnu.spring.smartfactory.Service.PopitService;
-
-import constant.ApiValue;
+import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
+import kr.co.shineware.nlp.komoran.core.Komoran;
+import kr.co.shineware.nlp.komoran.model.KomoranResult;
+import kr.co.shineware.nlp.komoran.model.Token;
 
 /**
  * Handles requests for the application home page.
@@ -64,6 +42,18 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		  Komoran komoran = new Komoran(DEFAULT_MODEL.LIGHT);
+	        String strToAnalyze = "서광현에게 에이동 고압 압축기 고장났다고 전해줘";
+
+	        KomoranResult analyzeResultList = komoran.analyze(strToAnalyze);
+
+	        System.out.println(analyzeResultList.getPlainText());
+	        System.out.println(analyzeResultList.getMorphesByTags("NNP"));
+	        List<Token> tokenList = analyzeResultList.getTokenList();
+	        for (Token token : tokenList) {
+	            System.out.format("(%2d, %2d) %s/%s\n", token.getBeginIndex(), token.getEndIndex(), token.getMorph(), token.getPos());
+	        }
+
 		logger.info("Welcome home! The client locale is {}.", locale);
 		// XML -> Mapper(DAO) -> Service -> ServiceImpl -> Controller에 해당 함수 실행
 

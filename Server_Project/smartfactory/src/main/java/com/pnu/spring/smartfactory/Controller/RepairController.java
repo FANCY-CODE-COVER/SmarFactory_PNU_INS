@@ -50,6 +50,8 @@ public class RepairController {
 			System.out.println("Error : "+e.toString());
 			jsonObj.put("message", "fail");
 		}
+		
+		
 		return jsonObj;
 	}
 	
@@ -87,6 +89,15 @@ public class RepairController {
 		List<RepairDAO> datas = repairserviceimpl.getRepairDetailService(param);
 		return convListToJsonArrary(datas);
 	}
+	
+	// 설비의 수리 상세 조회
+		@RequestMapping(value = "/getrepairdetailbyrepairno", method = RequestMethod.POST)
+		@ResponseBody
+		public JSONArray getRepairDetailByRepairNo(@RequestBody Map<String, Object> param) {
+//			String facility_no = (String) param.get("facility_no");
+			List<RepairDAO> datas = repairserviceimpl.getRepairDetailByRepairNoService(param);
+			return convListToJsonArrary(datas);
+		}
 	
 	private JSONArray convListToJsonArrary(List<RepairDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();

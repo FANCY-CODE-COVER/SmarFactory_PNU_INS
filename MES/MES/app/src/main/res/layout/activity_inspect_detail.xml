@@ -1,9 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.edit.InspectDetailActivity">
+    <TextView
+        android:id="@+id/insp_rst_no_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="점검결과번호"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        style="@style/linear_layout">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            style="@style/detail_title"
+            android:text="점검명" />
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/inspect_nm"
+            android:text="설명" />
+
+        <TextView
+            style="@style/detail_title"
+            android:text="점검결과" />
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/result"
+            android:text="설명" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        style="@style/linear_layout">
+
+        <TextView
+            style="@style/detail_title"
+            android:text="요청상세"/>
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/request_detail"
+            android:text="설명"/>
+
+        <TextView
+            style="@style/detail_title"
+            android:text="비고"/>
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/remark"
+            android:text="설명"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        style="@style/linear_layout">
+
+        <TextView
+            style="@style/detail_title"
+            android:text="설비명"/>
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/facility_nm"
+            android:text="설명"/>
+
+        <TextView
+            style="@style/detail_title"
+            android:text="설비번호"/>
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/facility_no"
+            android:text="설명"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        style="@style/linear_layout">
+
+        <TextView
+            style="@style/detail_title"
+            android:text="요청자"/>
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/user_nm"
+            android:text="설명"/>
+
+        <TextView
+            style="@style/detail_title"
+            android:text="접수자"/>
+
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/employee_nm"
+            android:text="설명"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="점검 삭제" />
+
+
+</LinearLayout>

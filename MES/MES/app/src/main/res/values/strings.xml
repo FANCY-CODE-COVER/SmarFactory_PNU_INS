@@ -6,4 +6,12 @@
     <string name="title_setting">Setting</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="APP_NAME">SMART FACTORY</string>
+    <string name="USER_ID_HINT">USER ID</string>
+    <string name="PASSWORD_HINT">PASSWORD</string>
+    <string name="LOGIN_BTN_NAME">LOGIN</string>
+    <string name="FREQUEST_SELECTION1">긴급</string>
+    <string name="FREQUEST_SELECTION2">중지</string>
+    <string name="FREQUEST_SELECTION3">점검</string>
+    <string name="DELETE_MESSAGE">삭제 하시겠습니까?</string>
 </resources>

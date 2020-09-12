@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import inc.app.mes.DTO.FacilityDAO;
 import inc.app.mes.DTO.PlaceDAO;
 import inc.app.mes.R;
-import inc.app.mes.ui.FacilityFragment;
 import inc.app.mes.ui.home.FacilityDetailActivity;
 
 public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapter.ViewHolder> {

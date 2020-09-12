@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import inc.app.mes.DTO.FacilityDAO;
 import inc.app.mes.DTO.InspectDAO;
 import inc.app.mes.R;
+import inc.app.mes.ui.edit.InspectDetailActivity;
 import inc.app.mes.ui.home.FacilityDetailActivity;
 
 public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.ViewHolder> {
@@ -40,14 +41,9 @@ public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.ViewHold
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     context=v.getContext();
-                    Toast.makeText(context, pos+"clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(v.getContext(), FacilityDetailActivity.class);
-                    intent.putExtra("facility_cd", items.get(pos).getFacility_no());
-
+                    Intent intent = new Intent(v.getContext(), InspectDetailActivity.class);
+                    intent.putExtra("insp_rst_no", items.get(pos).getInsp_rst_no());
                     context.startActivity(intent);
-
-//                    intent.putExtra("pos",pos);
-
                 }
 
             });

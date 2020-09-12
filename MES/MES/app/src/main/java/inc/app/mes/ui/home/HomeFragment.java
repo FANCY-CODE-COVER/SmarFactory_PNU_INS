@@ -25,6 +25,7 @@ import inc.app.mes.custum_application.MyApplication;
 import inc.app.mes.network.NetworkService;
 import inc.app.mes.recycler.PlaceAdapter;
 import inc.app.mes.recycler.FacilityListAdapter;
+import inc.app.mes.util.respnoseLogger;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -92,20 +93,7 @@ public class HomeFragment extends Fragment{
                     placeRecycler.setAdapter(placeAdapter);
                 }
                 else{// 실패시 에러코드들
-                    if(response.code()==500)
-                    {
-                        Log.i("SINSIN", "500실패");
-                    }
-                    else if(response.code()==503)
-                    {
-                        Log.i("SINSIN", "503 실패");
-                    }
-                    else if(response.code()==401)
-                    {
-                        Log.i("SINSIN", "401 실패");
-                    }
-                    Log.i("SINSIN", response.code()+"실패");
-                    Log.i("SINSIN", response.body()+"실패");
+                    respnoseLogger.doPrint(response.code(), response.body().toString());
                 }
             }
             @Override
@@ -136,20 +124,7 @@ public class HomeFragment extends Fragment{
                     facilityListRecycler.setAdapter(facilityListAdapter);
                 }
                 else{// 실패시 에러코드들
-                    if(response.code()==500)
-                    {
-                        Log.i("SINSIN", "500실패");
-                    }
-                    else if(response.code()==503)
-                    {
-                        Log.i("SINSIN", "503 실패");
-                    }
-                    else if(response.code()==401)
-                    {
-                        Log.i("SINSIN", "401 실패");
-                    }
-                    Log.i("SINSIN", response.code()+"실패");
-                    Log.i("SINSIN", response.body()+"실패");
+                    respnoseLogger.doPrint(response.code(), response.body().toString());
                 }
             }
             @Override

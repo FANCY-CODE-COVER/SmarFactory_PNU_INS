@@ -129,21 +129,22 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_register_frequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="요청 등록" />
 
+
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_inspect_lookup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="점검 이력 조회" />
+    <Button
+        android:id="@+id/btn_repair_lookup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="수리 이력 조회" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="점검 이력 조회" />
 
 </LinearLayout>

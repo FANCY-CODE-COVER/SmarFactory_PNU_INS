@@ -49,10 +49,10 @@ public interface NetworkService {
 
     //-----------설비 요청 관련
     @POST("insfrequest")
-    Call<String> insFRequest(@Body Map<String, Object> param);
+    Call<Message> insFRequest(@Body Map<String, Object> param);
 
     @POST("delfrequest")
-    Call<String> delFRequest(@Body Map<String, Object> param);
+    Call<Message> delFRequest(@Body Map<String, Object> param);
 
     @POST("getfrequestlist")
     Call<List<FRequestDAO>> getFRequestList(@Body Map<String, Object> param);
@@ -60,12 +60,15 @@ public interface NetworkService {
     @POST("getfrequestdetail")
     Call<List<FRequestDAO>> getFRequestDetail(@Body Map<String, Object> param);
 
+    @POST("getfrequestdetailbyreqno")
+    Call<List<FRequestDAO>> getFRequestDetailByReqNo(@Body Map<String, Object> param);
+
     //-----------설비 점검 관련
     @POST("insInspect")
-    Call<String> insInspect(@Body Map<String, Object> param);
+    Call<Message> insInspect(@Body Map<String, Object> param);
 
     @POST("delinspect")
-    Call<String> delInspect(@Body Map<String, Object> param);
+    Call<Message> delInspect(@Body Map<String, Object> param);
 
     @POST("getinspectlist")
     Call<List<InspectDAO>> getInspectList(@Body Map<String, Object> param);
@@ -73,16 +76,21 @@ public interface NetworkService {
     @POST("getinspectdetail")
     Call<List<InspectDAO>> getInspectDetail(@Body Map<String, Object> param);
 
+    @POST("getinspectdetailbyinsprstno")
+    Call<List<InspectDAO>> getInspectDetailByInspRstNo(@Body Map<String, Object> param);
     //-----------설비 수리 관련
     @POST("insrepair")
-    Call<String> insRepair(@Body Map<String, Object> param);
+    Call<Message> insRepair(@Body Map<String, Object> param);
 
     @POST("delrepair")
-    Call<String> delRepair(@Body Map<String, Object> param);
+    Call<Message> delRepair(@Body Map<String, Object> param);
 
     @POST("getrepairlist")
     Call<List<RepairDAO>> getRepairList(@Body Map<String, Object> param);
 
     @POST("getrepairdetail")
     Call<List<RepairDAO>> getRepairDetail(@Body Map<String, Object> param);
+
+    @POST("getrepairdetailbyrepairno")
+    Call<List<RepairDAO>> getRepairDetailByRepairNo(@Body Map<String, Object> param);
 }

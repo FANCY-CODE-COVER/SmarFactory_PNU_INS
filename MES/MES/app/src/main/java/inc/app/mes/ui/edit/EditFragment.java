@@ -28,6 +28,7 @@ import inc.app.mes.recycler.MenuAdapter;
 import inc.app.mes.recycler.InspectAdapter;
 import inc.app.mes.recycler.RepairAdapter;
 import inc.app.mes.recycler.RequestAdapter;
+import inc.app.mes.util.respnoseLogger;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -106,20 +107,7 @@ public class EditFragment extends Fragment {
                     editRecycler.setAdapter(requestAdapter);
                 }
                 else{// 실패시 에러코드들
-                    if(response.code()==500)
-                    {
-                        Log.i("SINSIN", "500실패");
-                    }
-                    else if(response.code()==503)
-                    {
-                        Log.i("SINSIN", "503 실패");
-                    }
-                    else if(response.code()==401)
-                    {
-                        Log.i("SINSIN", "401 실패");
-                    }
-                    Log.i("SINSIN", response.code()+"실패");
-                    Log.i("SINSIN", response.body()+"실패");
+                    respnoseLogger.doPrint(response.code(), response.body().toString());
                 }
             }
             @Override
@@ -128,6 +116,8 @@ public class EditFragment extends Fragment {
             }
         });
     }
+
+
     public void getInspectList() {
         Map<String, Object> param = new HashMap<String, Object>();
         Call<List<InspectDAO>> joinContentCall=networkService.getInspectList(param);
@@ -146,20 +136,7 @@ public class EditFragment extends Fragment {
                     editRecycler.setAdapter(inspectAdapter);
                 }
                 else{// 실패시 에러코드들
-                    if(response.code()==500)
-                    {
-                        Log.i("SINSIN", "500실패");
-                    }
-                    else if(response.code()==503)
-                    {
-                        Log.i("SINSIN", "503 실패");
-                    }
-                    else if(response.code()==401)
-                    {
-                        Log.i("SINSIN", "401 실패");
-                    }
-                    Log.i("SINSIN", response.code()+"실패");
-                    Log.i("SINSIN", response.body()+"실패");
+                    respnoseLogger.doPrint(response.code(), response.body().toString());
                 }
             }
             @Override
@@ -186,20 +163,7 @@ public class EditFragment extends Fragment {
                     editRecycler.setAdapter(repairAdapter);
                 }
                 else{// 실패시 에러코드들
-                    if(response.code()==500)
-                    {
-                        Log.i("SINSIN", "500실패");
-                    }
-                    else if(response.code()==503)
-                    {
-                        Log.i("SINSIN", "503 실패");
-                    }
-                    else if(response.code()==401)
-                    {
-                        Log.i("SINSIN", "401 실패");
-                    }
-                    Log.i("SINSIN", response.code()+"실패");
-                    Log.i("SINSIN", response.body()+"실패");
+                    respnoseLogger.doPrint(response.code(), response.body().toString());
                 }
             }
             @Override
@@ -208,5 +172,6 @@ public class EditFragment extends Fragment {
             }
         });
     }
+
 
 }

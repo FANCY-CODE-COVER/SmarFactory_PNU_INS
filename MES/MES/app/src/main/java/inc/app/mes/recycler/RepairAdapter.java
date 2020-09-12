@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import inc.app.mes.DTO.FacilityDAO;
 import inc.app.mes.DTO.RepairDAO;
 import inc.app.mes.R;
+import inc.app.mes.ui.edit.RepairDetailActivity;
 import inc.app.mes.ui.home.FacilityDetailActivity;
 
 public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder> {
@@ -41,14 +42,9 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     context=v.getContext();
-                    Toast.makeText(context, pos+"clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(v.getContext(), FacilityDetailActivity.class);
-                    intent.putExtra("facility_cd", items.get(pos).getFacility_no());
-
+                    Intent intent = new Intent(v.getContext(), RepairDetailActivity.class);
+                    intent.putExtra("repair_no", items.get(pos).getRepair_no());
                     context.startActivity(intent);
-
-//                    intent.putExtra("pos",pos);
-
                 }
 
             });

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import inc.app.mes.DTO.FRequestDAO;
 import inc.app.mes.DTO.FacilityDAO;
 import inc.app.mes.R;
+import inc.app.mes.ui.edit.FRequestDetailActivity;
 import inc.app.mes.ui.home.FacilityDetailActivity;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder> {
@@ -40,13 +41,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     context=v.getContext();
-                    Toast.makeText(context, pos+"clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(v.getContext(), FacilityDetailActivity.class);
-                    intent.putExtra("facility_cd", items.get(pos).getFacility_no());
+                    Intent intent = new Intent(v.getContext(), FRequestDetailActivity.class);
+                    intent.putExtra("req_no", items.get(pos).getReq_no());
 
                     context.startActivity(intent);
-
-//                    intent.putExtra("pos",pos);
 
                 }
 

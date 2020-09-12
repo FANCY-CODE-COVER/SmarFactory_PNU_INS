@@ -6,7 +6,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="KAKAO" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -18,16 +17,32 @@
       <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/NetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/NetworkService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/FRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/FRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/InspectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/InspectController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/KakaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/KakaoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/RepairController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/RepairController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/DAO/FRequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/DAO/FRequestDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/DAO/InspectDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/DAO/InspectDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Mapper/FRequestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Mapper/FRequestMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Mapper/InspectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Mapper/InspectMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Mapper/RepairMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Mapper/RepairMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/FRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/FRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/FRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/FRequestServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/InspectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/InspectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/InspectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/InspectServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/RepairService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/RepairService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/RepairServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Service/RepairServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/webapp/resources/mappers/FRequestMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/webapp/resources/mappers/FRequestMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/webapp/resources/mappers/InspectMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/webapp/resources/mappers/InspectMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/webapp/resources/mappers/RepairMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/webapp/resources/mappers/RepairMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="RF8M208DEJA" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -44,8 +59,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="layoutResourceFile" />
         <option value="Interface" />
+        <option value="layoutResourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -73,28 +88,32 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.-302318317">
-      <recent name="inc.app.mes.ui.home" />
-    </key>
-    <key name="android.template.-578673095">
-      <recent name="inc.app.mes.ui.edit" />
-    </key>
-    <key name="android.template.-346551922">
-      <recent name="inc.app.mes" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="inc.app.mes" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\dya21\Desktop\Github\SmarFactory_PNU_INS\MES\MES\app\src\main\java\inc\app\mes\DTO" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/java/inc/app/mes" />
+    </key>
+    <key name="android.template.-319147752">
+      <recent name="inc.app.mes.ui.edit" />
+      <recent name="inc.app.mes.ui.login" />
+    </key>
+    <key name="android.template.-578673095">
+      <recent name="inc.app.mes.ui.edit" />
+    </key>
+    <key name="android.template.-302318317">
+      <recent name="inc.app.mes.ui.home" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="inc.app.mes" />
+    </key>
+    <key name="android.template.-346551922">
+      <recent name="inc.app.mes" />
     </key>
   </component>
   <component name="RunManager">
@@ -187,9 +206,10 @@
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="513" y="198" key="#Auto_Import/0.0.1842.1080@0.0.1842.1080" timestamp="1599753142728" />
-    <state x="322" y="202" key="#Inspections" timestamp="1599799817867">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state x="255" y="162" key="#Inspections" timestamp="1599885029338">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
+    <state x="255" y="162" key="#Inspections/0.0.1458.864@0.0.1458.864" timestamp="1599885029338" />
     <state x="322" y="202" key="#Inspections/0.0.1842.1080@0.0.1842.1080" timestamp="1599799817867" />
     <state x="466" y="279" key="#PSD" timestamp="1599649988074">
       <screen x="0" y="0" width="1842" height="1080" />
@@ -197,9 +217,10 @@
     <state x="453" y="289" key="#PSD/0.0.1792.1120@0.0.1792.1120" timestamp="1599042217517" />
     <state x="466" y="279" key="#PSD/0.0.1842.1080@0.0.1842.1080" timestamp="1599649988074" />
     <state x="485" y="279" key="#PSD/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1598756654336" />
-    <state x="1130" y="227" key="#com.intellij.ide.util.MemberChooser" timestamp="1599789868027">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state x="894" y="182" key="#com.intellij.ide.util.MemberChooser" timestamp="1599893240924">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
+    <state x="894" y="182" key="#com.intellij.ide.util.MemberChooser/0.0.1458.864@0.0.1458.864" timestamp="1599893240924" />
     <state x="1130" y="227" key="#com.intellij.ide.util.MemberChooser/0.0.1842.1080@0.0.1842.1080" timestamp="1599789868027" />
     <state x="576" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1599652134168">
       <screen x="0" y="0" width="1842" height="1080" />
@@ -216,53 +237,63 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="215" y="294" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1599500308841" />
-    <state x="525" y="302" key="AndroidCreateResourceFileDialog" timestamp="1599785169161">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state x="400" y="334" key="AndroidCreateResourceFileDialog" timestamp="1599891839793">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
+    <state x="400" y="334" key="AndroidCreateResourceFileDialog/0.0.1458.864@0.0.1458.864" timestamp="1599891839793" />
     <state x="511" y="313" key="AndroidCreateResourceFileDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1599478988553" />
     <state x="525" y="302" key="AndroidCreateResourceFileDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599785169161" />
     <state x="548" y="302" key="AndroidCreateResourceFileDialog/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1598758946184" />
+    <state x="587" y="245" key="AndroidCreateXmlResourceDialog" timestamp="1599892167440">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="587" y="245" key="AndroidCreateXmlResourceDialog/0.0.1458.864@0.0.1458.864" timestamp="1599892167440" />
     <state x="515" y="164" key="CommitChangelistDialog2" timestamp="1598861434984">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="515" y="164" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1598861434984" />
-    <state x="644" y="234" key="FileChooserDialogImpl" timestamp="1599753602310">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state x="510" y="187" key="FileChooserDialogImpl" timestamp="1599873239651">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state x="510" y="187" key="FileChooserDialogImpl/0.0.1458.864@0.0.1458.864" timestamp="1599639838532" />
+    <state x="510" y="187" key="FileChooserDialogImpl/0.0.1458.864@0.0.1458.864" timestamp="1599873239651" />
     <state x="644" y="234" key="FileChooserDialogImpl/0.0.1842.1080@0.0.1842.1080" timestamp="1599753602310" />
-    <state width="875" height="161" key="GridCell.Tab.0.bottom" timestamp="1599791771884">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state width="682" height="149" key="GridCell.Tab.0.bottom" timestamp="1599890233348">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state width="706" height="219" key="GridCell.Tab.0.bottom/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
+    <state width="682" height="149" key="GridCell.Tab.0.bottom/0.0.1458.864@0.0.1458.864" timestamp="1599890233348" />
     <state width="875" height="161" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
-    <state width="875" height="161" key="GridCell.Tab.0.center" timestamp="1599791771884">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state width="682" height="149" key="GridCell.Tab.0.center" timestamp="1599890233348">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state width="706" height="219" key="GridCell.Tab.0.center/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
+    <state width="682" height="149" key="GridCell.Tab.0.center/0.0.1458.864@0.0.1458.864" timestamp="1599890233348" />
     <state width="875" height="161" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
-    <state width="875" height="161" key="GridCell.Tab.0.left" timestamp="1599791771883">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state width="682" height="149" key="GridCell.Tab.0.left" timestamp="1599890233348">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state width="706" height="219" key="GridCell.Tab.0.left/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
+    <state width="682" height="149" key="GridCell.Tab.0.left/0.0.1458.864@0.0.1458.864" timestamp="1599890233348" />
     <state width="875" height="161" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771883" />
-    <state width="875" height="161" key="GridCell.Tab.0.right" timestamp="1599791771884">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state width="682" height="149" key="GridCell.Tab.0.right" timestamp="1599890233348">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state width="706" height="219" key="GridCell.Tab.0.right/0.0.1458.864@0.0.1458.864" timestamp="1599636759462" />
+    <state width="682" height="149" key="GridCell.Tab.0.right/0.0.1458.864@0.0.1458.864" timestamp="1599890233348" />
     <state width="875" height="161" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
+    <state x="545" y="366" key="ReplaceDuplicatesPrompt" timestamp="1599892702549">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="545" y="366" key="ReplaceDuplicatesPrompt/0.0.1458.864@0.0.1458.864" timestamp="1599892702549" />
     <state x="496" y="300" key="Vcs.Push.Dialog.v2" timestamp="1598861517625">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="496" y="300" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1598861517625" />
-    <state x="608" y="300" key="com.intellij.ide.util.TipDialog" timestamp="1599649187346">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state x="481" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1599872325216">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state x="481" y="240" key="com.intellij.ide.util.TipDialog/0.0.1458.864@0.0.1458.864" timestamp="1599636831353" />
+    <state x="481" y="240" key="com.intellij.ide.util.TipDialog/0.0.1458.864@0.0.1458.864" timestamp="1599872325216" />
     <state x="608" y="300" key="com.intellij.ide.util.TipDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599649187346" />
-    <state x="460" y="311" key="extract.method.dialog" timestamp="1599799585913">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state x="417" y="293" width="538" height="500" key="extract.method.dialog" timestamp="1599892688019">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
+    <state x="417" y="293" width="538" height="500" key="extract.method.dialog/0.0.1458.864@0.0.1458.864" timestamp="1599892688019" />
     <state x="460" y="311" key="extract.method.dialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599799585913" />
     <state x="154" y="140" width="613" height="807" key="find.popup" timestamp="1599649566014">
       <screen x="0" y="0" width="1842" height="1080" />
@@ -272,13 +303,15 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="475" y="300" key="psd.add.library.dependency.panel.dimension/0.0.1792.1120@0.0.1792.1120" timestamp="1599042216801" />
-    <state x="265" y="252" key="run.anything.popup" timestamp="1599652421778">
-      <screen x="0" y="0" width="1842" height="1080" />
+    <state x="210" y="202" key="run.anything.popup" timestamp="1599891501304">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
+    <state x="210" y="202" key="run.anything.popup/0.0.1458.864@0.0.1458.864" timestamp="1599891501304" />
     <state x="265" y="252" key="run.anything.popup/0.0.1842.1080@0.0.1842.1080" timestamp="1599652421778" />
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1599480303932">
-      <screen x="0" y="0" width="1792" height="1120" />
+    <state x="456" y="194" width="672" height="522" key="search.everywhere.popup" timestamp="1599882361249">
+      <screen x="0" y="0" width="1458" height="864" />
     </state>
+    <state x="456" y="194" width="672" height="522" key="search.everywhere.popup/0.0.1458.864@0.0.1458.864" timestamp="1599882361249" />
     <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1599480303932" />
   </component>
 </project>

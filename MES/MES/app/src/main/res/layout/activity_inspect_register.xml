@@ -23,18 +23,33 @@ android:orientation="vertical">
             android:layout_weight="70"/>
         <TextView
             style="@style/detail_data"
+            android:id="@+id/facility_title"
             android:text="내용"
             android:layout_weight="100"
             />
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/detail_title"
+            android:text="요청 번호"
+            android:layout_weight="70"/>
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/req_title"
+            android:text="내용"
+            android:layout_weight="100"
+            />
     </LinearLayout>
 
 
     <TextView
         style="@style/register_title"
         android:text="시작 일시" />
-    <EditText
-        android:id="@+id/editTextDate"
+    <Button
+        android:id="@+id/edit_text_start_dt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -42,24 +57,25 @@ android:orientation="vertical">
     <TextView
         style="@style/register_title"
         android:text="종료 일시" />
-    <EditText
-        android:id="@+id/editTextDate2"
+    <Button
+        android:id="@+id/edit_text_end_dt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date" />
+
     <TextView
         style="@style/register_title"
-        android:text="점검 코드" />
+        android:text="점검 결과 코드" />
     <EditText
-        android:id="@+id/remㄴark"
+        android:id="@+id/result_cd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         style="@style/register_title"
         android:text="점검 결과 상세" />
     <EditText
-        android:id="@+id/remark"
+        android:id="@+id/result_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -67,7 +83,7 @@ android:orientation="vertical">
         style="@style/register_title"
         android:text="비고" />
     <EditText
-        android:id="@+id/rem2ark"
+        android:id="@+id/remark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout

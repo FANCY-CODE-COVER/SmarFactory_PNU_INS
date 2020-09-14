@@ -7,6 +7,7 @@ import inc.app.mes.DTO.Message;
 import inc.app.mes.R;
 import inc.app.mes.custum_application.MyApplication;
 import inc.app.mes.network.NetworkService;
+import inc.app.mes.ui.home.FacilityDetailActivity;
 import inc.app.mes.util.respnoseLogger;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +37,7 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
     private Button regInspectBtn, regRepairBtn, deleteBtn;
     private NetworkService networkService;
     private PopupWindow mPopupWindow;
-    private String req_no;
+    private String req_no, facility_cd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
         deleteBtn.setOnClickListener(this);
         Intent intent = getIntent();
         req_no = intent.getExtras().getString("req_no");
+        facility_cd="";
         getFRequestDetailByReqNo(req_no);
     }
 
@@ -67,10 +69,18 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
     public void onClick(View view) {
         int id=view.getId();
         if(id==R.id.btn_register_inspect){
+            Intent intent = new Intent(FRequestDetailActivity.this, InspectRegisterActivity.class);
+            intent.putExtra("req_no", req_no);
+            intent.putExtra("facility_cd", facility_cd);
 
+            this.startActivity(intent);
         }
         else if(id==R.id.btn_register_repair){
+            Intent intent = new Intent(FRequestDetailActivity.this, RepairRegisterActivity.class);
+            intent.putExtra("req_no", req_no);
+            intent.putExtra("facility_cd", facility_cd);
 
+            this.startActivity(intent);
         }
         else if(id==R.id.btn_delete){
             View popupView = getLayoutInflater().inflate(R.layout.dialog_yes_or_no, null);
@@ -117,6 +127,8 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
                         reqNoText.setText(fRequestDAO.getReq_no());
                         userNmText.setText(fRequestDAO.getUser_nm());
                         facilityNoText.setText(fRequestDAO.getFacility_no());
+                        facility_cd=fRequestDAO.getFacility_no();
+
                         InspRstNoText.setText(fRequestDAO.getInsp_rst_no());
                         statusText.setText(fRequestDAO.getStatus());
                         employeeNmText.setText(fRequestDAO.getEmployee_nm());

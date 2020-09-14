@@ -65,7 +65,7 @@ tools:context=".ui.edit.RepairDetailActivity">
 
     <TextView
         style="@style/detail_title"
-        android:text="시작일시"/>
+        android:text="시작일"/>
 
     <TextView
         style="@style/detail_data"
@@ -74,7 +74,7 @@ tools:context=".ui.edit.RepairDetailActivity">
 
     <TextView
         style="@style/detail_title"
-        android:text="종료일시"/>
+        android:text="종료일"/>
 
     <TextView
         style="@style/detail_data"

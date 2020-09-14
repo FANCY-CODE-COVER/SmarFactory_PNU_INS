@@ -13,6 +13,36 @@
         android:gravity="center"
         android:textSize="25sp"
         android:text="수리 등록" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/detail_title"
+            android:text="설비 번호"
+            android:layout_weight="70"/>
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/facility_title"
+            android:text="내용"
+            android:layout_weight="100"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/detail_title"
+            android:text="요청 번호"
+            android:layout_weight="70"/>
+        <TextView
+            style="@style/detail_data"
+            android:id="@+id/req_title"
+            android:text="내용"
+            android:layout_weight="100"
+            />
+    </LinearLayout>
     <TextView
         style="@style/register_title"
         android:text="상태" />
@@ -59,6 +89,31 @@
     </LinearLayout>
     <TextView
         style="@style/register_title"
+        android:text="시작일" />
+    <Button
+        android:id="@+id/edit_text_start_dt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:ems="10"/>
+    <TextView
+        style="@style/register_title"
+        android:text="종료일" />
+    <Button
+        android:id="@+id/edit_text_end_dt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:ems="10" />
+    <TextView
+        style="@style/register_title"
+        android:text="원인 코드" />
+    <EditText
+        android:id="@+id/cause_cd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        style="@style/register_title"
         android:text="원인" />
     <EditText
         android:id="@+id/cause"
@@ -68,21 +123,22 @@
         style="@style/register_title"
         android:text="수리타입" />
     <EditText
-        android:id="@+id/cause2ㄴ3"
+        android:id="@+id/repair_type"
+        android:text="401010"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         style="@style/register_title"
         android:text="수리 총계(AMT)" />
     <EditText
-        android:id="@+id/cau2se"
+        android:id="@+id/repair_amt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         style="@style/register_title"
         android:text="수리상세" />
     <EditText
-        android:id="@+id/request_detail"
+        android:id="@+id/repair_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView

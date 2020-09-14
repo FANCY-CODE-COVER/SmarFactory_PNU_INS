@@ -22,8 +22,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
@@ -40,6 +42,8 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.util.exception.KakaoException;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,7 +69,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     private Button kakaoAccountManageBtn, QRGenerateBtn, voiceMessageBtn;
     private Button friendAuthBtn, unlinkBtn, logoutBtn;
     private ImageView QRImageView;
-    private Button voiceRecogBtn;
+    private ImageButton voiceRecogBtn;
+    private TextView voiceMessage;
     private Intent i;
     private SpeechRecognizer mRecognizer;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -133,7 +138,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         QRImageView= (ImageView) root.findViewById(R.id.imageview_QR);
 
         voiceMessagePage=(LinearLayout) root.findViewById(R.id.voice_message_page);
-        voiceRecogBtn=(Button) root.findViewById(R.id.btn_voice_recog);
+        voiceRecogBtn=(ImageButton) root.findViewById(R.id.btn_voice_recog);
+        voiceMessage=(TextView) root.findViewById(R.id.voice_message);
+
         voiceRecogBtn.setOnClickListener(this);
         return root;
     }
@@ -175,6 +182,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 } else {
                     //권한을 허용한 경우
                     try {
+                        voiceMessage.setText( "지금부터 말을 해주세요!");
                         mRecognizer.startListening(i);
                     } catch(SecurityException e) {
                         e.printStackTrace();
@@ -194,7 +202,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }
         @Override
         public void onBeginningOfSpeech() {
-            Toast.makeText(getContext(), "지금부터 말을 해주세요!", Toast.LENGTH_SHORT).show();
+//            voiceMessage.setText( "지금부터 말을 해주세요!");
+            System.out.println("지금부터 말을 해주세요!");
         }
 
         @Override
@@ -214,7 +223,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onError(int error) {
-            Toast.makeText(getContext(), "천천히 다시 말해주세요.", Toast.LENGTH_SHORT).show();
+            voiceMessage.setText( "음성 인식 실패");
         }
 
         @Override
@@ -229,6 +238,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onResults(Bundle results) {
+            voiceMessage.setText("음성인식 종료");
+            System.out.println("음성인식 종료");
             String key= "";
             key = SpeechRecognizer.RESULTS_RECOGNITION;
             ArrayList<String> mResult = results.getStringArrayList(key);
@@ -238,6 +249,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             String access_token=PreferenceManager.getString(getContext(), "access_token");
             sendMessage(access_token,rs[0]);
             mRecognizer.stopListening();
+
 //            mRecognizer.startListening(i);
         }
     };

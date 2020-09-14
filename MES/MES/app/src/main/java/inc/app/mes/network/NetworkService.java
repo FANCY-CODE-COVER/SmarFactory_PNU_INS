@@ -64,7 +64,7 @@ public interface NetworkService {
     Call<List<FRequestDAO>> getFRequestDetailByReqNo(@Body Map<String, Object> param);
 
     //-----------설비 점검 관련
-    @POST("insInspect")
+    @POST("insinspect")
     Call<Message> insInspect(@Body Map<String, Object> param);
 
     @POST("delinspect")

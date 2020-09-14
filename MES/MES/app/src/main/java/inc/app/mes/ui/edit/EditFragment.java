@@ -45,6 +45,7 @@ public class EditFragment extends Fragment {
     public ArrayList<String> title = new ArrayList<String>();
     public ArrayList<String> state = new ArrayList<String>();
     private NetworkService networkService;
+    private String menu;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_edit, container, false);
@@ -55,7 +56,7 @@ public class EditFragment extends Fragment {
                 new MenuAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int pos) {
-                        String menu = menuAdapter.getItems().get(pos);
+                        menu = menuAdapter.getItems().get(pos);
                         if(menu.equals("요청")){
                             getFRequestList();
                         }
@@ -89,6 +90,25 @@ public class EditFragment extends Fragment {
 
         return root;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(menu==null){
+            menu="요청";
+        }
+        if(menu.equals("요청")){
+            getFRequestList();
+        }
+        else if (menu.equals("점검")){
+            getInspectList();
+        }
+        else if(menu.equals("수리")){
+            getRepairList();
+        }
+
+    }
+
     public void getFRequestList() {
         Map<String, Object> param = new HashMap<String, Object>();
         Call<List<FRequestDAO>> joinContentCall=networkService.getFRequestList(param);

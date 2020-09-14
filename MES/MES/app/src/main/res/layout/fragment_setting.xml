@@ -92,11 +92,23 @@
         android:orientation="vertical"
         android:visibility="invisible"
         >
-        <Button
+
+        <ImageButton
+            android:id="@+id/btn_voice_recog"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/recorder_image"
+            tools:src="@drawable/recorder_image" />
+        <TextView
+            android:id="@+id/voice_message"
+            android:text="음성 인식 메시지"
+            android:gravity="center"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="음성인식"
-            android:id="@+id/btn_voice_recog"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 

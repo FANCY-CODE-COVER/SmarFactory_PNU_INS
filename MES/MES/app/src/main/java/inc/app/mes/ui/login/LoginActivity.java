@@ -15,9 +15,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -30,11 +33,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editUserID, editPassword;
     private NetworkService networkService;
     private Boolean AUTO_LOGIN;
+    private PopupWindow mPopupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        AUTO_LOGIN=false;
+        AUTO_LOGIN = false;
 
         networkService = MyApplication.getInstance().getNetworkService();
         editUserID = (EditText) findViewById(R.id.edit_user_id);
@@ -46,6 +50,32 @@ public class LoginActivity extends AppCompatActivity {
 //                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                startActivity(intent);
                 String inputID = editUserID.getText().toString();
+                if (inputID.equals("ip")) {
+                    View popupView = getLayoutInflater().inflate(R.layout.dialog_change_ip, null);
+                    mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    mPopupWindow.setFocusable(true);
+                    mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+                    final EditText baseUrlEdit;
+                    Button ok = (Button) popupView.findViewById(R.id.btn_change_ip_addr);
+                    baseUrlEdit=(EditText) popupView.findViewById(R.id.edit_base_url);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String new_IP=baseUrlEdit.getText().toString();
+                            MyApplication.getInstance().setBaseUrl(new_IP);
+                            mPopupWindow.dismiss();
+                        }
+                    });
+
+                    Button cancel = (Button) popupView.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mPopupWindow.dismiss();
+                        }
+                    });
+                    return;
+                }
                 String inputPW = editPassword.getText().toString();
                 Map<String, Object> param = new HashMap<>();
                 param.put("user_id", inputID);
@@ -54,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                 new NetworkCall().execute(joinContentCall);
             }
         });
+
+
         String user_id = PreferenceManager.getString(this, "user_id");
         String password = PreferenceManager.getString(this, "password");
 
@@ -61,12 +93,11 @@ public class LoginActivity extends AppCompatActivity {
             Map<String, Object> param = new HashMap<>();
             param.put("user_id", user_id);
             param.put("password", password);
-            AUTO_LOGIN=true;
+            AUTO_LOGIN = true;
             Call<Message> joinContentCall = networkService.doLogin(param);
             new NetworkCall().execute(joinContentCall);
             Toast.makeText(this, "자동 로그인 됩니다.", Toast.LENGTH_SHORT).show();
         }
-
 
 
     }

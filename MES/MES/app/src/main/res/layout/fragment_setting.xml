@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_voice_message"
             android:text="음성인식 메시지 보내기"/>
+
     </LinearLayout>
 
     <LinearLayout

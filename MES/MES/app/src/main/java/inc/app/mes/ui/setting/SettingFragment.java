@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -22,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,10 +47,12 @@ import com.kakao.util.exception.KakaoException;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import inc.app.mes.DTO.TokenManager;
 import inc.app.mes.R;
 import inc.app.mes.custum_application.MyApplication;
 import inc.app.mes.network.NetworkService;
@@ -73,12 +77,15 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     private TextView voiceMessage;
     private Intent i;
     private SpeechRecognizer mRecognizer;
+    private String speechText;
+
+    private Button changeIPBtn;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
         networkService = MyApplication.getInstance().getNetworkService();
         Session.getCurrentSession().addCallback(sessionCallback);
-
+        speechText="";
         // This callback will only be called when MyFragment is at least Started.
             OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
@@ -102,6 +109,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         mRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
         mRecognizer.setRecognitionListener(listener);
 
+
+        changeIPBtn=(Button) root.findViewById(R.id.btn_change_ip_addr);
+        changeIPBtn.setOnClickListener(this);
         settingPage=(LinearLayout) root.findViewById(R.id.setting_page);
         kakaoLoginBtn=(LoginButton) root.findViewById(R.id.login_button);
         kakaoAccountManageBtn=(Button)root.findViewById(R.id.btn_kakao_account_manage);
@@ -149,6 +159,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         int id = view.getId();
         switch (id){
+            case R.id.btn_change_ip_addr:
+
+                break;
             case R.id.login_button:
                 break;
             case R.id.btn_kakao_account_manage:
@@ -182,7 +195,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 } else {
                     //권한을 허용한 경우
                     try {
-                        voiceMessage.setText( "지금부터 말을 해주세요!");
+
                         mRecognizer.startListening(i);
                     } catch(SecurityException e) {
                         e.printStackTrace();
@@ -246,7 +259,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             String[] rs = new String[mResult.size()];
             mResult.toArray(rs);
             Log.i("KAKAO",  rs[0]);
-            String access_token=PreferenceManager.getString(getContext(), "access_token");
+            speechText=rs[0];
+
+            String access_token = PreferenceManager.getString(getContext(), "access_token");
+            String refresh_token = PreferenceManager.getString(getContext(), "refresh_token");
+            isTokenAvailable(access_token, refresh_token);
+            Log.i("Token", "토큰 확인");
+
             sendMessage(access_token,rs[0]);
             mRecognizer.stopListening();
 
@@ -343,6 +362,98 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 });
     }
 
+    private void isTokenAvailable(String access_token, String refresh_token){
+        Map<String, Object> param = new HashMap<>();
+        param.put("access_token", access_token);
+        param.put("refresh_token", refresh_token);
+        Log.i("KAKAO", "access_token"+ access_token);
+        Log.i("KAKAO", "refresh_token"+ refresh_token);
+        param.put("expiresIn", "");
+        Call<TokenManager> joinContentCall = networkService.isTokenAvailable(param);
+        new TokenAvailableNetworkCall().execute(joinContentCall);
+    }
+
+    private class TokenAvailableNetworkCall extends AsyncTask<Call, Void, TokenManager> {
+        @Override
+        protected TokenManager doInBackground(Call[] params) {
+            try {
+                Call<TokenManager> call = params[0];
+                Response<TokenManager> response = call.execute();
+                Log.i("SINSIN", "토큰 검사");
+                return response.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(TokenManager tempTm) {
+            boolean result=false;
+            if (tempTm.getExpiresIn()!=null) {
+                int expire_time = Integer.parseInt(tempTm.getExpiresIn());
+                if (expire_time > 3000) {
+                    result = true;
+                }
+            }
+            String access_token = PreferenceManager.getString(getContext(), "access_token");
+            String refresh_token = PreferenceManager.getString(getContext(), "refresh_token");
+            //토큰 재발급 쪽으로 프로세스를 넘긴다.
+
+            getNewToken(result, access_token, refresh_token);
+        }//end onPostExecute
+    }
+
+    private void getNewToken(boolean result, String access_token, String refresh_token){
+        if(!result){
+            // 토큰이 이용불가능 하면
+            // 새로 발급한다.
+            Map<String, Object> param = new HashMap<>();
+            param.put("access_token", access_token);
+            param.put("refresh_token", refresh_token);
+            param.put("expiresIn", "");
+            Call<TokenManager> joinContentCall = networkService.getNewToken(param);
+            new GetNewTokenNetworkCall().execute(joinContentCall);
+        }
+        else{
+            // 토큰이 이용 가능하면 전송
+            access_token = PreferenceManager.getString(getContext(), "access_token");
+            refresh_token = PreferenceManager.getString(getContext(), "refresh_token");
+
+            sendMessage(access_token, speechText);
+            Log.i("Token", "메시지 보내기");
+        }
+    }
+
+    private class GetNewTokenNetworkCall extends AsyncTask<Call, Void, TokenManager> {
+
+        @Override
+        protected TokenManager doInBackground(Call[] params) {
+            try {
+                Call<TokenManager> call = params[0];
+                Response<TokenManager> response = call.execute();
+                return response.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(TokenManager tokenManager) {
+            //토큰 업데이트
+            assert tokenManager != null;
+            PreferenceManager.setString(getContext(), "access_token", tokenManager.getAccess_token());
+            PreferenceManager.setString(getContext(), "refresh_token", tokenManager.getRefresh_token());
+
+            String access_token = PreferenceManager.getString(getContext(), "access_token");
+            String refresh_token = PreferenceManager.getString(getContext(), "refresh_token");
+
+            sendMessage(access_token, speechText);
+            Log.i("Token", "메시지 보내기");
+        }//end onPostExecute
+    }
+
     public void sendMessage(String access_token, String raw_string) {//
         Map<String, Object> param = new HashMap<>();
         param.put("access_token", access_token);
@@ -379,8 +490,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             Log.i("KAKAO_SESSION", "로그인 성공");
             String access_token = Session.getCurrentSession().getAccessToken();
             String refresh_token = Session.getCurrentSession().getRefreshToken();
-            PreferenceManager.setString(getContext(), "access_token", access_token);
-            PreferenceManager.setString(getContext(), "refresh_token", refresh_token);
+            if( !access_token.isEmpty() && !refresh_token.isEmpty()) {
+                PreferenceManager.setString(getContext(), "access_token", access_token);
+                PreferenceManager.setString(getContext(), "refresh_token", refresh_token);
+            }
             PreferenceManager.setBoolean(getContext(), "kakao_login", true);
         }
 

@@ -2,6 +2,7 @@ package inc.app.mes.custum_application;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,12 +19,16 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     public static MyApplication getInstance() {return instance;}
     private NetworkService networkService;
-
+    private boolean changed;
     @Override
     public void onCreate() {
         super.onCreate();
         MyApplication.instance = this;
+        changed=false;
+        baseUrl="http://192.168.43.160:8082/smartfactory/";
+        Log.i("BASE_URL", baseUrl);
         buildNetworkService();
+
         // SDK 초기화
         KakaoSDK.init(new KakaoAdapter() {
             @Override
@@ -42,10 +47,21 @@ public class MyApplication extends Application {
         return networkService;
     }
 
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = "http://"+baseUrl;
+        Log.i("BASE_URL", baseUrl);
+        changed=true;
+    }
+
     public void buildNetworkService(){
         synchronized (MyApplication.class){
-            if(networkService==null){
-                baseUrl="http://192.168.43.160:8082/smartfactory/";
+            if(networkService==null || changed){
+                changed=false;
+                Log.i("BASE_URL_buildNetworkService", baseUrl);
                 Gson gson = new GsonBuilder()
                         .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                         .create();

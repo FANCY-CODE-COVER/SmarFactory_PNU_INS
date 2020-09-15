@@ -145,7 +145,8 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                     String request_detail=requestDetail.getText().toString();
                     String remark=remarkText.getText().toString();
                     insFRequest(status_result,request_detail , remark);
-                    Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "등록 완료", Toast.LENGTH_SHORT).show();
+                    mPopupWindow.dismiss();
                 }
             });
 

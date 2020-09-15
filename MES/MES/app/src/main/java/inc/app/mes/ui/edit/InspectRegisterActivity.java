@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -126,6 +127,7 @@ public class InspectRegisterActivity extends AppCompatActivity implements View.O
             String result_details =resultDetailEdit.getText().toString();
             String remark =remarkEdit.getText().toString();
             insInspect(start_dt, end_dt, result_cd, result_details, remark);
+            Toast.makeText(getApplicationContext(), "등록 완료", Toast.LENGTH_SHORT).show();
             finish();
         }
         else if(id==R.id.btn_cancel){

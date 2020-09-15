@@ -22,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -143,6 +144,7 @@ public class RepairRegisterActivity extends AppCompatActivity implements View.On
             String remark =remarkEdit.getText().toString();
             insRepair(start_dt, end_dt, status_result, case_cd, repair_type_cd, repair_amt
                     , cause, repair_details, remark);
+            Toast.makeText(getApplicationContext(), "등록 완료", Toast.LENGTH_SHORT).show();
             finish();
         }
         else if(id==R.id.btn_cancel){

@@ -29,7 +29,6 @@ public class FacilityController {
 	@RequestMapping(value = "/getplacelist", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getPlaceList() {
-		//String category_id = (String) param.get("category_id");
 		List<PlaceDAO> datas = facilityServiceimpl.getPlaceListService();
 		JSONArray jsonarrary = new JSONArray();
 		
@@ -54,9 +53,10 @@ public class FacilityController {
 	}
 
 	//설비 상세 조회
-	@RequestMapping(value = "/getfacilitydetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/getfacilitydetail/{user}", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getFacilityDetail(@RequestBody Map<String, Object> param) {
+		
 		String facility_cd = (String) param.get("facility_cd");
 		List<FacilityDAO> datas = facilityServiceimpl.getFacilityDetailService(param);
 		return convListtoJSONArray(datas);

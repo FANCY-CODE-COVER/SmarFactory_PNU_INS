@@ -1,8 +1,8 @@
 package com.pnu.spring.smartfactory.DAO;
 
 public class FacilityDAO {
-	String rowno, facility_no, facility_nm, place_cd, place, pline_nm, departmet_nm, employee_nm, state, facility_type,
-			reg_nm;
+	String rowno, facility_no, facility_nm, place_cd, place
+	, pline_nm, departmet_nm, employee_nm, state, facility_type, reg_nm;
 
 	public FacilityDAO() {
 

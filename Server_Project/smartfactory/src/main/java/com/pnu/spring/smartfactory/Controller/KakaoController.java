@@ -107,11 +107,9 @@ public class KakaoController {
 		String accessToken = (String) param.get("access_token");
 		String rawstring = (String) param.get("rawstring");
 
-		Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);
-		
+		Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);		
 		KomoranResult analyzeResultList = komoran.analyze(rawstring);
 
-//		System.out.println(analyzeResultList.getPlainText());
 		List<String> strList = analyzeResultList.getMorphesByTags("NNP");
 		String receiver = "";
 		String contents = "";
@@ -119,7 +117,6 @@ public class KakaoController {
 		for (String str1 : strList) {
 			receiver += str1;
 		}
-//		System.out.println(analyzeResultList.getMorphesByTags("NNP"));
 		List<Token> tokenList = analyzeResultList.getTokenList();
 		boolean NNPflag = false;
 		for (Token token : tokenList) {
@@ -133,13 +130,8 @@ public class KakaoController {
 					contents = rawstring.substring(token.getEndIndex(), rawstring.length());
 				}
 			}
-//			System.out.format("(%2d, %2d) %s/%s\n", token.getBeginIndex(), token.getEndIndex(), token.getMorph(),
-//					token.getPos());
 		}
-
-		// String receiver = (String) param.get("receiver");
 		String btnname = "";
-
 		System.out.println("getfriend");
 		System.out.println("receiver " + receiver);
 		System.out.println("btnname " + btnname);
@@ -206,39 +198,6 @@ public class KakaoController {
 		System.out.println("새토큰 발급 끝");
 		return jsonObj;
 	}// end
-
-	// REST API 로그인 부분
-//	// 카카오 로그인 할때 처음 들어오는 부분
-//	@RequestMapping(value = "/beforelogin", method = RequestMethod.GET)
-//	@ResponseBody
-//	public ModelAndView memberLoginForm(HttpSession session) {
-//		ModelAndView mav = new ModelAndView("a");
-//		String kakaoUrl = KakaoController.getAuthorizationUrl(session, ApiValue.kakao_key_rest, ApiValue.kakao_redirect_uri);
-//		
-//		/* 생성한 인증 URL을 View로 전달 */
-//		mav.setViewName("redirect:"+kakaoUrl);
-//		
-//		// 카카오 로그인
-//		mav.addObject("kakao_url", kakaoUrl);
-//		return mav;
-//	}// end memberLoginForm()
-//
-//	// 카카오 로그인해서 redirect해서 들어오는 부분
-//	@RequestMapping(value = "/kakaologin.do",  method = { RequestMethod.POST, RequestMethod.GET })
-//	@ResponseBody
-//	public void kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
-//			HttpServletResponse response, HttpSession session) throws Exception {
-//		System.out.println("code 잘들어옴");
-//		ModelAndView mav = new ModelAndView();
-//		// 결과값을 node에 담아줌
-//		JsonNode node = KakaoController.getAccessToken(code,ApiValue.kakao_key_rest, ApiValue.kakao_redirect_uri);
-//		// accessToken에 사용자의 로그인한 모든 정보가 들어있음
-//		JsonNode accessToken = node.get("access_token"); // 사용자의 정보
-//		System.out.println("getAccessToken : "+accessToken.toString());
-//		mav.setViewName("redirect:"+"http://www.naver.com");
-////		return mav;
-//	}// end kakaoLogin()
-	// 카카오 로그인 처음 부분
 
 	@ResponseBody
 	synchronized public static String getAuthorizationUrl(HttpSession session, String rest_api,
@@ -336,11 +295,10 @@ public class KakaoController {
 		return returnNode;
 	}
 
-	// 액세스토큰으로 나에게 메시지 보내는 메소드
-	@SuppressWarnings("deprecation")
-	@ResponseBody
-	public static JsonNode sendMessagetoYou(String accessToken, List<String> uuids, String contents, String btnname) {
 
+	@ResponseBody
+	public static JsonNode sendMessagetoYou(String accessToken, List<String> uuids
+			, String contents, String btnname) {
 		final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends/message/default/send";
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl); // add header
@@ -455,7 +413,7 @@ public class KakaoController {
 		postParams.add(new BasicNameValuePair("grant_type", "refresh_token"));
 		postParams.add(new BasicNameValuePair("client_id", rest_api_key));
 		postParams.add(new BasicNameValuePair("refresh_token", refreshToken));
-
+		System.out.println("refresh_token "+refreshToken);
 		JsonNode returnNode = null;
 		try {
 			post.setEntity(new UrlEncodedFormEntity(postParams));

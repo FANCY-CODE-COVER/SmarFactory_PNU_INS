@@ -46,11 +46,11 @@ public class InspectController {
 		JSONObject jsonObj = new JSONObject();
 		try {
 			inspectserviceimpl.insInspectService(param);
-			jsonObj.put("message", "success");
+			jsonObj.put("result", "success");
 		}
 		catch(Exception e) {
 			System.out.println("Error : "+e.toString());
-			jsonObj.put("message", "fail");
+			jsonObj.put("result", "fail");
 		}
 		
 		return jsonObj;
@@ -65,11 +65,11 @@ public class InspectController {
 		JSONObject jsonObj = new JSONObject();
 		try {
 			inspectserviceimpl.delInspectService(param);
-			jsonObj.put("message", "success");
+			jsonObj.put("result", "success");
 		}
 		catch(Exception e) {
 			System.out.println("Error : "+e.toString());
-			jsonObj.put("message", "fail");
+			jsonObj.put("result", "fail");
 		}
 		return jsonObj;
 	}

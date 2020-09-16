@@ -44,11 +44,11 @@ public class RepairController {
 		JSONObject jsonObj = new JSONObject();
 		try {
 			repairserviceimpl.insRepairService(param);
-			jsonObj.put("message", "success");
+			jsonObj.put("result", "success");
 		}
 		catch(Exception e) {
 			System.out.println("Error : "+e.toString());
-			jsonObj.put("message", "fail");
+			jsonObj.put("result", "fail");
 		}
 		
 		
@@ -64,11 +64,11 @@ public class RepairController {
 		JSONObject jsonObj = new JSONObject();
 		try {
 			repairserviceimpl.delRepairService(param);
-			jsonObj.put("message", "success");
+			jsonObj.put("result", "success");
 		}
 		catch(Exception e) {
 			System.out.println("Error : "+e.toString());
-			jsonObj.put("message", "fail");
+			jsonObj.put("result", "fail");
 		}
 		return jsonObj;
 	}

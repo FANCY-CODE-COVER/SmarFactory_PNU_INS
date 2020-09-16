@@ -1,5 +1,6 @@
 package com.pnu.spring.smartfactory.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class FacilityController {
 	private FacilityService facilityServiceimpl;
 	
 	// 설비 동 목록 조회
-	@RequestMapping(value = "/getplacelist", method = RequestMethod.POST)
+	@RequestMapping(value = "/places", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getPlaceList() {
 		List<PlaceDAO> datas = facilityServiceimpl.getPlaceListService();
@@ -44,20 +45,22 @@ public class FacilityController {
 	}
 	
 	// 동별 설비 목록 조회
-	@RequestMapping(value = "/getfacilitylistperplace", method = RequestMethod.POST)
+	@RequestMapping(value = "/facilities", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getFacilityListPerPlace(@RequestBody Map<String, Object> param) {
-		String place_cd = (String) param.get("place_cd");
+	public JSONArray getFacilityListPerPlace(String place_cd) {
+
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("place_cd", place_cd );
 		List<FacilityDAO> datas = facilityServiceimpl.getFacilityListPerPlaceService(param);
 		return convListtoJSONArray(datas);
 	}
 
 	//설비 상세 조회
-	@RequestMapping(value = "/getfacilitydetail/{user}", method = RequestMethod.POST)
+	@RequestMapping(value = "/facilitydetail", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getFacilityDetail(@RequestBody Map<String, Object> param) {
-		
-		String facility_cd = (String) param.get("facility_cd");
+	public JSONArray getFacilityDetail(String facility_cd) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("facility_cd", facility_cd );
 		List<FacilityDAO> datas = facilityServiceimpl.getFacilityDetailService(param);
 		return convListtoJSONArray(datas);
 	}

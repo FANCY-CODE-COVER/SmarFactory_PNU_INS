@@ -1,0 +1,42 @@
+<!--
+ Copyright 2019 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<resources>
+  <string name="app_name">MESglass</string>
+  <string name="empty_string"/>
+  <string name="thin_font">sans-serif-thin</string>
+  <string name="footnote_sample">This is the footnote</string>
+  <string name="timestamp_sample">just now</string>
+
+  <string name="equip_scan_qr"> 설비를 조회하려면 TAP을 해 QR코드를 스캔하세요.</string>
+  <string name="send_message">카카오톡 메세지를 보내려면 TAP을 해주세요.</string>
+  <string name="voice_instruction">TAP을 하면 음성인식을 시작합니다.</string>
+  <string name="log_out">로그아웃을 하려면 TAP을 해주세요.</string>
+
+  <string name="equip_info">설비 상세 조회를 하려면 TAP을 해주세요.</string>
+  <string name="equip_frequest">설비의 요청 상세 조회를 하려면 TAP을 해주세요.</string>
+  <string name="equip_inspect">설비의 점검 상세 조회를 하려면 TAP을 해주세요.</string>
+  <string name="equip_repair">설비의 수리 상세 조회를 하려면 TAP을 해주세요.</string>
+  <string name="add">Add</string>
+  <string name="save">Save</string>
+  <string name="delete">Delete</string>
+
+  <string name="menu_font">sans-serif-thin</string>
+  <string name="menu_item">Menu item</string>
+
+  <string name="result_label">Result:</string>
+
+</resources>

@@ -85,6 +85,7 @@ public class FacilityListAdapter extends RecyclerView.Adapter<FacilityListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(items.get(position).getFacility_nm());
         holder.state.setText(items.get(position).getFacility_no());
+        
     }
 
     @Override

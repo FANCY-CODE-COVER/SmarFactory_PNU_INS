@@ -110,8 +110,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         mRecognizer.setRecognitionListener(listener);
 
 
-        changeIPBtn=(Button) root.findViewById(R.id.btn_change_ip_addr);
-        changeIPBtn.setOnClickListener(this);
         settingPage=(LinearLayout) root.findViewById(R.id.setting_page);
         kakaoLoginBtn=(LoginButton) root.findViewById(R.id.login_button);
         kakaoAccountManageBtn=(Button)root.findViewById(R.id.btn_kakao_account_manage);
@@ -266,7 +264,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             isTokenAvailable(access_token, refresh_token);
             Log.i("Token", "토큰 확인");
 
-            sendMessage(access_token,rs[0]);
+
             mRecognizer.stopListening();
 
 //            mRecognizer.startListening(i);

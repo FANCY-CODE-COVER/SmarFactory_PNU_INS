@@ -53,8 +53,9 @@ public class MyApplication extends Application {
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = "http://"+baseUrl;
-        Log.i("BASE_URL", baseUrl);
+        Log.i("BASE_URL_setBaseUrl", baseUrl);
         changed=true;
+        buildNetworkService();
     }
 
     public void buildNetworkService(){

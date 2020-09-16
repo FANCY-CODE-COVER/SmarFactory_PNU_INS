@@ -60,10 +60,7 @@ public class InspectDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     public void getInspectDetailByInspRstNo(String insp_rst_no) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("insp_rst_no",insp_rst_no);
-        Log.i("SINSIN", param.get("insp_rst_no").toString());
-        Call<List<InspectDAO>> joinContentCall=networkService.getInspectDetailByInspRstNo(param);
+        Call<List<InspectDAO>> joinContentCall=networkService.getInspectDetailByInspRstNo(insp_rst_no);
 
         joinContentCall.enqueue(new Callback<List<InspectDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -90,7 +87,7 @@ public class InspectDetailActivity extends AppCompatActivity implements View.OnC
 
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override
@@ -101,10 +98,7 @@ public class InspectDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     public void delFRequest(String insp_rst_no) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("insp_rst_no",insp_rst_no);
-        Log.i("SINSIN", param.get("insp_rst_no").toString());
-        Call<Message> joinContentCall=networkService.delInspect(param);
+        Call<Message> joinContentCall=networkService.delInspect(insp_rst_no);
 
         joinContentCall.enqueue(new Callback<Message>(){
             @SuppressLint("SetTextI18n")
@@ -116,7 +110,7 @@ public class InspectDetailActivity extends AppCompatActivity implements View.OnC
 
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override

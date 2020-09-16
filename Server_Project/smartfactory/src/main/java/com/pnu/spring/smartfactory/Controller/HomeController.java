@@ -42,19 +42,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		  Komoran komoran = new Komoran(DEFAULT_MODEL.LIGHT);
-	        String strToAnalyze = "서광현에게 에이동 고압 압축기 고장났다고 전해줘";
 
-	        KomoranResult analyzeResultList = komoran.analyze(strToAnalyze);
-
-	        System.out.println(analyzeResultList.getPlainText());
-	        System.out.println(analyzeResultList.getMorphesByTags("NNP"));
-	        List<Token> tokenList = analyzeResultList.getTokenList();
-	        for (Token token : tokenList) {
-	            System.out.format("(%2d, %2d) %s/%s\n", token.getBeginIndex(), token.getEndIndex(), token.getMorph(), token.getPos());
-	        }
-
-		logger.info("Welcome home! The client locale is {}.", locale);
 		// XML -> Mapper(DAO) -> Service -> ServiceImpl -> Controller에 해당 함수 실행
 
 		//List<PopitDAO> popitmapper = popitServiceimpl.selectlistService();

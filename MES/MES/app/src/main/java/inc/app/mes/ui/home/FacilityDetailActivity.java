@@ -81,10 +81,8 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
     }
 
     public void getFacilityListPerPlace(String facility_cd) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("facility_cd",facility_cd);
-        Log.i("SINSIN", param.get("facility_cd").toString());
-        Call<List<FacilityDAO>> joinContentCall=networkService.getFacilityDetail(param);
+        Log.i("SINSIN", facility_cd);
+        Call<List<FacilityDAO>> joinContentCall=networkService.getFacilityDetail(facility_cd);
 
         joinContentCall.enqueue(new Callback<List<FacilityDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -113,7 +111,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
 
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override
@@ -219,9 +217,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
     }
 
     public void getInspectDetail(String facility_no) {
-                Map<String, Object> param = new HashMap<String, Object>();
-                param.put("facility_no",facility_no);
-                Call<List<InspectDAO>> joinContentCall=networkService.getInspectDetail(param);
+                Call<List<InspectDAO>> joinContentCall=networkService.getInspectDetail(facility_no);
 
                 joinContentCall.enqueue(new Callback<List<InspectDAO>>(){
                     @SuppressLint("SetTextI18n")
@@ -237,7 +233,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                             dialogRecycler.setAdapter(inspectAdapter);
                         }
                         else{// 실패시 에러코드들
-                            respnoseLogger.doPrint(response.code(), response.body().toString());
+                            respnoseLogger.doPrint(response.code());
                         }
                     }
                     @Override
@@ -247,9 +243,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                 });
             }
     public void getRepairDetail(String facility_no) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("facility_no", facility_no);
-        Call<List<RepairDAO>> joinContentCall = networkService.getRepairDetail(param);
+        Call<List<RepairDAO>> joinContentCall = networkService.getRepairDetail(facility_no);
 
         joinContentCall.enqueue(new Callback<List<RepairDAO>>() {
             @SuppressLint("SetTextI18n")
@@ -264,7 +258,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                     }
                     dialogRecycler.setAdapter(repairAdapter);
                 } else {// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
 
@@ -299,7 +293,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                         //do something
                     }
                 } else {// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
 

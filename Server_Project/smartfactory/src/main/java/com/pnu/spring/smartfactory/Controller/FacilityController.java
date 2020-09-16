@@ -47,10 +47,10 @@ public class FacilityController {
 	// 동별 설비 목록 조회
 	@RequestMapping(value = "/facilities", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getFacilityListPerPlace(String place_cd) {
+	public JSONArray getFacilityListPerPlace(String placecd) {
 
 		Map<String, Object> param= new HashMap<String, Object>();
-		param.put("place_cd", place_cd );
+		param.put("place_cd", placecd );
 		List<FacilityDAO> datas = facilityServiceimpl.getFacilityListPerPlaceService(param);
 		return convListtoJSONArray(datas);
 	}
@@ -58,9 +58,10 @@ public class FacilityController {
 	//설비 상세 조회
 	@RequestMapping(value = "/facilitydetail", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getFacilityDetail(String facility_cd) {
+	public JSONArray getFacilityDetail(String facilitycd) {
 		Map<String, Object> param= new HashMap<String, Object>();
-		param.put("facility_cd", facility_cd );
+		param.put("facility_cd", facilitycd );
+
 		List<FacilityDAO> datas = facilityServiceimpl.getFacilityDetailService(param);
 		return convListtoJSONArray(datas);
 	}

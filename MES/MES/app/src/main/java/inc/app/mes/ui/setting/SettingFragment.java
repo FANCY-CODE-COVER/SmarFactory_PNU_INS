@@ -260,8 +260,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             speechText=rs[0];
 
             String access_token = PreferenceManager.getString(getContext(), "access_token");
-            String refresh_token = PreferenceManager.getString(getContext(), "refresh_token");
-            isTokenAvailable(access_token, refresh_token);
+            isTokenAvailable(access_token);
             Log.i("Token", "토큰 확인");
 
 
@@ -360,14 +359,12 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 });
     }
 
-    private void isTokenAvailable(String access_token, String refresh_token){
+    private void isTokenAvailable(String access_token){
         Map<String, Object> param = new HashMap<>();
         param.put("access_token", access_token);
-        param.put("refresh_token", refresh_token);
         Log.i("KAKAO", "access_token"+ access_token);
-        Log.i("KAKAO", "refresh_token"+ refresh_token);
         param.put("expiresIn", "");
-        Call<TokenManager> joinContentCall = networkService.isTokenAvailable(param);
+        Call<TokenManager> joinContentCall = networkService.isTokenAvailable(access_token);
         new TokenAvailableNetworkCall().execute(joinContentCall);
     }
 

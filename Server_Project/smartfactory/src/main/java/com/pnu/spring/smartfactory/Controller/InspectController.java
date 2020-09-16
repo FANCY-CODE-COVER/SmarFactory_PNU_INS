@@ -1,5 +1,6 @@
 package com.pnu.spring.smartfactory.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,13 +34,11 @@ public class InspectController {
 	private InspectService inspectserviceimpl;
 	
 	// 설비 점검 등록 
-	@RequestMapping(value = "/insinspect", method = RequestMethod.POST)
+	@RequestMapping(value = "/inspect", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insInspect(@RequestBody Map<String, Object> param) {
-		String insp_rst_no = "";
-		String insp_date = "";
-//		String insp_rst_no = (String) param.get("insp_rst_no");
-//		String insp_date = (String) param.get("insp_date");
+		String insp_rst_no = (String) param.get("insp_rst_no");
+		String insp_date = (String) param.get("insp_date");
 		// #{facility_no}, #{req_no}, #{start_dt}, #{end_dt}, #{status}, 
 		// #{case_cd}, #{repair_type_cd}, #{repair_amt},#{cause}, #{repair_details},
 		// #{remark}, #{reg_id}
@@ -57,11 +56,12 @@ public class InspectController {
 	}
 	
 	// 설비 점검 삭제
-	@RequestMapping(value = "/delinspect", method = RequestMethod.POST)
+	@RequestMapping(value = "/inspect", method = RequestMethod.DELETE)
 	@ResponseBody
-	public JSONObject delInspect(@RequestBody Map<String, Object> param) {
+	public JSONObject delInspect(String insprstno) {
 		//String category_id = (String) param.get("category_id");
-		String insp_rst_no = (String) param.get("insp_rst_no");
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("insp_rst_no", insprstno );
 		JSONObject jsonObj = new JSONObject();
 		try {
 			inspectserviceimpl.delInspectService(param);
@@ -75,7 +75,7 @@ public class InspectController {
 	}
 	
 	// 설비 점검 목록 조회
-	@RequestMapping(value = "/getinspectlist", method = RequestMethod.POST)
+	@RequestMapping(value = "/inspects", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getInspectList() {
 		List<InspectDAO> datas = inspectserviceimpl.getInspectListService();
@@ -85,19 +85,21 @@ public class InspectController {
 	
 	
 	// 설비의 점검 상세 조회 
-	@RequestMapping(value = "/getinspectdetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/inspectdetailf", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getInspectDetail(@RequestBody Map<String, Object> param) {
-		String facility_no = (String) param.get("facility_no");
+	public JSONArray getInspectDetail(String facilityno) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("facility_no", facilityno );
 		List<InspectDAO> datas = inspectserviceimpl.getInspectDetailService(param);
 		return convListtoJSONArray(datas);
 	}
 	
 	// 설비의 점검 상세 조회 
-	@RequestMapping(value = "/getinspectdetailbyinsprstno", method = RequestMethod.POST)
+	@RequestMapping(value = "/inspectdetaili", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getInspectDetailByInspRstNo(@RequestBody Map<String, Object> param) {
-		String insp_rst_no = (String) param.get("insp_rst_no");
+	public JSONArray getInspectDetailByInspRstNo(String insprstno) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("insp_rst_no", insprstno );
 		List<InspectDAO> datas = inspectserviceimpl.getInspectDetailByInspRstNoService(param);
 		return convListtoJSONArray(datas);
 	}

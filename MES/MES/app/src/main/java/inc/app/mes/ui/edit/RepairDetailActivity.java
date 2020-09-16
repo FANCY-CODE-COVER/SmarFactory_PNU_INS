@@ -59,10 +59,8 @@ public class RepairDetailActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void getFRequestDetailByReqNo(String repair_no) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("repair_no",repair_no);
-        Log.i("SINSIN", param.get("repair_no").toString());
-        Call<List<RepairDAO>> joinContentCall=networkService.getRepairDetailByRepairNo(param);
+        Log.i("SINSIN", repair_no);
+        Call<List<RepairDAO>> joinContentCall=networkService.getRepairDetailByRepairNo(repair_no);
 
         joinContentCall.enqueue(new Callback<List<RepairDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -89,7 +87,7 @@ public class RepairDetailActivity extends AppCompatActivity implements View.OnCl
 
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override
@@ -100,10 +98,8 @@ public class RepairDetailActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void delRepair(String repair_no) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("repair_no",repair_no);
-        Log.i("SINSIN", param.get("repair_no").toString());
-        Call<Message> joinContentCall=networkService.delRepair(param);
+        Log.i("SINSIN", repair_no);
+        Call<Message> joinContentCall=networkService.delRepair(repair_no);
 
         joinContentCall.enqueue(new Callback<Message>(){
             @SuppressLint("SetTextI18n")
@@ -115,7 +111,7 @@ public class RepairDetailActivity extends AppCompatActivity implements View.OnCl
 
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override

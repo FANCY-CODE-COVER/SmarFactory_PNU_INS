@@ -75,10 +75,7 @@ public class HomeFragment extends Fragment{
 
 
     public void getPlaceList() {
-        Map<String, Object> param = new HashMap<String, Object>();
-//        param.put("facility_cd","SS-0-01-B");
-//        Log.i("SINSIN", param.get("facility_cd").toString());
-        Call<List<PlaceDAO>> joinContentCall=networkService.getPlaceList(param);
+        Call<List<PlaceDAO>> joinContentCall=networkService.getPlaceList();
 
         joinContentCall.enqueue(new Callback<List<PlaceDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -93,7 +90,7 @@ public class HomeFragment extends Fragment{
                     placeRecycler.setAdapter(placeAdapter);
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override
@@ -105,10 +102,8 @@ public class HomeFragment extends Fragment{
 
 
     public void getFacilityListPerPlace(String place_cd) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("place_cd",place_cd);
-        Log.i("SINSIN", param.get("place_cd").toString());
-        Call<List<FacilityDAO>> joinContentCall=networkService.getFacilityListPerPlace(param);
+        Log.i("SINSIN",place_cd);
+        Call<List<FacilityDAO>> joinContentCall=networkService.getFacilityListPerPlace(place_cd);
 
         joinContentCall.enqueue(new Callback<List<FacilityDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -124,7 +119,9 @@ public class HomeFragment extends Fragment{
                     facilityListRecycler.setAdapter(facilityListAdapter);
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    if(response.body()!=null) {
+                        respnoseLogger.doPrint(response.code());
+                    }
                 }
             }
             @Override

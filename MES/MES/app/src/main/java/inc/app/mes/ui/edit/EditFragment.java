@@ -110,8 +110,8 @@ public class EditFragment extends Fragment {
     }
 
     public void getFRequestList() {
-        Map<String, Object> param = new HashMap<String, Object>();
-        Call<List<FRequestDAO>> joinContentCall=networkService.getFRequestList(param);
+
+        Call<List<FRequestDAO>> joinContentCall=networkService.getFRequestList();
 
         joinContentCall.enqueue(new Callback<List<FRequestDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -127,7 +127,12 @@ public class EditFragment extends Fragment {
                     editRecycler.setAdapter(requestAdapter);
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    try {
+                        respnoseLogger.doPrint(response.code());
+                    }
+                    catch (Exception e){
+                        Log.e("ERROR",e.toString());
+                    }
                 }
             }
             @Override
@@ -139,8 +144,7 @@ public class EditFragment extends Fragment {
 
 
     public void getInspectList() {
-        Map<String, Object> param = new HashMap<String, Object>();
-        Call<List<InspectDAO>> joinContentCall=networkService.getInspectList(param);
+        Call<List<InspectDAO>> joinContentCall=networkService.getInspectList();
 
         joinContentCall.enqueue(new Callback<List<InspectDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -156,7 +160,7 @@ public class EditFragment extends Fragment {
                     editRecycler.setAdapter(inspectAdapter);
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override
@@ -166,8 +170,7 @@ public class EditFragment extends Fragment {
         });
     }
     public void getRepairList() {
-        Map<String, Object> param = new HashMap<String, Object>();
-        Call<List<RepairDAO>> joinContentCall=networkService.getRepairList(param);
+        Call<List<RepairDAO>> joinContentCall=networkService.getRepairList();
 
         joinContentCall.enqueue(new Callback<List<RepairDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -183,7 +186,7 @@ public class EditFragment extends Fragment {
                     editRecycler.setAdapter(repairAdapter);
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override

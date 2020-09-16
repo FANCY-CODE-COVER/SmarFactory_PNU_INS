@@ -171,12 +171,14 @@ public class KakaoController {
 		System.out.println("목소리로 메시지 보내기  끝");
 	}// end getFriend
 
-	@RequestMapping(value = "/tokenavailable", method = { RequestMethod.POST })
+	@RequestMapping(value = "/tokenavailable", method = { RequestMethod.GET })
 	@ResponseBody
-	public JSONObject isTokenAvailable(@RequestBody Map<String, Object> param) {
+	public JSONObject isTokenAvailableRouting(String accesstoken) {
 		System.out.println("토큰을 점검 시작.");
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("access_token", accesstoken );
 		String accessToken = (String) param.get("access_token");
-		JsonNode response = KakaoController.isTokenAvailable(accessToken);
+		JsonNode response = KakaoController.isTokenAvailable(accesstoken);
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("expiresIn", response.get("expires_in"));
 		System.out.println("Expires in : " + response.get("expires_in"));

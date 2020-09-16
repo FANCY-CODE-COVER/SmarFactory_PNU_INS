@@ -187,7 +187,7 @@ public class RepairRegisterActivity extends AppCompatActivity implements View.On
                         //do something
                     }
                 } else {// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
 

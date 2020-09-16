@@ -1,5 +1,6 @@
 package com.pnu.spring.smartfactory.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class FRequestController {
 	private FRequestService frequestServiceImpl;
 	
 	// 설비 요청 등록 (점검 or 수리)
-	@RequestMapping(value = "/insfrequest", method = RequestMethod.POST)
+	@RequestMapping(value = "/frequest", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insFRequest(@RequestBody Map<String, Object> param) {
 //		String req_no = (String) param.get("req_no");
@@ -49,11 +50,11 @@ public class FRequestController {
 	}
 	
 	// 설비 요청 삭제 (점검 or 수리)
-	@RequestMapping(value = "/delfrequest", method = RequestMethod.POST)
+	@RequestMapping(value = "/frequest", method = RequestMethod.DELETE)
 	@ResponseBody
-	public JSONObject delFRequest(@RequestBody Map<String, Object> param) {
-		//String category_id = (String) param.get("category_id");
-		String req_no = (String) param.get("req_no");
+	public JSONObject delFRequest(String reqno) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("req_no", reqno );
 		JSONObject jsonObj = new JSONObject();
 		try {
 			frequestServiceImpl.delFRequestSerivce(param);
@@ -67,7 +68,7 @@ public class FRequestController {
 	}
 	
 	// 설비 요청 목록 조회 (점검 or 수리)
-	@RequestMapping(value = "/getfrequestlist", method = RequestMethod.POST)
+	@RequestMapping(value = "/frequests", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getFRequestList() {
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestListSerivce();
@@ -75,19 +76,21 @@ public class FRequestController {
 	}
 	
 	// 설비의 요청 상세 조회 (점검 or 수리)
-	@RequestMapping(value = "/getfrequestdetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/frequestdetailf", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getFRequestDetail(@RequestBody Map<String, Object> param) {
-		String facility_no = (String) param.get("facility_no");
+	public JSONArray getFRequestDetail(String facilityno) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("facility_no", facilityno );
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailSerivce(param);
 		return convListtoJSONArray(datas);
 	}
 	
 	// 설비의 요청 상세 조회 요청번호 기분 (점검 or 수리)
-	@RequestMapping(value = "/getfrequestdetailbyreqno", method = RequestMethod.POST)
+	@RequestMapping(value = "/frequestdetailr", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getFRequestDetailByReqNo(@RequestBody Map<String, Object> param) {
-		String req_no = (String) param.get("req_no");
+	public JSONArray getFRequestDetailByReqNo(String reqno) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("req_no", reqno );
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailByReqNoService(param);
 		return convListtoJSONArray(datas);
 	}

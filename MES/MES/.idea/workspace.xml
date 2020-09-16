@@ -9,26 +9,13 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72e21213-12b6-43fb-89b1-60acc8135296" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/NetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/java/com/pnu/spring/smartfactory/client_for_server_test/NetworkService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/Client_For_Server_Test/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/FacilityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/FacilityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/InspectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/InspectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/KakaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/KakaoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/RepairController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/Controller/RepairController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/DAO/FacilityDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Server_Project/smartfactory/src/main/java/com/pnu/spring/smartfactory/DAO/FacilityDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SmartFactory_Server/SmartFactoryServer_MVC.war" beforeDir="false" />
-    </list>
+    <list default="true" id="72e21213-12b6-43fb-89b1-60acc8135296" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="RF8M208DEJA" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -207,6 +194,10 @@
     <state x="453" y="289" key="#PSD/0.0.1792.1120@0.0.1792.1120" timestamp="1599042217517" />
     <state x="466" y="279" key="#PSD/0.0.1842.1080@0.0.1842.1080" timestamp="1599649988074" />
     <state x="485" y="279" key="#PSD/0.0.1920.1080/1920.0.1792.1120@0.0.1920.1080" timestamp="1598756654336" />
+    <state x="1099" y="184" key="#app" timestamp="1600267839728">
+      <screen x="0" y="0" width="1844" height="1080" />
+    </state>
+    <state x="1099" y="184" key="#app/0.0.1844.1080@0.0.1844.1080" timestamp="1600267839728" />
     <state x="894" y="182" key="#com.intellij.ide.util.MemberChooser" timestamp="1600160771182">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
@@ -247,26 +238,30 @@
     </state>
     <state x="510" y="187" key="FileChooserDialogImpl/0.0.1458.864@0.0.1458.864" timestamp="1600073803023" />
     <state x="644" y="234" key="FileChooserDialogImpl/0.0.1842.1080@0.0.1842.1080" timestamp="1599753602310" />
-    <state width="1089" height="212" key="GridCell.Tab.0.bottom" timestamp="1600162476208">
-      <screen x="0" y="0" width="1458" height="864" />
+    <state width="1076" height="193" key="GridCell.Tab.0.bottom" timestamp="1600270541905">
+      <screen x="0" y="0" width="1844" height="1080" />
     </state>
     <state width="1089" height="212" key="GridCell.Tab.0.bottom/0.0.1458.864@0.0.1458.864" timestamp="1600162476208" />
     <state width="875" height="161" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
-    <state width="1089" height="212" key="GridCell.Tab.0.center" timestamp="1600162476208">
-      <screen x="0" y="0" width="1458" height="864" />
+    <state width="1076" height="193" key="GridCell.Tab.0.bottom/0.0.1844.1080@0.0.1844.1080" timestamp="1600270541905" />
+    <state width="1076" height="193" key="GridCell.Tab.0.center" timestamp="1600270541905">
+      <screen x="0" y="0" width="1844" height="1080" />
     </state>
     <state width="1089" height="212" key="GridCell.Tab.0.center/0.0.1458.864@0.0.1458.864" timestamp="1600162476208" />
     <state width="875" height="161" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
-    <state width="1089" height="212" key="GridCell.Tab.0.left" timestamp="1600162476207">
-      <screen x="0" y="0" width="1458" height="864" />
+    <state width="1076" height="193" key="GridCell.Tab.0.center/0.0.1844.1080@0.0.1844.1080" timestamp="1600270541905" />
+    <state width="1076" height="193" key="GridCell.Tab.0.left" timestamp="1600270541905">
+      <screen x="0" y="0" width="1844" height="1080" />
     </state>
     <state width="1089" height="212" key="GridCell.Tab.0.left/0.0.1458.864@0.0.1458.864" timestamp="1600162476207" />
     <state width="875" height="161" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771883" />
-    <state width="1089" height="212" key="GridCell.Tab.0.right" timestamp="1600162476208">
-      <screen x="0" y="0" width="1458" height="864" />
+    <state width="1076" height="193" key="GridCell.Tab.0.left/0.0.1844.1080@0.0.1844.1080" timestamp="1600270541905" />
+    <state width="1076" height="193" key="GridCell.Tab.0.right" timestamp="1600270541905">
+      <screen x="0" y="0" width="1844" height="1080" />
     </state>
     <state width="1089" height="212" key="GridCell.Tab.0.right/0.0.1458.864@0.0.1458.864" timestamp="1600162476208" />
     <state width="875" height="161" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1599791771884" />
+    <state width="1076" height="193" key="GridCell.Tab.0.right/0.0.1844.1080@0.0.1844.1080" timestamp="1600270541905" />
     <state x="545" y="366" key="ReplaceDuplicatesPrompt" timestamp="1599892702549">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
@@ -275,11 +270,12 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="496" y="300" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1598861517625" />
-    <state x="481" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1600157463421">
-      <screen x="0" y="0" width="1458" height="864" />
+    <state x="608" y="300" key="com.intellij.ide.util.TipDialog" timestamp="1600267824823">
+      <screen x="0" y="0" width="1844" height="1080" />
     </state>
     <state x="481" y="240" key="com.intellij.ide.util.TipDialog/0.0.1458.864@0.0.1458.864" timestamp="1600157463421" />
     <state x="608" y="300" key="com.intellij.ide.util.TipDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1599649187346" />
+    <state x="608" y="300" key="com.intellij.ide.util.TipDialog/0.0.1844.1080@0.0.1844.1080" timestamp="1600267824823" />
     <state x="417" y="293" width="538" height="500" key="extract.method.dialog" timestamp="1599892688019">
       <screen x="0" y="0" width="1458" height="864" />
     </state>

@@ -109,10 +109,8 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
     }
 
     public void getFRequestDetailByReqNo(String req_no) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("req_no",req_no);
-        Log.i("SINSIN", param.get("req_no").toString());
-        Call<List<FRequestDAO>> joinContentCall=networkService.getFRequestDetailByReqNo(param);
+        Log.i("SINSIN", req_no);
+        Call<List<FRequestDAO>> joinContentCall=networkService.getFRequestDetailByReqNo(req_no);
 
         joinContentCall.enqueue(new Callback<List<FRequestDAO>>(){
             @SuppressLint("SetTextI18n")
@@ -141,7 +139,7 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
 
                 }
                 else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override
@@ -151,10 +149,8 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
         });
     }
     public void delFRequest(String req_no) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("req_no",req_no);
-        Log.i("SINSIN", param.get("req_no").toString());
-        Call<Message> joinContentCall=networkService.delFRequest(param);
+        Log.i("SINSIN",req_no);
+        Call<Message> joinContentCall=networkService.delFRequest(req_no);
 
         joinContentCall.enqueue(new Callback<Message>(){
             @SuppressLint("SetTextI18n")
@@ -165,8 +161,8 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
                     assert dataDAO != null;
 
                 }
-                else{// 실패시 에러코드들
-                    respnoseLogger.doPrint(response.code(), response.body().toString());
+                else {// 실패시 에러코드들
+                    respnoseLogger.doPrint(response.code());
                 }
             }
             @Override

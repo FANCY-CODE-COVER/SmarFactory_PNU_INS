@@ -1,5 +1,6 @@
 package com.pnu.spring.smartfactory.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class RepairController {
 	private RepairService repairserviceimpl;
 	
 	// 설비 수리 등록 
-	@RequestMapping(value = "/insrepair", method = RequestMethod.POST)
+	@RequestMapping(value = "/repair", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insRepair(@RequestBody Map<String, Object> param) {
 		String repair_no = "";
@@ -56,11 +57,11 @@ public class RepairController {
 	}
 	
 	// 설비 수리 삭제 
-	@RequestMapping(value = "/delrepair", method = RequestMethod.POST)
+	@RequestMapping(value = "/repair", method = RequestMethod.DELETE)
 	@ResponseBody
-	public JSONObject delRepair(@RequestBody Map<String, Object> param) {
-		//String category_id = (String) param.get("category_id");
-		String repair_no = (String) param.get("repair_no");
+	public JSONObject delRepair(String repairno) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("repair_no", repairno );
 		JSONObject jsonObj = new JSONObject();
 		try {
 			repairserviceimpl.delRepairService(param);
@@ -74,7 +75,7 @@ public class RepairController {
 	}
 	
 	// 설비 수리 목록 조회
-	@RequestMapping(value = "/getrepairlist", method = RequestMethod.POST)
+	@RequestMapping(value = "/repairs", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getRepairList() {
 		List<RepairDAO> datas = repairserviceimpl.getRepairListService();
@@ -82,19 +83,21 @@ public class RepairController {
 	}
 	
 	// 설비의 수리 상세 조회
-	@RequestMapping(value = "/getrepairdetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/repairdetailf", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray getRepairDetail(@RequestBody Map<String, Object> param) {
-//		String facility_no = (String) param.get("facility_no");
+	public JSONArray getRepairDetail(String facilityno) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("facility_no", facilityno );
 		List<RepairDAO> datas = repairserviceimpl.getRepairDetailService(param);
 		return convListToJsonArrary(datas);
 	}
 	
 	// 설비의 수리 상세 조회
-		@RequestMapping(value = "/getrepairdetailbyrepairno", method = RequestMethod.POST)
+		@RequestMapping(value = "/repairdetailr", method = RequestMethod.GET)
 		@ResponseBody
-		public JSONArray getRepairDetailByRepairNo(@RequestBody Map<String, Object> param) {
-//			String facility_no = (String) param.get("facility_no");
+		public JSONArray getRepairDetailByRepairNo(String repairno) {
+			Map<String, Object> param= new HashMap<String, Object>();
+			param.put("repair_no", repairno );
 			List<RepairDAO> datas = repairserviceimpl.getRepairDetailByRepairNoService(param);
 			return convListToJsonArrary(datas);
 		}

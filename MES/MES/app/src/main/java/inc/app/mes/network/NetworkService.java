@@ -12,7 +12,11 @@ import inc.app.mes.DTO.RepairDAO;
 import inc.app.mes.DTO.TokenManager;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface NetworkService {
     @POST("getdatas")
@@ -30,67 +34,67 @@ public interface NetworkService {
     @POST("sendmessagebyvoice")
     Call<Void> sendMessageByVoice(@Body Map<String, Object> param);
 
-
-    @POST("tokenavailable")
-    Call<TokenManager> isTokenAvailable(@Body Map<String, Object> param);
+    @GET("tokenavailable")
+    Call<TokenManager> isTokenAvailable(@Query("accesstoken") String access_token);
 
     @POST("getnewtoken")
     Call<TokenManager> getNewToken(@Body Map<String, Object> param);
 
     //-----------설비 관련
-    @POST("getplacelist")
-    Call<List<PlaceDAO>> getPlaceList(@Body Map<String, Object> param);
+    @GET("places")
+    Call<List<PlaceDAO>> getPlaceList();
 
-    @POST("getfacilitylistperplace")
-    Call<List<FacilityDAO>> getFacilityListPerPlace(@Body Map<String, Object> param);
+    @GET("facilities")
+    Call<List<FacilityDAO>> getFacilityListPerPlace(@Query("placecd") String place_cd);
 
-    @POST("getfacilitydetail")
-    Call<List<FacilityDAO>> getFacilityDetail(@Body Map<String, Object> param);
+    @GET("facilitydetail")
+    Call<List<FacilityDAO>> getFacilityDetail(@Query("facilitycd") String facility_cd);
 
     //-----------설비 요청 관련
-    @POST("insfrequest")
+    @POST("frequest")
     Call<Message> insFRequest(@Body Map<String, Object> param);
 
-    @POST("delfrequest")
-    Call<Message> delFRequest(@Body Map<String, Object> param);
+    @DELETE("frequest")
+    Call<Message> delFRequest(@Query("reqno") String req_no);
 
-    @POST("getfrequestlist")
-    Call<List<FRequestDAO>> getFRequestList(@Body Map<String, Object> param);
+    @GET("frequests")
+    Call<List<FRequestDAO>> getFRequestList();
 
-    @POST("getfrequestdetail")
-    Call<List<FRequestDAO>> getFRequestDetail(@Body Map<String, Object> param);
+    @GET("frequestdetailf")
+    Call<List<FRequestDAO>> getFRequestDetail(@Query("facilityno") String facility_no);
 
-    @POST("getfrequestdetailbyreqno")
-    Call<List<FRequestDAO>> getFRequestDetailByReqNo(@Body Map<String, Object> param);
+    @GET("frequestdetailr")
+    Call<List<FRequestDAO>> getFRequestDetailByReqNo(@Query("reqno") String req_no);
 
     //-----------설비 점검 관련
-    @POST("insinspect")
+    @POST("inspect")
     Call<Message> insInspect(@Body Map<String, Object> param);
 
-    @POST("delinspect")
-    Call<Message> delInspect(@Body Map<String, Object> param);
+    @DELETE("inspect")
+    Call<Message> delInspect(@Query("insprstno") String insp_rst_no);
 
-    @POST("getinspectlist")
-    Call<List<InspectDAO>> getInspectList(@Body Map<String, Object> param);
+    @GET("inspects")
+    Call<List<InspectDAO>> getInspectList();
 
-    @POST("getinspectdetail")
-    Call<List<InspectDAO>> getInspectDetail(@Body Map<String, Object> param);
+    @GET("inspectdetailf")
+    Call<List<InspectDAO>> getInspectDetail(@Query("facilityno") String facility_no);
 
-    @POST("getinspectdetailbyinsprstno")
-    Call<List<InspectDAO>> getInspectDetailByInspRstNo(@Body Map<String, Object> param);
+    @GET("inspectdetaili")
+    Call<List<InspectDAO>> getInspectDetailByInspRstNo(@Query("insprstno") String insp_rst_no);
+
     //-----------설비 수리 관련
-    @POST("insrepair")
+    @POST("repair")
     Call<Message> insRepair(@Body Map<String, Object> param);
 
-    @POST("delrepair")
-    Call<Message> delRepair(@Body Map<String, Object> param);
+    @DELETE("repair")
+    Call<Message> delRepair(@Query("repairno") String repair_no);
 
-    @POST("getrepairlist")
-    Call<List<RepairDAO>> getRepairList(@Body Map<String, Object> param);
+    @GET("repairs")
+    Call<List<RepairDAO>> getRepairList();
 
-    @POST("getrepairdetail")
-    Call<List<RepairDAO>> getRepairDetail(@Body Map<String, Object> param);
+    @GET("repairdetailf")
+    Call<List<RepairDAO>> getRepairDetail(@Query("facilityno") String facility_no);
 
-    @POST("getrepairdetailbyrepairno")
-    Call<List<RepairDAO>> getRepairDetailByRepairNo(@Body Map<String, Object> param);
+    @GET("repairdetailr")
+    Call<List<RepairDAO>> getRepairDetailByRepairNo(@Query("repairno") String repair_no);
 }

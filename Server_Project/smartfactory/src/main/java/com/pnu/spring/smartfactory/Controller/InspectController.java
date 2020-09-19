@@ -21,6 +21,7 @@ import com.pnu.spring.smartfactory.Service.InspectService;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import util.CustomLogger;
 
 @Controller
 public class InspectController {
@@ -42,6 +43,7 @@ public class InspectController {
 		// #{facility_no}, #{req_no}, #{start_dt}, #{end_dt}, #{status}, 
 		// #{case_cd}, #{repair_type_cd}, #{repair_amt},#{cause}, #{repair_details},
 		// #{remark}, #{reg_id}
+		CustomLogger.printLog(this, "INFO", "점검 등록");
 		JSONObject jsonObj = new JSONObject();
 		try {
 			inspectserviceimpl.insInspectService(param);
@@ -59,6 +61,7 @@ public class InspectController {
 	@RequestMapping(value = "/inspect", method = RequestMethod.DELETE)
 	@ResponseBody
 	public JSONObject delInspect(String insprstno) {
+		CustomLogger.printLog(this, "INFO", "점검 삭제");
 		//String category_id = (String) param.get("category_id");
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("insp_rst_no", insprstno );
@@ -78,6 +81,7 @@ public class InspectController {
 	@RequestMapping(value = "/inspects", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getInspectList() {
+		CustomLogger.printLog(this, "INFO", "점검 목록 조회");
 		List<InspectDAO> datas = inspectserviceimpl.getInspectListService();
 		return convListtoJSONArray(datas);
 	}
@@ -88,6 +92,7 @@ public class InspectController {
 	@RequestMapping(value = "/inspectdetailf", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getInspectDetail(String facilityno) {
+		CustomLogger.printLog(this, "INFO", "설비 번호에 따른 점검 상세 조회");
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("facility_no", facilityno );
 		List<InspectDAO> datas = inspectserviceimpl.getInspectDetailService(param);
@@ -98,6 +103,7 @@ public class InspectController {
 	@RequestMapping(value = "/inspectdetaili", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getInspectDetailByInspRstNo(String insprstno) {
+		CustomLogger.printLog(this, "INFO", "점검 결과 번호에 따른 점검 상세 조회");
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("insp_rst_no", insprstno );
 		List<InspectDAO> datas = inspectserviceimpl.getInspectDetailByInspRstNoService(param);
@@ -106,7 +112,7 @@ public class InspectController {
 
 	private JSONArray convListtoJSONArray(List<InspectDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
-		System.out.println("Size:"+datas.size());
+		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("insp_rst_no", datas.get(i).getInsp_rst_no());

@@ -12,3 +12,5 @@ public interface RepairService {
 	public List<RepairDAO> getRepairDetailService(Map<String, Object> param);
 	public List<RepairDAO> getRepairDetailByRepairNoService(Map<String, Object> param);
 }
+
+

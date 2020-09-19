@@ -22,6 +22,7 @@ import com.pnu.spring.smartfactory.Service.FacilityService;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import util.CustomLogger;
 
 @Controller
 public class FRequestController {
@@ -36,6 +37,7 @@ public class FRequestController {
 //		String req_no = (String) param.get("req_no");
 //		String req_dt = (String) param.get("req_dt");
 		// #{req_user_id}, #{facility_no}, #{status},  #{req_details}, #{remark}, #{reg_id}
+		CustomLogger.printLog(this, "INFO", "설비 요청 등록");
 		JSONObject jsonObj = new JSONObject();
 		try {
 			frequestServiceImpl.insFRequestSerivce(param);
@@ -55,6 +57,7 @@ public class FRequestController {
 	public JSONObject delFRequest(String reqno) {
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("req_no", reqno );
+		CustomLogger.printLog(this, "INFO", "설비 요청 삭제");
 		JSONObject jsonObj = new JSONObject();
 		try {
 			frequestServiceImpl.delFRequestSerivce(param);
@@ -71,6 +74,7 @@ public class FRequestController {
 	@RequestMapping(value = "/frequests", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getFRequestList() {
+		CustomLogger.printLog(this, "INFO", "요청 목록 조회");
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestListSerivce();
 		return convListtoJSONArray(datas);
 	}
@@ -79,6 +83,7 @@ public class FRequestController {
 	@RequestMapping(value = "/frequestdetailf", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getFRequestDetail(String facilityno) {
+		CustomLogger.printLog(this, "INFO", "설비 번호에 따른 요청 상세 조회");
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("facility_no", facilityno );
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailSerivce(param);
@@ -89,6 +94,7 @@ public class FRequestController {
 	@RequestMapping(value = "/frequestdetailr", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getFRequestDetailByReqNo(String reqno) {
+		CustomLogger.printLog(this, "INFO", "요청 번호에 따른 요청 상세 조회");
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("req_no", reqno );
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailByReqNoService(param);
@@ -98,7 +104,7 @@ public class FRequestController {
 	
 	private JSONArray convListtoJSONArray(List<FRequestDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
-		System.out.println("Size:"+datas.size());
+		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("req_no", datas.get(i).getReq_no());

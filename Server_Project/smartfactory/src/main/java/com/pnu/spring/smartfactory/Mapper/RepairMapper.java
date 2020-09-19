@@ -13,3 +13,7 @@ public interface RepairMapper {
 	public List<RepairDAO> getRepairDetail(Map<String, Object> param);
 	public List<RepairDAO> getRepairDetailByRepairNo(Map<String, Object> param);
 }
+
+
+
+

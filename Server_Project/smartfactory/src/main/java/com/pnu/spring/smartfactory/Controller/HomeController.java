@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import util.CustomLogger;
+
 import com.pnu.spring.smartfactory.DAO.*;
 import com.pnu.spring.smartfactory.Service.DataService;
 import com.pnu.spring.smartfactory.Service.LoginService;
@@ -42,7 +44,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-
+		CustomLogger.printLog(this, "INFO", "홈");
 		// XML -> Mapper(DAO) -> Service -> ServiceImpl -> Controller에 해당 함수 실행
 
 		//List<PopitDAO> popitmapper = popitServiceimpl.selectlistService();
@@ -56,25 +58,25 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> doLogin(@RequestBody Map<String, Object> param) {
+		CustomLogger.printLog(this, "INFO", "로그인");
 		//param.get("user_id"), param.get("password")
 		List<String> count = loginServicimpl.tryloginService(param);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println("try login");
 		int count_int=0;
 		try {
 			count_int= Integer.parseInt(count.get(0));
 			if(count_int==1) {
 				map.put("result", "success");
-				System.out.println("login success");
+				CustomLogger.printLog(this, "INFO", "로그인 성공");
 			}
 			else
 			{
 				map.put("result", "fail");
-				System.out.println("login fail");
+				CustomLogger.printLog(this, "INFO", "로그인 실패");
 			}
 		}
 		catch(Exception ex ) {
-			System.out.println(ex.toString());
+			CustomLogger.printLog(this, "ERROR", ex.toString());
 			map.put("result", ex.toString());
 		}
 		

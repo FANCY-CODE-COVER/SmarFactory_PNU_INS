@@ -12,3 +12,6 @@ public interface FacilityMapper {
 	public List<FacilityDAO> getFacilityListPerPlace(Map<String, Object> param);
 	public List<FacilityDAO> getFacilityDetail(Map<String, Object> param);
 }
+
+
+

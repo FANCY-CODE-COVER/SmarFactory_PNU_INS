@@ -44,6 +44,7 @@ import kr.co.shineware.nlp.komoran.core.Komoran;
 import kr.co.shineware.nlp.komoran.model.KomoranResult;
 import kr.co.shineware.nlp.komoran.model.Token;
 import net.minidev.json.JSONObject;
+import util.CustomLogger;
 
 @Controller
 public class KakaoController {
@@ -59,15 +60,12 @@ public class KakaoController {
 	@RequestMapping(value = "/sendmessagetofriend", method = { RequestMethod.POST })
 	@ResponseBody
 	public void sendMessageToFriend(@RequestBody Map<String, Object> param) {
-		System.out.println("친구 가져오기, 메시지 전송 시작");
+		CustomLogger.printLog(this, "KAKAO", "친구에게 메시지 보내기 요청 시작");
 		String accessToken = (String) param.get("access_token");
 		String receiver = (String) param.get("receiver");
 		String btnname = (String) param.get("btnname");
 		String contents = (String) param.get("contents");
 
-		System.out.println("getfriend");
-		System.out.println("btnname " + btnname);
-		System.out.println("contents " + contents);
 		List<String> uuids = new ArrayList<String>();
 		int offset = 0;
 		int limit = 5;
@@ -76,6 +74,7 @@ public class KakaoController {
 		JsonNode freindList = null;
 		do {
 			freindList = getFriends(accessToken, Integer.toString(offset), Integer.toString(limit));
+			CustomLogger.printLogCount(this, "KAKAO", "친구 목록 수", freindList.size());
 			for (int i = 0; i < freindList.size(); ++i) {
 				String nickname = freindList.get(i).get("profile_nickname").toString();
 				nickname = nickname.replace("\"", "");
@@ -95,15 +94,15 @@ public class KakaoController {
 		if (uuids.size() >= 1) {
 			KakaoController.sendMessagetoYou(accessToken, uuids, contents, btnname);
 		} else {
-			System.out.println("친구가 존재하지 않음");
+			CustomLogger.printLog(this, "KAKAO", receiver+", 해당 친구 존재하지 않음");
 		}
-		System.out.println("친구 가져오기, 메시지 전송 끝");
+		CustomLogger.printLog(this, "KAKAO", "친구에게 메시지 보내기 요청 종료");
 	}// end getFriend
 
 	@RequestMapping(value = "/sendmessagebyvoice", method = { RequestMethod.POST })
 	@ResponseBody
 	public void sendMessageByVoice(@RequestBody Map<String, Object> param) {
-		System.out.println("목소리로 메시지 보내기 시작");
+		CustomLogger.printLog(this, "KAKAO", "음성인식으로 메시지 보내기 시작");
 		String accessToken = (String) param.get("access_token");
 		String rawstring = (String) param.get("rawstring");
 
@@ -132,10 +131,8 @@ public class KakaoController {
 			}
 		}
 		String btnname = "";
-		System.out.println("getfriend");
-		System.out.println("receiver " + receiver);
-		System.out.println("btnname " + btnname);
-		System.out.println("contents " + contents);
+		CustomLogger.printLog(this, "KAKAO", "받는 사람 : "+receiver);
+		CustomLogger.printLog(this, "KAKAO", "받는 내용 : "+contents);
 		List<String> uuids = new ArrayList<String>();
 		int offset = 0;
 		int limit = 5;
@@ -144,6 +141,7 @@ public class KakaoController {
 		JsonNode freindList = null;
 		do {
 			freindList = getFriends(accessToken, Integer.toString(offset), Integer.toString(limit));
+			CustomLogger.printLogCount(this, "KAKAO", "친구 목록 수", freindList.size());
 			if (freindList != null) {
 				for (int i = 0; i < freindList.size(); ++i) {
 					String nickname = freindList.get(i).get("profile_nickname").toString();
@@ -152,7 +150,6 @@ public class KakaoController {
 					if (nickname.equals(receiver)) {
 						String uuid = freindList.get(i).get("uuid").toString();
 						uuids.add(uuid);
-						System.out.println("uuid :"+uuid);
 						break;
 					}
 				}
@@ -166,38 +163,37 @@ public class KakaoController {
 		if (uuids.size() >= 1) {
 			KakaoController.sendMessagetoYou(accessToken, uuids, contents, btnname);
 		} else {
-			System.out.println("친구가 존재하지 않음");
+			CustomLogger.printLog(this, "KAKAO", receiver+", 해당 친구 존재하지 않음");
 		}
-		System.out.println("목소리로 메시지 보내기  끝");
+		CustomLogger.printLog(this, "KAKAO", "음성인식으로 메시지 보내기 종료");
 	}// end getFriend
 
 	@RequestMapping(value = "/tokenavailable", method = { RequestMethod.GET })
 	@ResponseBody
 	public JSONObject isTokenAvailableRouting(String accesstoken) {
-		System.out.println("토큰을 점검 시작.");
+		CustomLogger.printLog(this, "KAKAO", "토큰 점검 시작");
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("access_token", accesstoken );
 		String accessToken = (String) param.get("access_token");
 		JsonNode response = KakaoController.isTokenAvailable(accesstoken);
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("expiresIn", response.get("expires_in"));
-		System.out.println("Expires in : " + response.get("expires_in"));
-		System.out.println("토큰을 점검 끝");
+		CustomLogger.printLog(this, "KAKAO", "Expires in : " + response.get("expires_in"));
+		CustomLogger.printLog(this, "KAKAO", "토큰 점검 종료");
 		return jsonObj;
 	}// end
 
 	@RequestMapping(value = "/getnewtoken", method = { RequestMethod.POST })
 	@ResponseBody
 	public JSONObject getNewToken(@RequestBody Map<String, Object> param) {
-		System.out.println("새토큰 발급 시작");
+		CustomLogger.printLog(this, "KAKAO", "토큰 재발급 시작");
 		String refreshToken = (String) param.get("refresh_token");
 		JsonNode tokenmanger = KakaoController.getNewToken(ApiValue.kakao_key_rest, refreshToken);
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("access_token", tokenmanger.get("access_token"));
 		jsonObj.put("refresh_token", tokenmanger.get("refresh_token"));
-		System.out.println(" access_token: " + tokenmanger.get("access_token"));
-		System.out.println("refresh_token_expires_in : " + tokenmanger.get("refresh_token_expires_in"));
-		System.out.println("새토큰 발급 끝");
+		CustomLogger.printLog(this, "KAKAO", "refresh_token_expires_in : " + tokenmanger.get("refresh_token_expires_in"));
+		CustomLogger.printLog(this, "KAKAO", "토큰 재발급 종료");
 		return jsonObj;
 	}// end
 
@@ -265,8 +261,8 @@ public class KakaoController {
 
 	// 액세스토큰으로 나에게 메시지 보내는 메소드
 	@ResponseBody
-	public static JsonNode getFriends(String accessToken, String offset, String limit) {
-
+	public JsonNode getFriends(String accessToken, String offset, String limit) {
+		CustomLogger.printLog(this, "KAKAO", "친구 목록 받아오기 시작");
 		final String RequestUrl = "https://kapi.kakao.com/v1/api/talk/friends?offset=" + offset + "&limit=" + limit
 				+ "&order=asc";
 		// final String RequestUrl =
@@ -284,7 +280,7 @@ public class KakaoController {
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
 			returnNode = returnNode.get("elements");
-			System.out.println("getFriends "+returnNode.toString() );
+			CustomLogger.printLog(this, "KAKAO", "친구 목록 받아오기 종료");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -323,7 +319,6 @@ public class KakaoController {
 				+ "\"" + "}";
 
 		postParams.add(new BasicNameValuePair("template_object", subParams));
-		System.out.println("Send Message to You");
 
 		JsonNode returnNode = null;
 		UrlEncodedFormEntity form;
@@ -331,7 +326,6 @@ public class KakaoController {
 			form = new UrlEncodedFormEntity(postParams, "utf-8");
 			post.setEntity(form);
 			final HttpResponse response = client.execute(post); // JSON 형태 반환값 처리
-			System.out.println(response.toString());
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
 		} catch (UnsupportedEncodingException e) {
@@ -415,7 +409,6 @@ public class KakaoController {
 		postParams.add(new BasicNameValuePair("grant_type", "refresh_token"));
 		postParams.add(new BasicNameValuePair("client_id", rest_api_key));
 		postParams.add(new BasicNameValuePair("refresh_token", refreshToken));
-		System.out.println("refresh_token "+refreshToken);
 		JsonNode returnNode = null;
 		try {
 			post.setEntity(new UrlEncodedFormEntity(postParams));

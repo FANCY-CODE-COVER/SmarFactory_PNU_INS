@@ -19,21 +19,21 @@ import com.pnu.spring.smartfactory.DAO.PlaceDAO;
 import com.pnu.spring.smartfactory.Service.FacilityService;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import util.CustomLogger;
 
 @Controller
 public class FacilityController {
 	private static final Logger logger = LoggerFactory.getLogger(FacilityController.class);
 	@Resource(name = "com.pnu.spring.smartfactory.Service.FacilityServiceImpl") 
 	private FacilityService facilityServiceimpl;
-	
 	// 설비 동 목록 조회
 	@RequestMapping(value = "/places", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getPlaceList() {
+		CustomLogger.printLog(this, "INFO", "동 목록 조회");
 		List<PlaceDAO> datas = facilityServiceimpl.getPlaceListService();
 		JSONArray jsonarrary = new JSONArray();
-		
-		System.out.println("Size:"+datas.size());
+		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("rowno", datas.get(i).getRowno());
@@ -48,10 +48,10 @@ public class FacilityController {
 	@RequestMapping(value = "/facilities", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONArray getFacilityListPerPlace(String placecd) {
-
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("place_cd", placecd );
 		List<FacilityDAO> datas = facilityServiceimpl.getFacilityListPerPlaceService(param);
+		CustomLogger.printLog(this, "INFO", "동별 설비 목록 조회 ");
 		return convListtoJSONArray(datas);
 	}
 
@@ -61,14 +61,14 @@ public class FacilityController {
 	public JSONArray getFacilityDetail(String facilitycd) {
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("facility_cd", facilitycd );
-
 		List<FacilityDAO> datas = facilityServiceimpl.getFacilityDetailService(param);
+		CustomLogger.printLog(this, "INFO", "설비 상세 조회 ");
 		return convListtoJSONArray(datas);
 	}
 	
 	private JSONArray convListtoJSONArray(List<FacilityDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
-		System.out.println("Size:"+datas.size());
+		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("rowno", datas.get(i).getRowno());

@@ -28,3 +28,6 @@ public class RepairServiceImpl implements RepairService{
 		return repairMapper.getRepairDetailByRepairNo(param);
 	}
 }
+
+
+

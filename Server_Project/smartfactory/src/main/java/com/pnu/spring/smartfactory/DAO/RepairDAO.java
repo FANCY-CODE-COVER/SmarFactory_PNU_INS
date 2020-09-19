@@ -8,8 +8,8 @@ public class RepairDAO {
 		
 	}
 	
-	public RepairDAO(String repair_no, String facility_no, String req_no, String start_dt, String end_dt, String status,
-			String cause, String repair_type) {
+	public RepairDAO(String repair_no, String facility_no, String req_no, String start_dt
+			, String end_dt, String status,String cause, String repair_type) {
 		super();
 		this.repair_no = repair_no;
 		this.facility_no = facility_no;

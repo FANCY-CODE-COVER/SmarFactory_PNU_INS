@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
     private static final int REQUEST_CODE = 105;
     private String userID = "";
     private String access_token = "token";
-    public static final String base_url = "http://192.168.43.113:8080/SmartFactoryServer_MVC/";
+    public static final String base_url = "http://192.168.43.160:8082/smartfactory/";
     //"http://192.168.43.113:8080/SmartFactoryServer_MVC/";"http://192.168.43.160:8082/smartfactory/"
     @Override
     protected void onCreate(Bundle savedInstanceState) {

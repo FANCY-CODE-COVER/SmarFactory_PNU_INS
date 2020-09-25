@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity {
                 }
 
 
-                Call<LoginData> call = service.getLoginData(login_map);
+                Call<LoginData> call = service.doLogin(login_map);
                 Log.d("sendinfo",user_id[1]);
                 Log.d("sendinfo",password[1]);
                 Log.d("sendinfo",access_token[1]);

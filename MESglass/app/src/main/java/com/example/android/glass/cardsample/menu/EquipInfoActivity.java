@@ -36,9 +36,6 @@ public class EquipInfoActivity extends BaseActivity {
         facility_cd = getIntent().getStringExtra(EQUIPMENT_RESULT);
         Log.d("machine_name", facility_cd);
 
-        Map<String, Object> facility_map = new HashMap<>();
-        facility_map.put("facility_cd", facility_cd);
-
         machine = (TextView)findViewById(R.id.machine_name);
         machine.setText(facility_cd);
 
@@ -56,7 +53,7 @@ public class EquipInfoActivity extends BaseActivity {
         RetrofitInterface service = retrofit.create(RetrofitInterface.class);
 
 
-        Call<List<FacilityDAO>> call = service.getFacilityDetail(facility_map);
+        Call<List<FacilityDAO>> call = service.getFacilityDetail(facility_cd);
         call.enqueue(new Callback<List<FacilityDAO>>() {
 
             @Override

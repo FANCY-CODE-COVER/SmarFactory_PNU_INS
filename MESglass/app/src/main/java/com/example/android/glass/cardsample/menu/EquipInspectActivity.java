@@ -54,7 +54,7 @@ public class EquipInspectActivity extends BaseActivity {
         RetrofitInterface service = retrofit.create(RetrofitInterface.class);
 
 
-        Call<List<InspectDAO>> call = service.getInspectDetail(facility_map);
+        Call<List<InspectDAO>> call = service.getInspectDetail(facility_cd);
         call.enqueue(new Callback<List<InspectDAO>>() {
 
             @Override

@@ -45,8 +45,6 @@ public class EquipQRScan extends BaseActivity {
                 final String qrData = data.getStringExtra(QR_SCAN_RESULT);
                 Log.d("qrData", qrData);
 
-                Map<String, Object> facility_map = new HashMap<>();
-                facility_map.put("facility_cd",qrData);
                 //facility_map.put("facility_cd",qrData);
 
                 //애뮬레이터 : http://10.0.2.2:4903
@@ -58,7 +56,7 @@ public class EquipQRScan extends BaseActivity {
                 RetrofitInterface service = retrofit.create(RetrofitInterface.class);
 
 
-                Call<List<FacilityDAO>> call = service.getFacilityDetail(facility_map);
+                Call<List<FacilityDAO>> call = service.getFacilityDetail(qrData);
                 call.enqueue(new Callback<List<FacilityDAO>>() {
 
                     @Override

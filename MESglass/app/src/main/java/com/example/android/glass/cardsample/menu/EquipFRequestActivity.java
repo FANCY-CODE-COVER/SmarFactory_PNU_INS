@@ -38,8 +38,6 @@ public class EquipFRequestActivity extends BaseActivity {
         val2 = (TextView)findViewById(R.id.freq_val2) ;
         val3 = (TextView)findViewById(R.id.freq_val3) ;
         val4 = (TextView)findViewById(R.id.freq_val4) ;
-        Map<String, Object> facility_map = new HashMap<>();
-        facility_map.put("facility_cd", facility_cd);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(base_url)
@@ -48,7 +46,7 @@ public class EquipFRequestActivity extends BaseActivity {
         RetrofitInterface service = retrofit.create(RetrofitInterface.class);
 
 
-        Call<List<FRequestDAO>> call = service.getFRequestDetail(facility_map);
+        Call<List<FRequestDAO>> call = service.getFRequestDetail(facility_cd);
         call.enqueue(new Callback<List<FRequestDAO>>() {
 
             @Override

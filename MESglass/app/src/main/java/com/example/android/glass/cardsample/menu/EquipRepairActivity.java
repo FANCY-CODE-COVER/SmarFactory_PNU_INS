@@ -33,9 +33,7 @@ public class EquipRepairActivity extends BaseActivity {
         setContentView(R.layout.equip_repair_layout);
 
         facility_cd = getIntent().getStringExtra(EQUIPMENT_RESULT);
-        Map<String, Object> facility_map = new HashMap<>();
 
-        facility_map.put("facility_no", facility_cd);
 
         machine = (TextView)findViewById(R.id.machine_name);
         machine.setText(facility_cd);
@@ -54,7 +52,7 @@ public class EquipRepairActivity extends BaseActivity {
         RetrofitInterface service = retrofit.create(RetrofitInterface.class);
 
 
-        Call<List<RepairDAO>> call = service.getRepairDetail(facility_map);
+        Call<List<RepairDAO>> call = service.getRepairDetail(facility_cd);
         call.enqueue(new Callback<List<RepairDAO>>() {
 
             @Override

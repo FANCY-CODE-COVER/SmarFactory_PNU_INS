@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1042010321733",
+    "firebase_url": "https://smart-factory-project-db618.firebaseio.com",
+    "project_id": "smart-factory-project-db618",
+    "storage_bucket": "smart-factory-project-db618.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042010321733:android:3d3ec27964d2ffa491442c",
+        "android_client_info": {
+          "package_name": "inc.app.mes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042010321733-53rfo1m41hrvmrdn7a2gpqagu72ih4fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiSw9XO29_p7HVsLkXcDq0iWlu2D09EkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042010321733-53rfo1m41hrvmrdn7a2gpqagu72ih4fg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

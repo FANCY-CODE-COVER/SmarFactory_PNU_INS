@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".ui.edit.RepairDetailActivity">
+<TextView
+    android:id="@+id/repair_no_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="수리번호"
+    android:gravity="center"
+    android:textSize="20sp"/>
+<LinearLayout
+    android:id="@+id/linearLayout2"
+    style="@style/linear_layout">
+
+    <TextView
+        style="@style/detail_title"
+        android:text="수리번호" />
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/repair_no"
+        android:text="설명" />
+
+    <TextView
+        style="@style/detail_title"
+        android:text="상태" />
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/status"
+        android:text="설명" />
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/linearLayout6"
+    style="@style/linear_layout">
+
+    <TextView
+        style="@style/detail_title"
+        android:text="설비수리사유"/>
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/cause"
+        android:text="설명"/>
+
+    <TextView
+        style="@style/detail_title"
+        android:text="설비수리항목"/>
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/repair_type"
+        android:text="설명"/>
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/linearLayout4"
+    style="@style/linear_layout">
+
+    <TextView
+        style="@style/detail_title"
+        android:text="시작일"/>
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/start_dt"
+        android:text="설명"/>
+
+    <TextView
+        style="@style/detail_title"
+        android:text="종료일"/>
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/end_dt"
+        android:text="설명"/>
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/linearLayout5"
+    style="@style/linear_layout">
+
+    <TextView
+        style="@style/detail_title"
+        android:text="설비번호"/>
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/facility_no"
+        android:text="설명"/>
+
+    <TextView
+        style="@style/detail_title"
+        android:text="요청번호"/>
+
+    <TextView
+        style="@style/detail_data"
+        android:id="@+id/req_no"
+        android:text="설명"/>
+</LinearLayout>
+    <Button
+    android:id="@+id/btn_delete"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="수리 삭제" />
+
+
+
+</LinearLayout>

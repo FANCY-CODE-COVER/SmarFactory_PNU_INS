@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pnu.spring.smartfactory.Service.DataService;
 
-import constant.ApiValue;
+
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
 import kr.co.shineware.nlp.komoran.core.Komoran;
 import kr.co.shineware.nlp.komoran.model.KomoranResult;
@@ -191,7 +191,7 @@ public class KakaoController {
 	public JSONObject getNewToken(@RequestBody Map<String, Object> param) {
 		CustomLogger.printLog(this, "KAKAO", "토큰 재발급 시작");
 		String refreshToken = (String) param.get("refresh_token");
-		JsonNode tokenmanger = KakaoController.getNewToken(ApiValue.kakao_key_rest, refreshToken);
+		JsonNode tokenmanger = KakaoController.getNewToken("", refreshToken);
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("access_token", tokenmanger.get("access_token"));
 		jsonObj.put("refresh_token", tokenmanger.get("refresh_token"));

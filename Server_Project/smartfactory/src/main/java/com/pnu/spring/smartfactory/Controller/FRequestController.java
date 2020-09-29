@@ -85,7 +85,7 @@ public class FRequestController {
 	public JSONArray getFRequestDetail(String facilityno) {
 		CustomLogger.printLog(this, "INFO", "설비 번호에 따른 요청 상세 조회");
 		Map<String, Object> param= new HashMap<String, Object>();
-		param.put("facility_no", facilityno );
+		param.put("facility_cd", facilityno );
 		List<FRequestDAO> datas = frequestServiceImpl.getFRequestDetailSerivce(param);
 		return convListtoJSONArray(datas);
 	}

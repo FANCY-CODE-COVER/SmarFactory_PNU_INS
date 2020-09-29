@@ -114,7 +114,9 @@ public class KakaoController {
 		String contents = "";
 		 
 		for (String str1 : strList) {
+			if(receiver.length()<3) {
 			receiver += str1;
+			}
 		}
 		List<Token> tokenList = analyzeResultList.getTokenList();
 		boolean NNPflag = false;
@@ -127,6 +129,7 @@ public class KakaoController {
 			if (NNPflag) {
 				if (token.getPos().equals("JKB")) {
 					contents = rawstring.substring(token.getEndIndex(), rawstring.length());
+					break;
 				}
 			}
 		}

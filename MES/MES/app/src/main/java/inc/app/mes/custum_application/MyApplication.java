@@ -25,7 +25,7 @@ public class MyApplication extends Application {
         super.onCreate();
         MyApplication.instance = this;
         changed=false;
-        baseUrl="http://192.168.0.2:8082/smartfactory/";
+        baseUrl="";
         Log.i("BASE_URL", baseUrl);
         buildNetworkService();
 

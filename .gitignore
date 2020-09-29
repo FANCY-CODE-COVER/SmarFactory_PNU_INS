@@ -18,3 +18,7 @@ Server_Project/smartfactory/target/
 MES/MES/app/src/main/AndroidManifest.xml
 
 Server_Project/Client_For_Server_Test/
+
+MES/MES/.gradle/
+
+MES/MES/.idea/

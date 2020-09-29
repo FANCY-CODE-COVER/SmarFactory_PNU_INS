@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import inc.app.mes.DTO.PlaceDAO;
 
 public class EditViewModel extends ViewModel {
 

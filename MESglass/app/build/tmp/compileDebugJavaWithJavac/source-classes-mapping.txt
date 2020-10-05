@@ -1,0 +1,82 @@
+com/example/android/glass/cardsample/data/RepairDAO.java
+ com.example.android.glass.cardsample.data.RepairDAO
+com/example/android/glass/cardsample/data/LoginData.java
+ com.example.android.glass.cardsample.data.LoginData
+com/example/android/glass/cardsample/menu/GlassMenuItem.java
+ com.example.android.glass.cardsample.menu.GlassMenuItem
+com/example/android/glass/cardsample/menu/MenuActivity.java
+ com.example.android.glass.cardsample.menu.MenuActivity
+ com.example.android.glass.cardsample.menu.MenuActivity$1
+ com.example.android.glass.cardsample.menu.MenuActivity$2
+com/example/android/glass/cardsample/data/RetrofitInterface.java
+ com.example.android.glass.cardsample.data.RetrofitInterface
+com/example/android/glass/cardsample/menu/QRCodePreview.java
+ com.example.android.glass.cardsample.menu.QRCodePreview
+com/example/android/glass/cardsample/menu/CameraActivity.java
+ com.example.android.glass.cardsample.menu.CameraActivity
+ com.example.android.glass.cardsample.menu.CameraActivity$1
+com/example/android/glass/cardsample/data/FRequestDAO.java
+ com.example.android.glass.cardsample.data.FRequestDAO
+com/example/android/glass/cardsample/menu/EquipInspectActivity.java
+ com.example.android.glass.cardsample.menu.EquipInspectActivity
+ com.example.android.glass.cardsample.menu.EquipInspectActivity$1
+com/example/android/glass/cardsample/menu/CameraConfigProvider.java
+ com.example.android.glass.cardsample.menu.CameraConfigProvider
+com/example/android/glass/cardsample/menu/EquipFRequestActivity.java
+ com.example.android.glass.cardsample.menu.EquipFRequestActivity
+ com.example.android.glass.cardsample.menu.EquipFRequestActivity$1
+com/example/android/glass/cardsample/DataBindingInfo.java
+ com.example.android.glass.cardsample.DataBindingInfo
+com/example/android/glass/cardsample/fragments/OnSingleTapUpListener.java
+ com.example.android.glass.cardsample.fragments.OnSingleTapUpListener
+com/example/android/glass/cardsample/menu/QRCodeImageAnalysis.java
+ com.example.android.glass.cardsample.menu.QRCodeImageAnalysis
+ com.example.android.glass.cardsample.menu.QRCodeImageAnalysis$QrCodeAnalysisCallback
+com/example/android/glass/cardsample/menu/MenuAdapter.java
+ com.example.android.glass.cardsample.menu.MenuAdapter
+ com.example.android.glass.cardsample.menu.MenuAdapter$MenuViewHolder
+com/example/android/glass/cardsample/menu/VoiceRecognitionActivity.java
+ com.example.android.glass.cardsample.menu.VoiceRecognitionActivity
+ com.example.android.glass.cardsample.menu.VoiceRecognitionActivity$1
+ com.example.android.glass.cardsample.menu.VoiceRecognitionActivity$2
+com/example/android/glass/cardsample/LoginActivity.java
+ com.example.android.glass.cardsample.LoginActivity
+ com.example.android.glass.cardsample.LoginActivity$1
+ com.example.android.glass.cardsample.LoginActivity$2
+com/example/android/glass/cardsample/BaseActivity.java
+ com.example.android.glass.cardsample.BaseActivity
+ com.example.android.glass.cardsample.BaseActivity$1
+ com.example.android.glass.cardsample.BaseActivity$2
+com/example/android/glass/cardsample/fragments/MainLayoutFragment.java
+ com.example.android.glass.cardsample.fragments.MainLayoutFragment
+com/example/android/glass/cardsample/data/InspectDAO.java
+ com.example.android.glass.cardsample.data.InspectDAO
+com/example/android/glass/cardsample/menu/EquipRepairActivity.java
+ com.example.android.glass.cardsample.menu.EquipRepairActivity
+ com.example.android.glass.cardsample.menu.EquipRepairActivity$1
+com/example/android/glass/cardsample/databinding/MenuItemBinding.java
+ com.example.android.glass.cardsample.databinding.MenuItemBinding
+com/example/android/glass/cardsample/BuildConfig.java
+ com.example.android.glass.cardsample.BuildConfig
+com/example/android/glass/cardsample/MainActivity.java
+ com.example.android.glass.cardsample.MainActivity
+ com.example.android.glass.cardsample.MainActivity$1
+ com.example.android.glass.cardsample.MainActivity$ScreenSlidePagerAdapter
+com/example/android/glass/cardsample/data/FacilityDAO.java
+ com.example.android.glass.cardsample.data.FacilityDAO
+com/example/android/glass/cardsample/fragments/BaseFragment.java
+ com.example.android.glass.cardsample.fragments.BaseFragment
+com/example/android/glass/cardsample/menu/EquipQRScan.java
+ com.example.android.glass.cardsample.menu.EquipQRScan
+ com.example.android.glass.cardsample.menu.EquipQRScan$1
+ com.example.android.glass.cardsample.menu.EquipQRScan$2
+com/example/android/glass/cardsample/fragments/ColumnLayoutFragment.java
+ com.example.android.glass.cardsample.fragments.ColumnLayoutFragment
+com/example/android/glass/cardsample/menu/EquipMenuActivity.java
+ com.example.android.glass.cardsample.menu.EquipMenuActivity
+ com.example.android.glass.cardsample.menu.EquipMenuActivity$1
+ com.example.android.glass.cardsample.menu.EquipMenuActivity$ScreenSlidePagerAdapter
+com/example/android/glass/cardsample/menu/EquipInfoActivity.java
+ com.example.android.glass.cardsample.menu.EquipInfoActivity
+ com.example.android.glass.cardsample.menu.EquipInfoActivity$1
+ com.example.android.glass.cardsample.menu.EquipInfoActivity$2

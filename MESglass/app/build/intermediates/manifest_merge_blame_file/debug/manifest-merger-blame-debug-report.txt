@@ -1,0 +1,155 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3 Copyright 2019 Google LLC
+4
+5 Licensed under the Apache License, Version 2.0 (the "License");
+6 you may not use this file except in compliance with the License.
+7 You may obtain a copy of the License at
+8
+9     http://www.apache.org/licenses/LICENSE-2.0
+10
+11 Unless required by applicable law or agreed to in writing, software
+12 distributed under the License is distributed on an "AS IS" BASIS,
+13 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14 See the License for the specific language governing permissions and
+15 limitations under the License.
+16-->
+17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+18    package="com.example.MESglass"
+19    android:versionCode="1"
+20    android:versionName="1.0" >
+21
+22    <uses-sdk
+23        android:minSdkVersion="27"
+23-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml
+24        android:targetSdkVersion="28" />
+24-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml
+25
+26    <uses-permission android:name="android.permission.INTERNET" />
+26-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:71:3-64
+26-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:71:20-62
+27
+28    <uses-feature android:name="android.hardware.camera" />
+28-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:72:3-58
+28-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:72:17-55
+29
+30    <uses-permission android:name="android.permission.CAMERA" />
+30-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:74:3-63
+30-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:74:20-60
+31
+32    <application
+32-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:21:3-70:17
+33        android:allowBackup="true"
+33-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:22:7-33
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.1.0] C:\Users\lee\.gradle\caches\transforms-2\files-2.1\95040a3433ac2f166894051c15b219d9\core-1.1.0\AndroidManifest.xml:24:18-86
+35        android:debuggable="true"
+36        android:extractNativeLibs="false"
+37        android:icon="@mipmap/ic_launcher"
+37-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:23:7-41
+38        android:label="@string/app_name"
+38-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:24:7-39
+39        android:networkSecurityConfig="@xml/network_security_config"
+39-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:27:7-67
+40        android:roundIcon="@mipmap/ic_launcher"
+40-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:25:7-46
+41        android:supportsRtl="true"
+41-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:26:7-33
+42        android:testOnly="true"
+43        android:theme="@style/AppTheme" >
+43-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:28:7-38
+44
+45        <!--
+46      Changes Glass touchpad response from the following key strokes:
+47        - Enter
+48        - Tab
+49        - Shift + Tab
+50        - Back button
+51        - Home button
+52        - Arrows
+53      to the motion events, enabling this app to use the touch gestures.
+54        -->
+55        <meta-data
+55-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:39:5-41:32
+56            android:name="com.google.android.glass.TouchEnabledApplication"
+56-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:40:9-72
+57            android:value="true" />
+57-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:41:9-29
+58
+59        <activity android:name="com.example.android.glass.cardsample.MainActivity" >
+59-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:43:5-50:16
+59-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:43:15-79
+60            <intent-filter>
+60-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:44:7-49:23
+61                <action android:name="android.intent.action.MAIN" />
+61-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:45:9-60
+61-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:45:17-58
+62
+63                <category android:name="android.intent.category.LAUNCHER" />
+63-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:47:9-68
+63-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:47:19-66
+64                <category android:name="com.google.android.glass.category.DIRECTORY" />
+64-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:48:9-79
+64-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:48:19-77
+65            </intent-filter>
+66        </activity>
+67        <activity
+67-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:51:5-59:16
+68            android:name="com.example.android.glass.cardsample.menu.MenuActivity"
+68-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:52:9-78
+69            android:theme="@style/MenuTheme" >
+69-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:53:9-41
+70            <intent-filter>
+70-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:54:7-58:23
+71                <action android:name="android.intent.action.MAIN" />
+71-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:45:9-60
+71-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:45:17-58
+72
+73                <category android:name="android.intent.category.DEFAULT" />
+73-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:57:9-67
+73-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:57:19-65
+74            </intent-filter>
+75        </activity>
+76        <activity android:name="com.example.android.glass.cardsample.LoginActivity" />
+76-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:60:5-46
+76-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:60:15-44
+77        <activity android:name="com.example.android.glass.cardsample.menu.CameraActivity" />
+77-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:61:5-52
+77-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:61:15-50
+78        <activity android:name="com.example.android.glass.cardsample.menu.EquipQRScan" />
+78-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:62:5-49
+78-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:62:15-47
+79        <activity android:name="com.example.android.glass.cardsample.menu.EquipMenuActivity" />
+79-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:63:5-55
+79-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:63:15-53
+80        <activity android:name="com.example.android.glass.cardsample.menu.EquipInfoActivity" />
+80-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:64:5-55
+80-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:64:15-53
+81        <activity android:name="com.example.android.glass.cardsample.menu.EquipFRequestActivity" />
+81-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:65:5-59
+81-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:65:15-57
+82        <activity android:name="com.example.android.glass.cardsample.menu.EquipInspectActivity" />
+82-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:66:5-58
+82-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:66:15-56
+83        <activity android:name="com.example.android.glass.cardsample.menu.EquipRepairActivity" />
+83-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:67:5-57
+83-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:67:15-55
+84        <activity android:name="com.example.android.glass.cardsample.menu.VoiceRecognitionActivity" />
+84-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:69:5-62
+84-->C:\Users\lee\Desktop\glass-enterprise-samples-master\glass-enterprise-samples-master\MESglass\app\src\main\AndroidManifest.xml:69:15-60
+85
+86        <provider
+86-->[androidx.camera:camera-camera2:1.0.0-alpha06] C:\Users\lee\.gradle\caches\transforms-2\files-2.1\182df45b5e1c19b40aff01f53aee3e3f\jetified-camera-camera2-1.0.0-alpha06\AndroidManifest.xml:25:9-30:43
+87            android:name="androidx.camera.camera2.impl.Camera2Initializer"
+87-->[androidx.camera:camera-camera2:1.0.0-alpha06] C:\Users\lee\.gradle\caches\transforms-2\files-2.1\182df45b5e1c19b40aff01f53aee3e3f\jetified-camera-camera2-1.0.0-alpha06\AndroidManifest.xml:26:13-75
+88            android:authorities="com.example.MESglass.camerax-init"
+88-->[androidx.camera:camera-camera2:1.0.0-alpha06] C:\Users\lee\.gradle\caches\transforms-2\files-2.1\182df45b5e1c19b40aff01f53aee3e3f\jetified-camera-camera2-1.0.0-alpha06\AndroidManifest.xml:27:13-64
+89            android:exported="false"
+89-->[androidx.camera:camera-camera2:1.0.0-alpha06] C:\Users\lee\.gradle\caches\transforms-2\files-2.1\182df45b5e1c19b40aff01f53aee3e3f\jetified-camera-camera2-1.0.0-alpha06\AndroidManifest.xml:28:13-37
+90            android:initOrder="100"
+90-->[androidx.camera:camera-camera2:1.0.0-alpha06] C:\Users\lee\.gradle\caches\transforms-2\files-2.1\182df45b5e1c19b40aff01f53aee3e3f\jetified-camera-camera2-1.0.0-alpha06\AndroidManifest.xml:29:13-36
+91            android:multiprocess="true" />
+91-->[androidx.camera:camera-camera2:1.0.0-alpha06] C:\Users\lee\.gradle\caches\transforms-2\files-2.1\182df45b5e1c19b40aff01f53aee3e3f\jetified-camera-camera2-1.0.0-alpha06\AndroidManifest.xml:30:13-40
+92    </application>
+93
+94</manifest>

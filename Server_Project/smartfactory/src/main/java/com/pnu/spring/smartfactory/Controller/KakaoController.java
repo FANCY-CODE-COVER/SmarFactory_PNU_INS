@@ -49,6 +49,7 @@ import util.CustomLogger;
 @Controller
 public class KakaoController {
 	// 임시로 데이터 요청 해주면 보내주는 메소드
+	// 현재 사용 안함
 	@RequestMapping(value = "/sendmessagetome", method = { RequestMethod.POST })
 	@ResponseBody
 	public void sendMessage(@RequestBody Map<String, Object> param) {
@@ -57,6 +58,8 @@ public class KakaoController {
 		JsonNode rInfo = sendMessagetoMe(accessToken);
 	}
 
+	// 친구에게 메시지 보내기 메소드
+	// 현재 사용안하고 있음
 	@RequestMapping(value = "/sendmessagetofriend", method = { RequestMethod.POST })
 	@ResponseBody
 	public void sendMessageToFriend(@RequestBody Map<String, Object> param) {
@@ -99,6 +102,7 @@ public class KakaoController {
 		CustomLogger.printLog(this, "KAKAO", "친구에게 메시지 보내기 요청 종료");
 	}// end getFriend
 
+	// 음성인식한 raw_string으로 메시지 보내기
 	@RequestMapping(value = "/sendmessagebyvoice", method = { RequestMethod.POST })
 	@ResponseBody
 	public void sendMessageByVoice(@RequestBody Map<String, Object> param) {
@@ -106,18 +110,17 @@ public class KakaoController {
 		String accessToken = (String) param.get("access_token");
 		String rawstring = (String) param.get("rawstring");
 
+		// Komoran 형태소 분석기 사용
 		Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);		
 		KomoranResult analyzeResultList = komoran.analyze(rawstring);
 
+		// 고유명사 추출
 		List<String> strList = analyzeResultList.getMorphesByTags("NNP");
-		String receiver = "";
 		String contents = "";
 		 
-		for (String str1 : strList) {
-			if(receiver.length()<3) {
-			receiver += str1;
-			}
-		}
+		//고유명사 전체 합치기
+		String receiver ="";
+		receiver = mergeNNP(strList);
 		List<Token> tokenList = analyzeResultList.getTokenList();
 		boolean NNPflag = false;
 		for (Token token : tokenList) {
@@ -127,7 +130,7 @@ public class KakaoController {
 				}
 			}
 			if (NNPflag) {
-				if (token.getPos().equals("JKB")) {
+				if (token.getPos().equals("JKB")) {// 부사격 조사 기준으로 나누기 
 					contents = rawstring.substring(token.getEndIndex(), rawstring.length());
 					break;
 				}
@@ -143,13 +146,15 @@ public class KakaoController {
 
 		JsonNode freindList = null;
 		do {
+			//친구 목록 받아오기
 			freindList = getFriends(accessToken, Integer.toString(offset), Integer.toString(limit));
-			CustomLogger.printLogCount(this, "KAKAO", "친구 목록 수", freindList.size());
+//			CustomLogger.printLogCount(this, "KAKAO", "친구 목록 수", freindList.size());
 			if (freindList != null) {
 				for (int i = 0; i < freindList.size(); ++i) {
 					String nickname = freindList.get(i).get("profile_nickname").toString();
+					// " 문제 제거
 					nickname = nickname.replace("\"", "");
-
+					// receiver 와 동일한 nickname의 uuid 추출
 					if (nickname.equals(receiver)) {
 						String uuid = freindList.get(i).get("uuid").toString();
 						uuids.add(uuid);
@@ -161,9 +166,11 @@ public class KakaoController {
 				}
 				offset += limit;
 			}
-		} while (freindList != null && freindList.size() >= limit);
+		} // 친구 목록의 최대 갯수가 있기 때문에 친구를 못찾은 경우 다음 페이지를 본다.  
+		while (freindList != null && freindList.size() >= limit);
 
 		if (uuids.size() >= 1) {
+			//친구에게 메시지를 보낸다.
 			KakaoController.sendMessagetoYou(accessToken, uuids, contents, btnname);
 		} else {
 			CustomLogger.printLog(this, "KAKAO", receiver+", 해당 친구 존재하지 않음");
@@ -171,13 +178,24 @@ public class KakaoController {
 		CustomLogger.printLog(this, "KAKAO", "음성인식으로 메시지 보내기 종료");
 	}// end getFriend
 
+	private String mergeNNP(List<String> strList) {
+		String receiver="";
+		for (String str1 : strList) {
+			if(receiver.length()<3) {
+			receiver += str1;
+			}
+		}
+		return receiver;
+	}
+
+	// 토큰 유효기간 확인 메소드
 	@RequestMapping(value = "/tokenavailable", method = { RequestMethod.GET })
 	@ResponseBody
 	public JSONObject isTokenAvailableRouting(String accesstoken) {
 		CustomLogger.printLog(this, "KAKAO", "토큰 점검 시작");
 		Map<String, Object> param= new HashMap<String, Object>();
 		param.put("access_token", accesstoken );
-		String accessToken = (String) param.get("access_token");
+		String accessToken = (String) param.get("access_token");		
 		JsonNode response = KakaoController.isTokenAvailable(accesstoken);
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("expiresIn", response.get("expires_in"));
@@ -278,7 +296,6 @@ public class KakaoController {
 
 		JsonNode returnNode = null;
 		try {
-
 			final HttpResponse response = client.execute(get); // JSON 형태 반환값 처리
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
@@ -379,6 +396,7 @@ public class KakaoController {
 		return returnNode;
 	}
 
+	//카카오 서버로 유효시간 요청 메소드
 	@ResponseBody
 	public static JsonNode isTokenAvailable(String accessToken) {
 		final String RequestUrl = "https://kapi.kakao.com/v1/user/access_token_info";

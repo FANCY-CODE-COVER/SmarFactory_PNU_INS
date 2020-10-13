@@ -96,6 +96,7 @@ public class RepairController {
 			return convListToJsonArrary(datas);
 		}
 	
+	//리스트를 JSON 배열로 전환하는 메소드
 	private JSONArray convListToJsonArrary(List<RepairDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
 		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());

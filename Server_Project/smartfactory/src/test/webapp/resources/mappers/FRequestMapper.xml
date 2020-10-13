@@ -18,7 +18,7 @@
 		CRR.REQ_NO,	-- 요청번호
 		USR.USER_NM,						-- 요청자
 		CRR.FACILITY_NO,					-- 설비번호
-		CRR.INSP_RST_NO,					-- 점검결과번호
+		-- CRR.INSP_RST_NO,					-- 점검결과번호
 		CD1.CODE_NM AS STATUS,				-- 상태
 		EP1.EMPLOYEE_NM,					-- 접수자
 		CRR.REQ_DETAILS,					-- 요청 상세내용
@@ -36,7 +36,7 @@
 		CRR.REQ_NO,	-- 요청번호
 		USR.USER_NM,						-- 요청자
 		CRR.FACILITY_NO,					-- 설비번호
-		CRR.INSP_RST_NO,					-- 점검결과번호
+		-- CRR.INSP_RST_NO,					-- 점검결과번호
 		CD1.CODE_NM AS STATUS,				-- 상태
 		EP1.EMPLOYEE_NM,					-- 접수자
 		CRR.REQ_DETAILS,					-- 요청 상세내용
@@ -54,7 +54,7 @@
 		CRR.REQ_NO,	-- 요청번호
 		USR.USER_NM,						-- 요청자
 		CRR.FACILITY_NO,					-- 설비번호
-		CRR.INSP_RST_NO,					-- 점검결과번호
+		-- CRR.INSP_RST_NO,					-- 점검결과번호
 		CD1.CODE_NM AS STATUS,				-- 상태
 		EP1.EMPLOYEE_NM,					-- 접수자
 		CRR.REQ_DETAILS,					-- 요청 상세내용

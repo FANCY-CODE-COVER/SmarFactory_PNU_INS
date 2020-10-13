@@ -313,7 +313,7 @@ public class KakaoController {
 		return returnNode;
 	}
 
-
+	// 간단한 메시지 형식으로 친구에게  메시지 보내는 메소드
 	@ResponseBody
 	public static JsonNode sendMessagetoYou(String accessToken, List<String> uuids
 			, String contents, String btnname) {
@@ -332,6 +332,7 @@ public class KakaoController {
 			}
 		}
 		uuids_to_string += "]";
+		//메시지 양식
 		postParams.add(new BasicNameValuePair("receiver_uuids", uuids_to_string));
 		String subParams = "{" + "\"object_type\": \"text\"," + "\"text\": \"" + contents + "\"," + "\"link\": {"
 				+ "	\"web_url\": \"https://developers.kakao.com\","
@@ -420,6 +421,7 @@ public class KakaoController {
 		return returnNode;
 	}
 
+	// refresh token으로 새로운 토큰을 얻어오는 메소드
 	@ResponseBody
 	public static JsonNode getNewToken(String rest_api_key, String refreshToken) {
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";

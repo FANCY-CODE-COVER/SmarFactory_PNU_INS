@@ -110,6 +110,7 @@ public class InspectController {
 		return convListtoJSONArray(datas);
 	}
 
+	// 받은 리스트를 JSON을 변환한다.
 	private JSONArray convListtoJSONArray(List<InspectDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
 		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());

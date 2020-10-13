@@ -34,6 +34,7 @@ public class FacilityController {
 		List<PlaceDAO> datas = facilityServiceimpl.getPlaceListService();
 		JSONArray jsonarrary = new JSONArray();
 		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());
+		// JSON 객체에 넣는다.
 		for (int i = 0; i < datas.size(); ++i) {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("rowno", datas.get(i).getRowno());
@@ -66,6 +67,7 @@ public class FacilityController {
 		return convListtoJSONArray(datas);
 	}
 	
+	// 받은 리스트를 JSON을 변환한다.
 	private JSONArray convListtoJSONArray(List<FacilityDAO> datas) {
 		JSONArray jsonarrary = new JSONArray();
 		CustomLogger.printLogCount(this, "INFO", "데이터 갯수", datas.size());

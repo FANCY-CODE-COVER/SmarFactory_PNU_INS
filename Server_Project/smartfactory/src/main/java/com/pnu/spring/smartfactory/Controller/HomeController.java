@@ -42,6 +42,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	// 홈 부분 home.jsp로 연결된다.
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		CustomLogger.printLog(this, "INFO", "홈");
@@ -55,6 +56,7 @@ public class HomeController {
 		return "home";
 	}
 
+	// 로그인할 때 거치는 부분
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> doLogin(@RequestBody Map<String, Object> param) {

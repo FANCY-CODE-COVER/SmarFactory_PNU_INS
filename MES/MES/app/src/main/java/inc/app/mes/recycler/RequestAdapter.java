@@ -43,9 +43,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
                     context=v.getContext();
                     Intent intent = new Intent(v.getContext(), FRequestDetailActivity.class);
                     intent.putExtra("req_no", items.get(pos).getReq_no());
-
                     context.startActivity(intent);
-
                 }
 
             });
@@ -77,7 +75,6 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     public void addItem(FRequestDAO fRequestDAO)
     {
         items.add(fRequestDAO);
-//        mListData.add(String.valueOf(ItemRecyclerView));
     }
     public void setClear(){
         items.clear();

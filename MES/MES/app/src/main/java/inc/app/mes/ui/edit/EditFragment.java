@@ -77,8 +77,6 @@ public class EditFragment extends Fragment {
         menuAdapter.addItem("점검");
         menuAdapter.addItem("수리");
         menuRecycler.setAdapter(menuAdapter);
-
-
         editRecycler = (RecyclerView)root.findViewById(R.id.EditRecycler);
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
         editRecycler.setLayoutManager(linearLayoutManager2);
@@ -86,8 +84,6 @@ public class EditFragment extends Fragment {
         inspectAdapter=new InspectAdapter(this.getContext());
         repairAdapter=new RepairAdapter(this.getContext());
         getFRequestList();
-
-
         return root;
     }
 
@@ -97,6 +93,7 @@ public class EditFragment extends Fragment {
         if(menu==null){
             menu="요청";
         }
+
         if(menu.equals("요청")){
             getFRequestList();
         }

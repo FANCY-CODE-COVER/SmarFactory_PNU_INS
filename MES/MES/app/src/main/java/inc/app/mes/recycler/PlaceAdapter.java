@@ -45,7 +45,6 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     toggleItemSelected(pos);
-//                    Toast.makeText(v.getContext(), "Clicked", Toast.LENGTH_SHORT).show();
                     if(mListener!=null){
                         mListener.onItemClick(v, pos);
                     }

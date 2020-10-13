@@ -47,10 +47,10 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
                 String inputID = editUserID.getText().toString();
                 if (inputID.equals("ip")) {
+                    // ip 변경을 위한 부분
+                    // 사용 필요 적음
                     View popupView = getLayoutInflater().inflate(R.layout.dialog_change_ip, null);
                     mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     mPopupWindow.setFocusable(true);
@@ -84,8 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 new NetworkCall().execute(joinContentCall);
             }
         });
-
-
+        // 로그인정보 저장으로 PreferenceManager 사용
         String user_id = PreferenceManager.getString(this, "user_id");
         String password = PreferenceManager.getString(this, "password");
 
@@ -95,15 +94,14 @@ public class LoginActivity extends AppCompatActivity {
             param.put("password", password);
             AUTO_LOGIN = true;
             Call<Message> joinContentCall = networkService.doLogin(param);
+            // 로그인 응답 후 접속되야하기 때문에 동기식 통신사용
             new NetworkCall().execute(joinContentCall);
             Toast.makeText(this, "자동 로그인 됩니다.", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     private class NetworkCall extends AsyncTask<Call, Void, String> {
-
+        //동기식 통신을 위한 내부 클래스
         @Override
         protected String doInBackground(Call[] params) {
             try {

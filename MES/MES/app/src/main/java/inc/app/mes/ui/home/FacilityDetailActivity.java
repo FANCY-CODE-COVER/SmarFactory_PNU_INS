@@ -40,7 +40,7 @@ import java.util.Map;
 public class FacilityDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView titleText, facilityNmText, facilityCdText, placeText, placeCdText, departmentNmText, employeeNmText,
-    facilityTypeText, stateText, plineNmText, regNmText;
+            facilityTypeText, stateText, plineNmText, regNmText;
     private Button regFRequestBtn, inspectLookupBtn, repairLookupBtn;
     private PopupWindow mPopupWindow;
     private NetworkService networkService;
@@ -50,12 +50,12 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
     private String facility_no;
     private EditText requestDetail, remarkText;
     private RadioGroup radioGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility_detail);
         networkService = MyApplication.getInstance().getNetworkService();
-
         titleText = (TextView) findViewById(R.id.facility_nm_title);
         facilityNmText = (TextView) findViewById(R.id.facility_nm);
         facilityCdText = (TextView) findViewById(R.id.facility_cd);
@@ -67,10 +67,9 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
         stateText = (TextView) findViewById(R.id.state);
         plineNmText = (TextView) findViewById(R.id.pline_nm);
         regNmText = (TextView) findViewById(R.id.reg_nm);
-
-        regFRequestBtn=(Button) findViewById(R.id.btn_register_frequest);
-        inspectLookupBtn=(Button) findViewById(R.id.btn_inspect_lookup);
-        repairLookupBtn=(Button) findViewById(R.id.btn_repair_lookup);
+        regFRequestBtn = (Button) findViewById(R.id.btn_register_frequest);
+        inspectLookupBtn = (Button) findViewById(R.id.btn_inspect_lookup);
+        repairLookupBtn = (Button) findViewById(R.id.btn_repair_lookup);
         regFRequestBtn.setOnClickListener(this);
         inspectLookupBtn.setOnClickListener(this);
         repairLookupBtn.setOnClickListener(this);
@@ -82,17 +81,17 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
 
     public void getFacilityListPerPlace(String facility_cd) {
         Log.i("SINSIN", facility_cd);
-        Call<List<FacilityDAO>> joinContentCall=networkService.getFacilityDetail(facility_cd);
+        Call<List<FacilityDAO>> joinContentCall = networkService.getFacilityDetail(facility_cd);
 
-        joinContentCall.enqueue(new Callback<List<FacilityDAO>>(){
+        joinContentCall.enqueue(new Callback<List<FacilityDAO>>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<List<FacilityDAO>> call, Response<List<FacilityDAO>> response) {
-                if(response.isSuccessful()){
-                    List<FacilityDAO> dataDAO=response.body();
+                if (response.isSuccessful()) {
+                    List<FacilityDAO> dataDAO = response.body();
                     assert dataDAO != null;
-                    if(dataDAO.size()>0){
-                        FacilityDAO facility=dataDAO.get(0);
+                    if (dataDAO.size() > 0) {
+                        FacilityDAO facility = dataDAO.get(0);
                         titleText.setText(facility.getFacility_nm());
                         facilityNmText.setText(facility.getFacility_nm());
                         facilityCdText.setText(facility.getFacility_no());
@@ -104,16 +103,15 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                         stateText.setText(facility.getState());
                         plineNmText.setText(facility.getPline_nm());
                         regNmText.setText(facility.getReg_nm());
-                    }
-                    else{
+                    } else {
                         titleText.setText("설비 찾을 수 없음");
                     }
 
-                }
-                else{// 실패시 에러코드들
+                } else {// 실패시 에러코드들
                     respnoseLogger.doPrint(response.code());
                 }
             }
+
             @Override
             public void onFailure(Call<List<FacilityDAO>> call, Throwable t) {
                 //실패
@@ -123,31 +121,28 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        int id =view.getId();
-        if(id==R.id.btn_register_frequest){
+        int id = view.getId();
+        if (id == R.id.btn_register_frequest) {
             View popupView = getLayoutInflater().inflate(R.layout.dialog_frequest_activity, null);
             mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             mPopupWindow.setFocusable(true);
             mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-
             radioGroup = (RadioGroup) popupView.findViewById(R.id.radio_status);
-            requestDetail= popupView.findViewById(R.id.request_detail);
-            remarkText= popupView.findViewById(R.id.remark);
-
+            requestDetail = popupView.findViewById(R.id.request_detail);
+            remarkText = popupView.findViewById(R.id.remark);
             Button ok = (Button) popupView.findViewById(R.id.btn_register);
             ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int status = radioGroup.getCheckedRadioButtonId();
                     String status_result = getStringFromID(status);
-                    String request_detail=requestDetail.getText().toString();
-                    String remark=remarkText.getText().toString();
-                    insFRequest(status_result,request_detail , remark);
+                    String request_detail = requestDetail.getText().toString();
+                    String remark = remarkText.getText().toString();
+                    insFRequest(status_result, request_detail, remark);
                     Toast.makeText(getApplicationContext(), "등록 완료", Toast.LENGTH_SHORT).show();
                     mPopupWindow.dismiss();
                 }
             });
-
             Button cancel = (Button) popupView.findViewById(R.id.btn_cancel);
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,10 +150,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                     mPopupWindow.dismiss();
                 }
             });
-
-
-        }
-        else if(id==R.id.btn_inspect_lookup || id==R.id.btn_repair_lookup){
+        } else if (id == R.id.btn_inspect_lookup || id == R.id.btn_repair_lookup) {
             View popupView = getLayoutInflater().inflate(R.layout.dialog_history_activity, null);
             mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             //popupView 에서 (LinearLayout 을 사용) 레이아웃이 둘러싸고 있는 컨텐츠의 크기 만큼 팝업 크기를 지정
@@ -166,19 +158,19 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
             // 외부 영역 선택히 PopUp 종료
             mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-            TextView title=popupView.findViewById(R.id.title);
+            TextView title = popupView.findViewById(R.id.title);
 
-            dialogRecycler=popupView.findViewById(R.id.dialog_recyclerview);
+            dialogRecycler = popupView.findViewById(R.id.dialog_recyclerview);
             LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this);
             dialogRecycler.setLayoutManager(linearLayoutManager2);
-            if(id==R.id.btn_inspect_lookup){
+            if (id == R.id.btn_inspect_lookup) {
                 title.setText("점검 이력 조회");
-                inspectAdapter=new InspectAdapter(this);
+                inspectAdapter = new InspectAdapter(this);
                 getInspectDetail(facility_no);
             }
-            if(id==R.id.btn_repair_lookup){
+            if (id == R.id.btn_repair_lookup) {
                 title.setText("수리 이력 조회");
-                repairAdapter=new RepairAdapter(this);
+                repairAdapter = new RepairAdapter(this);
                 getRepairDetail(facility_no);
             }
 
@@ -195,53 +187,48 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
 
     private String getStringFromID(int status) {
         String status_result = "F";
-        if(status==R.id.request){
-            status_result="Q";
-        }
-        else if(status==R.id.receipt){
-            status_result="R";
-        }
-        else if(status==R.id.progress){
-            status_result="P";
-        }
-        else if(status==R.id.complete){
-            status_result="C";
-        }
-        else if(status==R.id.hold){
-            status_result="H";
-        }
-        else if(status==R.id.cancel){
-            status_result="X";
+        if (status == R.id.request) {
+            status_result = "Q";
+        } else if (status == R.id.receipt) {
+            status_result = "R";
+        } else if (status == R.id.progress) {
+            status_result = "P";
+        } else if (status == R.id.complete) {
+            status_result = "C";
+        } else if (status == R.id.hold) {
+            status_result = "H";
+        } else if (status == R.id.cancel) {
+            status_result = "X";
         }
         return status_result;
     }
 
     public void getInspectDetail(String facility_no) {
-                Call<List<InspectDAO>> joinContentCall=networkService.getInspectDetail(facility_no);
+        Call<List<InspectDAO>> joinContentCall = networkService.getInspectDetail(facility_no);
 
-                joinContentCall.enqueue(new Callback<List<InspectDAO>>(){
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onResponse(Call<List<InspectDAO>> call, Response<List<InspectDAO>> response) {
-                        if(response.isSuccessful()){
-                            List<InspectDAO> dataDAO=response.body();
-                            assert dataDAO != null;
-                            inspectAdapter.setClear();
-                            for(int i = 0; i<dataDAO.size(); ++i) {
-                                inspectAdapter.addItem(dataDAO.get(i));
-                            }
-                            dialogRecycler.setAdapter(inspectAdapter);
-                        }
-                        else{// 실패시 에러코드들
-                            respnoseLogger.doPrint(response.code());
-                        }
+        joinContentCall.enqueue(new Callback<List<InspectDAO>>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<List<InspectDAO>> call, Response<List<InspectDAO>> response) {
+                if (response.isSuccessful()) {
+                    List<InspectDAO> dataDAO = response.body();
+                    assert dataDAO != null;
+                    inspectAdapter.setClear();
+                    for (int i = 0; i < dataDAO.size(); ++i) {
+                        inspectAdapter.addItem(dataDAO.get(i));
                     }
-                    @Override
-                    public void onFailure(Call<List<InspectDAO>> call, Throwable t) {
-                        //실패
-                    }
-                });
+                    dialogRecycler.setAdapter(inspectAdapter);
+                } else {// 실패시 에러코드들
+                    respnoseLogger.doPrint(response.code());
+                }
             }
+            @Override
+            public void onFailure(Call<List<InspectDAO>> call, Throwable t) {
+                //실패
+            }
+        });
+    }
+
     public void getRepairDetail(String facility_no) {
         Call<List<RepairDAO>> joinContentCall = networkService.getRepairDetail(facility_no);
 
@@ -261,17 +248,17 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                     respnoseLogger.doPrint(response.code());
                 }
             }
-
             @Override
             public void onFailure(Call<List<RepairDAO>> call, Throwable t) {
                 //실패
             }
         });
     }// end
+
     // #{req_user_id}, #{facility_no}, #{status},  #{req_details}, #{remark}, #{reg_id}
     public void insFRequest(String status, String req_details, String remark) {
-        String user_id=PreferenceManager.getString(this,"user_id");
-        user_id="K19870001";
+        String user_id = PreferenceManager.getString(this, "user_id");
+        Log.i("Shin", user_id);
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("req_user_id", user_id);
         param.put("facility_no", facility_no);
@@ -288,8 +275,7 @@ public class FacilityDetailActivity extends AppCompatActivity implements View.On
                 if (response.isSuccessful()) {
                     Message dataDAO = response.body();
                     assert dataDAO != null;
-                    if(dataDAO.getResult().equals("success"))
-                    {
+                    if (dataDAO.getResult().equals("success")) {
                         //do something
                     }
                 } else {// 실패시 에러코드들

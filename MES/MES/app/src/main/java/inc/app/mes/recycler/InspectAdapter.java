@@ -74,7 +74,6 @@ public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.ViewHold
     public void addItem(InspectDAO inspectDAO)
     {
         items.add(inspectDAO);
-//        mListData.add(String.valueOf(ItemRecyclerView));
     }
     public void setClear(){
         items.clear();

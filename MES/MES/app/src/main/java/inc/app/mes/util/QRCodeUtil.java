@@ -8,6 +8,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+// QR코드 BitMatrix를 BitMap으로 변경
 public class QRCodeUtil {
     private QRCodeUtil() {}
     public static Bitmap encodeAsBitmap(String source, int width, int height) {

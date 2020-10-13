@@ -3,6 +3,7 @@ package inc.app.mes.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+// 아이디, 비밀번호, 액세스 토큰, 리프레쉬 토큰 저장을 위해 사용
 public class PreferenceManager {
 
     public static final String PREFERENCES_NAME = "rebuild_preference";

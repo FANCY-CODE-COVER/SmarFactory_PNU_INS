@@ -138,7 +138,6 @@ public class InspectDetailActivity extends AppCompatActivity implements View.OnC
                     finish();
                 }
             });
-
             Button cancel = (Button) popupView.findViewById(R.id.no);
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override

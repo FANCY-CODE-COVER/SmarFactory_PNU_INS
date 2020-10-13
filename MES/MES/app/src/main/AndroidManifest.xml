@@ -19,8 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
-        <activity android:name=".ui.edit.RepairActivity" >
-        </activity>
         <activity android:name=".ui.edit.InspectRegisterActivity" />
         <activity android:name=".ui.login.LoginActivity" >
             <intent-filter>
@@ -32,7 +30,9 @@
         <activity android:name=".ui.edit.RepairDetailActivity" />
         <activity android:name=".ui.edit.InspectDetailActivity" />
         <activity android:name=".ui.edit.FRequestDetailActivity" />
+        <activity android:name=".ui.edit.RepairRegisterActivity" />
         <activity android:name=".ui.home.FacilityDetailActivity" />
+
         <activity android:name=".qrScan" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"

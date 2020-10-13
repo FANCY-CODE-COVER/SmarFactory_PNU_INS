@@ -159,7 +159,6 @@ public class FRequestDetailActivity extends AppCompatActivity implements View.On
                 if(response.isSuccessful()){
                     Message dataDAO=response.body();
                     assert dataDAO != null;
-
                 }
                 else {// 실패시 에러코드들
                     respnoseLogger.doPrint(response.code());

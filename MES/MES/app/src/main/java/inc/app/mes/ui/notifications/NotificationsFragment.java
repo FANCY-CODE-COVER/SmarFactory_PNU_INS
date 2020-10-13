@@ -16,7 +16,7 @@ import inc.app.mes.R;
 import inc.app.mes.recycler.FacilityListAdapter;
 
 public class NotificationsFragment extends Fragment {
-
+    // 미사용 중인 fragment
     private RecyclerView notificationRecycler;
     private FacilityListAdapter notificationAdapter;
     public ArrayList<String> title = new ArrayList<String>();

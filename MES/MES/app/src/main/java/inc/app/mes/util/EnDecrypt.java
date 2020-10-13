@@ -1,7 +1,8 @@
 package inc.app.mes.util;
 
+// vigenere cipher를 위해 만들었던 객체
+// 현재 미사용중
 public class EnDecrypt {
-    //vigenere cipher
     private int[] key={3,5,1,9,5,1,7};
     private String user_id;
     private String password;

@@ -25,12 +25,13 @@ public class MyApplication extends Application {
         super.onCreate();
         MyApplication.instance = this;
         changed=false;
-        baseUrl="";
+        baseUrl="http://192.168.9.182:8082/smartfactory/";
         Log.i("BASE_URL", baseUrl);
         buildNetworkService();
 
         // SDK 초기화
         KakaoSDK.init(new KakaoAdapter() {
+            // 카카오 SDK 초기화
             @Override
             public IApplicationConfig getApplicationConfig() {
                 return new IApplicationConfig() {
@@ -61,6 +62,7 @@ public class MyApplication extends Application {
     public void buildNetworkService(){
         synchronized (MyApplication.class){
             if(networkService==null || changed){
+                //retrofit 사용 설정
                 changed=false;
                 Log.i("BASE_URL_buildNetworkService", baseUrl);
                 Gson gson = new GsonBuilder()

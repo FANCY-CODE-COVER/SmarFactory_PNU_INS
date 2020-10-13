@@ -103,12 +103,12 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
+        // 음성인식을 위한 인텐트 추가 및 설정
         i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getContext().getPackageName());
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");
         mRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
         mRecognizer.setRecognitionListener(listener);
-
 
         settingPage=(LinearLayout) root.findViewById(R.id.setting_page);
         kakaoLoginBtn=(LoginButton) root.findViewById(R.id.login_button);
@@ -125,15 +125,12 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             kakaoAccountManageBtn.setVisibility(View.INVISIBLE);
             kakaoLoginBtn.setVisibility(View.VISIBLE);
         }
-
-
         QRGenerateBtn=(Button) root.findViewById(R.id.btn_qr_generate);
         voiceMessageBtn=(Button) root.findViewById(R.id.btn_voice_message);
         kakaoLoginBtn.setOnClickListener(this);
         kakaoAccountManageBtn.setOnClickListener(this);
         QRGenerateBtn.setOnClickListener(this);
         voiceMessageBtn.setOnClickListener(this);
-
         kakaoPage=(LinearLayout) root.findViewById(R.id.kakao_page);
         friendAuthBtn=(Button) root.findViewById(R.id.btn_friend_auth);
         unlinkBtn= (Button) root.findViewById(R.id.btn_unlink);
@@ -193,7 +190,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 } else {
                     //권한을 허용한 경우
                     try {
-
                         mRecognizer.startListening(i);
                     } catch(SecurityException e) {
                         e.printStackTrace();
@@ -206,6 +202,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
     }//end onClink
 
+    // 음성인식을 위한 객체
     private RecognitionListener listener = new RecognitionListener() {
         @Override
         public void onReadyForSpeech(Bundle params) {
@@ -258,15 +255,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             mResult.toArray(rs);
             Log.i("KAKAO",  rs[0]);
             speechText=rs[0];
-
             String access_token = PreferenceManager.getString(getContext(), "access_token");
+            // 음성인식 후 토큰 확인 프로세스 부터 시작
             isTokenAvailable(access_token);
             Log.i("Token", "토큰 확인");
-
-
             mRecognizer.stopListening();
-
-//            mRecognizer.startListening(i);
         }
     };
 
@@ -365,9 +358,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         Log.i("KAKAO", "access_token"+ access_token);
         param.put("expiresIn", "");
         Call<TokenManager> joinContentCall = networkService.isTokenAvailable(access_token);
+        // 동기식 통신 시작
         new TokenAvailableNetworkCall().execute(joinContentCall);
     }
 
+    // 토큰 확인을 위한 동기식 통신
     private class TokenAvailableNetworkCall extends AsyncTask<Call, Void, TokenManager> {
         @Override
         protected TokenManager doInBackground(Call[] params) {
@@ -399,6 +394,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }//end onPostExecute
     }
 
+    // 토큰 확인 후에 유효시간 초과 하면 토큰 발급
     private void getNewToken(boolean result, String access_token, String refresh_token){
         if(!result){
             // 토큰이 이용불가능 하면
@@ -420,6 +416,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    // 토큰 발급 동기식 통신 클래스
     private class GetNewTokenNetworkCall extends AsyncTask<Call, Void, TokenManager> {
 
         @Override
@@ -449,6 +446,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }//end onPostExecute
     }
 
+    // 토큰확인 및 발급 이후 메시지 보내기 요청 전송
     public void sendMessage(String access_token, String raw_string) {//
         Map<String, Object> param = new HashMap<>();
         param.put("access_token", access_token);
@@ -479,9 +477,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         });
     }
     // 세션 콜백 구현 : 로그인관련
+    // 카카오 로그인을 위한 세션 콜백
     private ISessionCallback sessionCallback = new ISessionCallback() {
         @Override
         public void onSessionOpened() {
+            // 로그인 후에 액세스토큰과 리프레쉬 토큰을 앱에 저장
             Log.i("KAKAO_SESSION", "로그인 성공");
             String access_token = Session.getCurrentSession().getAccessToken();
             String refresh_token = Session.getCurrentSession().getRefreshToken();

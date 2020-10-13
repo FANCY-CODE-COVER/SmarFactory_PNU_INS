@@ -62,7 +62,6 @@ public class HomeFragment extends Fragment{
         placeRecycler.setLayoutManager(linearLayoutManager2);
         getPlaceList();
         placeRecycler.setAdapter(placeAdapter);
-
         facilityListRecycler = (RecyclerView)root.findViewById(R.id.HomeRecycler);
         facilityListAdapter = new FacilityListAdapter(this.getActivity(), facilityDAOS);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

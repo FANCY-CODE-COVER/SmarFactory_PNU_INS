@@ -158,7 +158,7 @@ public class RepairRegisterActivity extends AppCompatActivity implements View.On
             ,String repair_type_cd,String repair_amt,String cause,String repair_details
             ,String remark) {
         String user_id= PreferenceManager.getString(this,"user_id");
-        user_id="K19870001";
+
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("facility_no", facility_no);
         param.put("req_no", req_no);

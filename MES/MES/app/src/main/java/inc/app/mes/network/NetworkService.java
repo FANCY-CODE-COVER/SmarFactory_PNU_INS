@@ -18,6 +18,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface NetworkService {
+    // retrofit2를 이용해서 REST API로 각 메소드에 접근하도록 구현
     @POST("getdatas")
     Call<List<DataDAO>> getDatas(@Body Map<String, Object> param);
 

@@ -100,6 +100,7 @@ public class InspectRegisterActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.edit_text_start_dt) {
+            // 달력을 출력하기 위해서 버튼 + 달력 사용
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String date = format.format(Calendar.getInstance().getTime());
             date.substring(0, 4);
@@ -140,7 +141,7 @@ public class InspectRegisterActivity extends AppCompatActivity implements View.O
     public void insInspect(String start_dt, String end_dt, String result_cd
             , String result_details, String remark) {
         String user_id= PreferenceManager.getString(this,"user_id");
-        user_id="K19870001";
+
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("facility_no", facility_no);
         param.put("req_no", req_no);
@@ -150,9 +151,7 @@ public class InspectRegisterActivity extends AppCompatActivity implements View.O
         param.put("result_details", result_details);
         param.put("remark", remark);
         param.put("reg_id", user_id);
-
         Call<Message> joinContentCall = networkService.insInspect(param);
-
         joinContentCall.enqueue(new Callback<Message>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -166,10 +165,8 @@ public class InspectRegisterActivity extends AppCompatActivity implements View.O
                     }
                 } else {// 실패시 에러코드들
                     assert response.body() != null;
-//                    respnoseLogger.doPrint(response.code(), response.body().toString());
                 }
             }
-
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
                 //실패

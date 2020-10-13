@@ -9,7 +9,7 @@ import inc.app.mes.ui.home.FacilityDetailActivity;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
+// QR코드를 스캔하는 액티비티
 public class qrScan extends AppCompatActivity {
     private IntentIntegrator qrScan;
     private TextView serialNumber;

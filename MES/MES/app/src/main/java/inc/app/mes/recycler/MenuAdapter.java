@@ -38,14 +38,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
             title = itemView.findViewById(R.id.title);
             cardView =itemView.findViewById(R.id.item_cardview);
-//            layout=itemView.find
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     toggleItemSelected(pos);
-//                    Toast.makeText(v.getContext(), "Clicked", Toast.LENGTH_SHORT).show();
                     if(mListener!=null){
                         mListener.onItemClick(v, pos);
                     }
